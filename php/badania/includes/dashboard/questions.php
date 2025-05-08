@@ -1193,4 +1193,18 @@ class Pytania {
     </div>
     <?php
   }
+
+  public function badania_pytania_metryczka_handler() {
+    ?>
+    <div id="wpbody-content">
+      <div class="wrap acf-settings-wrap">
+        <h1 style="margin-bottom: 10px;">Metryczka końcowa</h1>
+        <div id="poststuff">
+          <?php $this->badania_pytania_form( 'metryczka' ); ?>
+          <?php $this->badania_pytania_lista( 'metryczka' ); ?>
+        </div>
+      </div>
+    </div>
+    <?php
+  }
 }

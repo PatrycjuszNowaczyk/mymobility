@@ -99,6 +99,14 @@ class Badania_Dashboard extends Badanie {
       'badania_pytania_krok4',
       [ $this->questions, 'badania_pytania_krok4_handler' ],
     );
+    add_submenu_page(
+      'badania',
+      'Metryczka końcowa',
+      'Metryczka końcowa',
+      'edit_posts',
+      'badania_pytania_metryczka',
+      [ $this->questions, 'badania_pytania_metryczka_handler' ],
+    );
   }
 
   public function badania_glowna_handler() {
