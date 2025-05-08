@@ -1,0 +1,78 @@
+nav.main {
+  ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    li {
+      & + li {
+        margin-left: 30px;
+      }
+      a {
+        position: relative; opacity: 1 !important;
+        color: $blue; font-size: 16px; letter-spacing: 0.08em;
+        letter-spacing: 1px; text-transform: uppercase;
+        font-weight: 700;
+
+        &:before {
+          position: absolute; bottom: -5px; left: 50%; transform: translate(-50%,0);
+          content: ' '; border-bottom: 2px solid $blue; max-width: 0;
+          width: 100%; transition: all 0.3s ease-in-out;
+        }
+        &:hover {
+          &:before {
+            max-width: calc(100% + 10px);
+          }
+        }
+      }
+      &.wpml-ls-current-language {
+        a {
+          &:before {
+            max-width: calc(100% + 10px);
+          }
+        }
+      }
+      &.btn-link {
+        a {
+          @include btn;
+          @include btn-red;
+          &:before {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  @include clear;
+
+  @media screen and (max-width: 1400px) {
+    ul {
+      li {
+        & + li {
+          margin-left: 25px;
+        }
+        a {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1250px) {
+    ul {
+      li {
+        & + li {
+          margin-left: 23px;
+        }
+        a {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 1150px) {
+    ul {
+      display: none;
+    }
+  }
+
+}

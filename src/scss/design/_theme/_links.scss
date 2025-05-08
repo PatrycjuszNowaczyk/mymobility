@@ -1,0 +1,7 @@
+a { 
+    color: $font-color; 
+    &:hover { 
+        color: #000; 
+        opacity: 0.7; 
+    }
+}

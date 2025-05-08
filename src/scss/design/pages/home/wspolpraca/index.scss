@@ -1,0 +1,36 @@
+#wspolpraca {
+    .col-left {
+        max-width: 50%;
+        flex-basis: 50%;
+        padding-right: 30px;
+        .line-btn {
+            text-align: right;
+            padding-top: 20px;
+        }
+    }
+    .col-right {
+        max-width: 50%;
+        flex-basis: 50%;
+        padding-left: 30px;
+        text-align: right;
+        img {
+            filter: drop-shadow(0px 4px 16px rgba(0, 0, 0, 0.15));
+            border-radius: 8px;
+        }
+    }
+    @media screen and (max-width: 768px) {
+        .flex {
+            flex-wrap: wrap;
+        }
+        .col-left {
+            max-width: 100%;
+            flex-basis: 100%;
+        }
+        .col-right {
+            max-width: 100%;
+            flex-basis: 100%;
+            margin-top: 30px;
+            display: none;
+        }
+    }
+}

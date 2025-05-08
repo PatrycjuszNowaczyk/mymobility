@@ -1,0 +1,63 @@
+#advisors {
+  p {
+    padding: 0;
+  }
+  
+  a {
+    display: block;
+  }
+  
+  .advisors {
+    &__heading {
+      margin-bottom: 1.5em;
+      font-size: clamp(24px, 5vw, 36px);
+      line-height: 0.8;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+  }
+  
+  .advisor {
+    padding: 20px 0;
+    text-align: center;
+    font-style: normal;
+    color: $white;
+    
+    &:not(:first-of-type) {
+      border-top: 1px solid lighten($blue, 50%);
+      
+      @media (min-width: $breakpoint-sm) {
+        border-top: unset;
+      }
+    }
+    
+    @media (min-width: $breakpoint-sm) {
+      text-align: left;
+    }
+    
+    &__name {
+      font-size: 20px;
+      font-weight: 700;
+      padding-bottom: 0.25em;
+    }
+    
+    &__role {
+      font-size: 16px;
+      font-weight: 700;
+      padding-bottom: 1em;
+    }
+    
+    &__phone {
+      font-size: 16px;
+      font-weight: 700;
+      color: inherit;
+      padding-bottom: 0.8em;
+    }
+    
+    &__email {
+      font-size: 16px;
+      font-weight: 700;
+      color: inherit;
+    }
+  }
+}

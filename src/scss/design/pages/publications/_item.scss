@@ -1,0 +1,43 @@
+.item {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    padding: 24px;
+    word-break: break-all;
+    header {
+        padding-bottom: 10px;
+        h3 {
+            font-size: 24px;
+            line-height: 130%;
+        }
+    }
+    .more {
+        max-height: 0;
+        overflow: hidden;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+    }
+    .line-btn {
+        text-align: right;
+        padding-top: 10px;
+        .link-less {
+            display: none;
+        }
+    }
+    &.active {
+        .more {
+            max-height: 10000px;
+            opacity: 1;
+            visibility: visible;
+        }
+        .line-btn {
+            .link-less {
+                display: inline-block;
+            }
+            .link-more {
+                display: none;
+            }
+        }
+    }
+}

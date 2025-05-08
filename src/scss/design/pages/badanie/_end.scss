@@ -1,0 +1,22 @@
+#form-podsumowanie-badania {
+    label {
+        display: block; padding-bottom: 15px;
+        font-weight: 700;
+    }
+    .email-add-info {
+        padding-top: 15px;
+    }
+    .answers {
+        label {
+            font-weight: 400;
+            padding-bottom: 0;
+        }
+    }
+    & + .thankyou {
+        border-radius: 6px;
+        background: $green;
+        text-align: center;
+        padding: 20px !important;
+        color: #fff;
+    }
+}

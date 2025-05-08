@@ -1,0 +1,122 @@
+$line-width: 2px;
+@mixin btn {
+  padding: calc( 14px - $line-width * 2) calc( 20px - $line-width * 2);
+  text-transform: uppercase;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  border: $line-width solid $blue;
+  border-radius: 100px;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  opacity: 1 !important;
+  cursor: pointer;
+  text-align: center;
+}
+
+@mixin btn-big {
+  min-width: 133px;
+  padding: calc( 20px - $line-width * 2) calc( 24px - $line-width * 2);
+}
+
+@mixin btn-red {
+  color: $white;
+  border-color: $red;
+  background: $red;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
+  &:hover {
+    color: $white;
+    background: $blue;
+    border-color: $blue;
+  }
+}
+
+@mixin btn-blue {
+  color: $white;
+  border-color: $blue;
+  background: $blue;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
+  &:hover {
+    background: $background;
+    color: $blue;
+  }
+}
+
+@mixin btn-green {
+  color: $white;
+  border-color: $green;
+  background: $green;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
+  &:hover {
+    color: $white;
+    background: $blue;
+    border-color: $blue;
+  }
+}
+
+@mixin btn-line {
+  min-width: 180px;
+  background: transparent;
+}
+
+@mixin btn-blue-line {
+  @include btn-line;
+  color: $blue;
+  &:hover {
+    color: $white;
+    background: $blue;
+    border-color: $blue;
+  }
+}
+
+@mixin btn-green-line {
+  @include btn-line;
+  color: $green;
+  border-color: $green;
+  &:hover {
+    color: $white;
+    background: $green;
+  }
+}
+
+@mixin btn-white-line {
+  @include btn-line;
+  color: $white;
+  border-color: $white;
+  &:hover {
+    color: $blue;
+    background: $white;
+  }
+}
+
+.btn {
+  @include btn;
+  
+  &-big {
+    @include btn-big;
+  }
+  
+  &-blue {
+    @include btn-blue;
+  }
+  
+  &-red {
+    @include btn-red;
+  }
+  
+  &-green {
+    @include btn-green;
+  }
+  
+  &-blue-line {
+    @include btn-blue-line;
+  }
+  
+  &-green-line {
+    @include btn-green-line;
+  }
+  
+  &-white-line {
+    @include btn-white-line;
+  }
+}

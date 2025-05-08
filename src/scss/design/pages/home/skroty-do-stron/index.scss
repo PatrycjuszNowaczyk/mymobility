@@ -1,0 +1,60 @@
+#skroty-do-stron {
+    .grid {
+        grid-column-gap: 100px;
+        grid-row-gap: 50px;
+    }
+    .item {
+        header {
+            padding-bottom: 10px;
+            h3 {
+                color: $blue;
+                font-weight: 800;
+                font-size: 36px;
+                line-height: 110%;
+            }
+            .claim {
+                display: block;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 150%;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: $blue;
+                padding-bottom: 10px;
+            }
+        }
+        .content {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 150%;
+        }
+        .line-btn {
+            text-align: right;
+            padding-top: 20px;
+        }
+    }
+    @media screen and (max-width: 768px) {
+        .grid {
+            display: block;
+        }
+        .item {
+            & + .item {
+                margin-top: 40px;
+            }
+            header {
+                h3 {
+                    font-size: 30px;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 641px) {
+        .item {
+            header {
+                h3 {
+                    font-size: 28px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,152 @@
+#page-badanie {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top: 100px;
+    position: relative;
+    &.loading:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: resolve('loader.gif') rgba(255,255,255,0.8) no-repeat center 50px;
+        z-index: 22;
+        content: ' ';
+    }
+    .col-left {
+        .header {
+            padding-bottom: 20px;
+            h1 {
+                font-weight: 800;
+                font-size: 36px;
+                line-height: 110%;
+                max-width: 383px;
+                color: #1D1D1F;
+            }
+        }
+        .content {
+            .desc {
+                line-height: 150%;
+            }
+            .line-btn {
+                margin-top: 20px;
+            }
+            .accordions {
+                margin-bottom: 20px;
+            }
+            h4 {
+                font-size: 24px;
+                line-height: 130%;
+            }
+            .start {
+                margin-top: 15px;
+                &-link {
+                    font-weight: 800;
+                    font-size: 16px;
+                    color: $green;
+                    text-transform: uppercase;
+                    letter-spacing: 0.06em;
+                    padding-right: 25px;
+                    position: relative;
+                    transition: all 0.3s ease-in-out;
+                    &:before {
+                        background: resolve('arrow-down-green.svg') no-repeat 0 0;
+                        content: ' ';
+                        width: width('arrow-down-green.svg');
+                        height: height('arrow-down-green.svg');
+                        position: absolute;
+                        right: 0;
+                        top: 50%;
+                        transform: translate(0,-50%);
+                        transition: all 0.3s ease-in-out;
+                    }
+                    &:hover {
+                        opacity: 1;
+                        &:before {
+                            margin-top: 3px;
+                        }
+                    }
+                }
+            }
+            .blue {
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 160%;
+                color: $blue;
+                margin-bottom: 20px;
+            }
+            .code {
+                margin-bottom: 20px;
+                span {
+                    display: inline-block;
+                    border: 3px solid $blue;
+                    border-radius: 8px;
+                    padding: 10px 64px 10px 24px;
+                    color: $blue;
+                    font-weight: 700;
+                    position: relative;
+                    cursor: pointer;
+                    transition: all 0.3s ease-in-out;
+                    &:before {
+                        right: 20px;
+                        top: 50%;
+                        transform: translate(0,-50%);
+                        content: ' ';
+                        background: resolve('icon-copy.svg') no-repeat;
+                        width: width('icon-copy.svg');
+                        height: height('icon-copy.svg');
+                        position: absolute;
+                    }
+                    &:hover {
+                        background: $blue;
+                        color: #fff;
+                        &:before {
+                            background: resolve('icon-copy-white.svg') no-repeat;
+                        }
+                    }
+                }
+            }
+        }
+        #form-uruchom-krok {
+            margin-top: 30px;
+            .line-btn {
+                text-align: right;
+                padding-top: 30px;
+            }
+            @import './menu-steps';
+        }
+    }
+    .col-right {
+        padding-left: 40px;
+        @import './form-code';
+    }
+
+    @import './steps';
+
+    @media screen and (max-width: 1030px) {
+        padding-top: 50px;
+        .col-left {
+            .content {
+                h4 {
+                    font-size: 20px;
+                }
+            }
+        }
+        .col-right {
+            padding-left: 0;
+            margin-top: 20px;
+        }
+    }
+	@media screen and (max-width: 641px) {
+        padding-top: 30px;
+        padding-bottom: 30px;
+        .col-left {
+            .header {
+                padding-bottom: 20px;
+                h1 {
+                    font-size: 26px;
+                }
+            }
+        }        
+    }
+}

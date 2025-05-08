@@ -1,0 +1,13 @@
+select {
+    border: 2px solid #9C9C9E;
+    border-radius: 8px;
+    padding: 10px 16px !important;
+    font-weight: 400;
+    font-size: 16px;
+    font-family: $font-family;
+    width: 100%;
+    max-width: 310px;
+    -webkit-appearance:none;
+    background: resolve('select.svg') no-repeat calc(100% - 10px) center;
+    cursor: pointer;
+}

@@ -1,0 +1,26 @@
+.bg {
+    &-gray {
+        background-color: #fbfbfd;
+    }
+    &-blue {
+        background-color: $blue;
+    }
+    &-green {
+        background-color: $green;
+    }
+    &-red {
+        background-color: $red;
+    }
+}
+
+.text {
+    &-white {
+        color: #fff;
+    }
+    &-blue {
+        color: $blue;
+    }
+    &-green {
+        color: $green;
+    }
+}

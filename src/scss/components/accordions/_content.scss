@@ -1,0 +1,11 @@
+& > div {
+    max-height: 0;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+}
+&.active > div {
+    max-height: 10000px;
+    visibility: visible;
+    opacity: 1;
+}

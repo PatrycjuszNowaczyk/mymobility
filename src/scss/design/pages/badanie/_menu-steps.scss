@@ -1,0 +1,58 @@
+.menu-steps {
+    ul {
+        list-style: none;
+        li {
+            margin-top: 3px;
+            label {
+                position: relative;
+                overflow: hidden;
+                input[type="radio"] {
+                    & + span {
+                        border-radius: 8px;
+                        display: block;
+                        width: 100%;
+                        text-transform: uppercase;
+                        color: $blue;
+                        padding: 14px 18px;
+                        font-weight: 800;
+                        font-size: 14px;
+                        letter-spacing: 0.04em;
+                        transition: all 0.3s ease-in-out;
+                        &:before {
+                            display: none !important;
+                        }
+                        &:after {
+                            display: none !important;
+                        }
+                        &:hover {
+                            background: $blue !important;
+                            color: #fff;
+                        }
+                    }
+                    &:checked + span {
+                        background: $blue !important; color: #fff;
+                    }
+                    &.full {
+                        & + span {
+                            background: #B4E2DD; color: #fff;
+                            &:after {
+                                display: inline-block !important;
+                                background: resolve('icon-check-white.svg') no-repeat 0 0;
+                                background-size: auto 100%;
+                                width: 16px;
+                                height: 10px;
+                                border: 0;
+                                border-radius: 0;
+                                right: 20px;
+                                top: 50%;
+                                transform: translate(0,-50%);
+                                left: auto;
+                                opacity: 1 !important;
+                            }
+                        }
+                    }
+                }                
+            }
+        }
+    }
+}

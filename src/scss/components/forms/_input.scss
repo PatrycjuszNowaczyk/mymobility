@@ -1,0 +1,26 @@
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"] {
+    border: 2px solid #9C9C9E;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-weight: 400;
+    font-size: 16px;
+    font-family: $font-family;
+    width: 100%;
+    max-width: 310px;
+    &::placeholder {
+        color: #A4A4A8;
+        opacity: 1;
+        font-family: $font-family;
+    }    
+    &.inne {
+        border: 0;
+        border-bottom: 2px solid #9C9C9E;
+        border-radius: 0;
+        margin-left: 10px;
+        padding: 5px;
+        max-width: 200px;
+    }
+}

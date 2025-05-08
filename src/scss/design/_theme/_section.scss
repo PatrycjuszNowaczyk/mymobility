@@ -1,0 +1,33 @@
+.section {
+    padding: 70px 0;
+    &-title {
+        padding-bottom: 30px;
+        .claim {
+            display: block;
+            font-size: 14px;
+            letter-spacing: 0.08em;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .title {
+            display: block;
+            font-size: 24px;
+            line-height: 1.1;
+            font-weight: 800;
+        }
+    }
+    @media screen and (max-width: 768px) {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    @media screen and (max-width: 641px) {
+        padding-top: 30px;
+        padding-bottom: 30px;
+        &-title {
+            padding-bottom: 20px;
+            .title {
+                font-size: 28px;
+            }
+        }
+    }
+}

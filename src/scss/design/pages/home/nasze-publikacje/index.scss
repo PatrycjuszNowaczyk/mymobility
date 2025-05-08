@@ -1,0 +1,36 @@
+#nasze-publikacje {
+    padding-top: 0;
+    .item {
+        background: #FBFBFD;
+        box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        padding: 12px 24px;
+        min-height: 132px;
+        display: flex;
+        align-items: center;
+        transition: all 0.3s ease-in-out;
+        opacity: 1 !important;
+        h3 {
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 140%;
+        }
+        &:hover {
+            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.35);
+        }
+    }
+    .line-btn {
+        padding-top: 30px;
+        text-align: right;
+    }
+    @media screen and (max-width: 641px) {
+        .grid {
+            display: block;
+            .item {
+                & + .item {
+                    margin-top: 20px;
+                }
+            }
+        }
+    }
+}

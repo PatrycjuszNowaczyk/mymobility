@@ -1,0 +1,89 @@
+.item {
+    background: #FBFBFD;
+    box-shadow: 4px 4px 16px rgba(5, 65, 58, 0.5);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: nowrap;
+    & + .item {
+        margin-top: 30px;
+    }
+    .img {
+        max-width: 315px;
+        flex-basis: 315px;
+        & + .text {
+            max-width: calc(100% - 315px);
+            flex-basis: calc(100% - 315px);
+        }
+    }
+    .text {
+        padding: 24px;
+        max-width: 100%;
+        flex-basis: 100%;
+        .title {
+            h3 {
+                font-size: 24px;
+                line-height: 130%;
+                color: $blue;
+                padding-bottom: 5px;
+            }
+        }
+        .position {
+            color: #1D1D1F; 
+            display: block;
+        }
+        .desc {
+            line-height: 1.3;
+        }
+        .line-btn {
+            text-align: right;
+            padding-top: 20px;
+            .link {
+                text-transform: uppercase;
+                color: $green;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                font-weight: 800;
+                font-size: 14px;
+                line-height: 140%;
+                display: inline-block;
+                padding-right: 30px;
+                position: relative;
+                &:before {
+                    position: absolute;
+                    right: 0;
+                    width: width('link.svg');
+                    height: height('link.svg');
+                    background: resolve('link.svg') no-repeat center;
+                    content: ' ';
+                    margin-top: -2px;
+                }
+            }
+        }
+
+    }
+
+    @media screen and (max-width: 768px) {
+        .img {
+            max-width: 240px;
+            flex-basis: 240px;
+            & + .text {
+                max-width: calc(100% - 240px);
+                flex-basis: calc(100% - 240px);
+            }
+        }
+    }
+    @media screen and (max-width: 570px) {
+        flex-wrap: wrap;
+        .img {
+            max-width: 100%;
+            flex-basis: 100%;
+            padding: 30px 30px 0;
+            text-align: center;
+            & + .text {
+                max-width: 100%;
+                flex-basis: 100%;
+            }
+        }
+    }
+}

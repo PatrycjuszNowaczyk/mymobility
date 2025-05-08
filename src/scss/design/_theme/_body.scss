@@ -1,0 +1,27 @@
+body { 
+    background: #FBFBFD;
+    font-family: $font-family;
+    color: #1D1D1F;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+    overflow-x: hidden;
+
+    &.overflow, 
+    &.mobile-menu-active {
+        overflow: hidden;
+    }
+    &.shadow {
+        overflow: hidden;
+        &:before {
+            position: absolute; top: 0; bottom: 0; left: 0; right: 0; content: ' '; background: rgba(0,0,0,0.8); z-index: 11111;
+            backdrop-filter: blur(6px);
+        }
+    }
+    &:not(.home) {
+        padding-top: 100px;
+        @media screen and (max-width: 1150px) {
+            padding-top: 80px;
+        }
+    }
+}

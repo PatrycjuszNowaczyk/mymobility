@@ -1,0 +1,69 @@
+#inne-projekty {
+    .item {
+        border-radius: 12px;
+        box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
+        background: #fff;
+        overflow: hidden;
+        transition: all 0.3s ease-in-out;
+        opacity: 1 !important;
+        .img {
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+            header {
+                h3 {
+                    font-weight: 700;
+                    font-size: 18px;
+                    line-height: 140%;
+                    color: $blue;
+                }
+            }
+            .text {
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 150%;
+                color: #1D1D1F;
+            }
+            .link {
+                text-align: right;
+                padding-top: 10px;
+                span {
+                    text-transform: uppercase;
+                    color: $blue;
+                    letter-spacing: 0.06em;
+                    text-transform: uppercase;
+                    font-weight: 800;
+                    font-size: 14px;
+                    line-height: 140%;
+                    display: inline-block;
+                    padding-right: 30px;
+                    position: relative;
+                    &:before {
+                        position: absolute;
+                        right: 0;
+                        width: width('link.svg');
+                        height: height('link.svg');
+                        background: resolve('link.svg') no-repeat center;
+                        content: ' ';
+                        margin-top: -2px;
+                    }
+                }
+            }
+        }
+        &:hover {
+            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.35);
+        }
+    }
+    @media screen and (max-width: 768px) {
+        .grid {
+            display: block;
+            .item {
+                display: block;
+                & + .item {
+                    margin-top: 30px;
+                }
+            }
+        }
+    }
+}

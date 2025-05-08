@@ -1,0 +1,15 @@
+#page-o-nas {
+    #o-crash {
+        padding-bottom: 70px;
+
+        @media screen and (max-width: 768px) {
+            padding-bottom: 50px;
+        }
+
+        @media screen and (max-width: 530px) {
+            padding-bottom: 30px;
+        }
+    }
+    @import './o-projekcie/index';
+    @import './team/index';
+}

@@ -1,0 +1,307 @@
+.badania-field {
+    padding: 15px 12px;
+    position: relative;
+}
+
+.badania-field.loading:before {
+    background: #fff url('./../../../img/loader.gif') center no-repeat;
+    opacity: 0.7;
+    position: absolute;
+    content: ' ';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 111;
+}
+table.badania-pytania-table {
+    width: 100%; 
+    border-spacing: 0;
+    border-collapse: collapse; 
+    border: 1px solid #c3c4c7;
+}
+table.badania-pytania-table thead th:first-child {
+    border-top-left-radius: 3px;
+}
+table.badania-pytania-table thead th:last-child {
+    border-top-right-radius: 3px;
+}
+table.badania-pytania-table thead th {
+    padding: 10px;
+    background: #004f91;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+}
+
+table.badania-pytania-table tbody tr:nth-child(odd) {
+    background: #f4f4f4;
+}
+
+
+table.badania-pytania-table td {
+    padding: 20px;
+}
+table.badania-pytania-table .id {
+    width: 1%;
+    white-space: nowrap;
+    text-align: center;
+    font-weight: 700;
+}
+table.badania-pytania-table .type {
+    width: 1%;
+    white-space: nowrap;
+}
+table.badania-pytania-table .actions {
+    width: 1%;
+    white-space: nowrap;
+}
+table.badania-pytania-table .actions a {
+    display: block;
+    border-radius: 6px;
+    text-transform: uppercase;
+    border: 1px solid #db574b;
+    background: #db574b;
+    color: #fff;
+    font-size: 11px;
+    padding: 7px 15px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 700;
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+}
+table.badania-pytania-table .actions a:hover {
+    color: #db574b;
+    background: #fff;
+}
+table.badania-pytania-table .actions a.pytanie_edytuj {
+    background: #004f91;
+    border-color: #004f91;
+}
+table.badania-pytania-table .actions a.pytanie_edytuj:hover {
+    background: #fff;
+    color: #004f91;
+}
+table.badania-pytania-table .actions a.pytanie_odpowiedzi {
+    background: #059f8e;
+    border-color: #059f8e;
+}
+table.badania-pytania-table .actions a.pytanie_odpowiedzi:hover {
+    background: #fff;
+    color: #059f8e;
+}
+
+
+table.badania-pytania-table .id span {
+    display: block;
+}
+table.badania-pytania-table .id a {
+    display: inline-block;
+    width: 16px;
+    height: 10px;
+    text-indent: -9999px;
+    overflow: hidden;
+    position: relative;
+    margin: 5px 0;
+}
+table.badania-pytania-table .id a:before {
+    content: ' ';
+    border-top: 10px solid #1fa692;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    position: absolute;
+    width: auto;
+    height: auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+table.badania-pytania-table .id a.pytanie_przesun_gora:before {
+    border-top: 0;
+    border-bottom: 10px solid #1fa692;
+}
+table.badania-pytania-table .name .flex {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+table.badania-pytania-table .name .flex span {
+    margin-right: 5px;
+}
+table.badania-pytania-table .name .flex .flag {
+    width: 20px;
+    height: 12px;
+    background: url('./../../../img/ukraina.png') center no-repeat;
+    background-size: cover;
+    display: inline-block;
+    margin-top: 3px;
+    position: relative;
+    margin-right: 10px;
+}
+table.badania-pytania-table .name .flex .flag:hover:before {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    background: #fff;
+    content: attr(data-text);
+    width: 200px;
+    box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 0.3);
+}
+table.badania-pytania-table .name .flex .flag.en {
+    background-image: url('./../../../img/uk.png');
+}
+table.badania-pytania-table .name .odpowiedz-edytuj {
+    font-size: 10px; text-decoration: none;
+    color: #004f91;
+}
+table.badania-pytania-table .name .odpowiedz-usun:hover,
+table.badania-pytania-table .name .odpowiedz-edytuj:hover {
+    text-decoration: underline;
+}
+table.badania-pytania-table .name .odpowiedz-usun {
+    font-size: 11px; text-decoration: none;
+    color: #db574b;
+}
+
+table.badania-pytania-table tbody tr:first-child .id .pytanie_przesun_gora {
+    display: none;
+}
+table.badania-pytania-table tbody tr:last-child .id .pytanie_przesun_dol {
+    display: none;
+}
+#wpfooter {
+    display: none;
+}
+
+#poststuff .questions-group {
+    background: #1fa692;
+    padding: 20px;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 24%);
+    margin-bottom: 20px;
+}
+#poststuff .questions-group > h2 {
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 0;
+    padding: 0;
+    position: relative;
+    cursor: pointer;
+}
+#poststuff .questions-group > h2:before {
+    border-top: 8px solid #fff;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    content: ' ';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0,-50%);
+}
+#poststuff .questions-group.active > h2:before { 
+    transform: translate(0,-50%) rotate(180deg);
+}
+
+#poststuff .questions-group > .questions-group-content {
+    display: none;
+    margin-top: 20px;
+}
+#poststuff .questions-group.active > .questions-group-content {
+    display: block;
+}
+
+#form-pytania input[type="submit"] { 
+    border-radius: 6px;
+    text-transform: uppercase;
+    background: #059f8e;
+    border-color: #059f8e;
+    color: #fff;
+    font-size: 13px;
+    padding: 10px 20px;
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: 700;
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+    margin-top: 10px;
+    cursor: pointer;
+}
+#form-pytania input[type="submit"]:hover {
+    background: #fff;
+    color: #059f8e;
+}
+
+/* WYNIKI */
+.content-wyniki {
+    padding: 50px;
+    position: relative;
+}
+.content-wyniki.loading:before {
+    background: #fff url('./../../../img/loader.gif') center 50px no-repeat;
+    opacity: 0.7;
+    position: absolute;
+    content: ' ';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 111;
+}
+table.table-wyniki {
+    width: 100%; 
+    border-spacing: 0;
+    border-collapse: collapse; 
+    border: 1px solid #c3c4c7;
+}
+table.table-wyniki thead th:first-child {
+    border-top-left-radius: 3px;
+}
+table.table-wyniki thead th:last-child {
+    border-top-right-radius: 3px;
+}
+table.table-wyniki thead th {
+    padding: 10px;
+    background: #004f91;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+}
+
+table.table-wyniki tbody tr:nth-child(odd) {
+    background: #f4f4f4;
+}
+
+table.table-wyniki td {
+    padding: 20px;
+}
+table.table-wyniki .badanie_id {
+    width: 1%;
+    white-space: nowrap;
+    text-align: center;
+    font-weight: 700;
+}
+table.table-wyniki .badanie_data,
+table.table-wyniki .badanie_status,
+table.table-wyniki .badanie_code,
+table.table-wyniki .badanie_actions,
+table.table-wyniki .badanie_email {
+    width: 1%;
+    white-space: nowrap;
+    text-align: center; 
+}
+table.table-wyniki .otwarte {
+    color: #f1574b;
+}
+table.table-wyniki .zamkniete {
+    color: #1fa692;
+}
+table.table-wyniki .badanie_etap {
+    text-align: center;
+}

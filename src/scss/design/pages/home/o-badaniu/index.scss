@@ -1,0 +1,79 @@
+#o-badaniu {
+  .col {
+    &-left {
+      width: calc(100% - 474px);
+      padding-right: 20px;
+    }
+    
+    &-right {
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 474px;
+      padding-left: 20px;
+      text-align: right;
+      
+      img {
+        position: sticky;
+        top: 100px;
+        margin-top: 50px;
+        margin-bottom: 70px;
+      }
+      
+      .line-btn {
+        width: 100%;
+        margin-top: auto;
+      }
+    }
+  }
+  
+  @media screen and (max-width: 960px) {
+    .col {
+      &-left {
+        width: 50%;
+      }
+      
+      &-right {
+        width: 50%;
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .flex {
+      flex-wrap: wrap;
+    }
+    .col {
+      &-left {
+        width: 100%;
+        padding-right: 0;
+      }
+      
+      &-right {
+        text-align: center;
+        width: 100%;
+        padding-left: 0;
+        padding-top: 20px;
+        
+        img {
+          position: relative;
+          top: 0;
+          margin-top: 0;
+          margin-bottom: 0;
+          width: 100%;
+          aspect-ratio: 16/9;
+          object-fit: cover;
+          border-radius: 16px;
+        }
+        
+        .line-btn {
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+  
+  .claim {
+    margin-bottom: 30px;
+  }
+}

@@ -1,0 +1,8 @@
+.accordions {
+    &-item {
+        border-bottom: 2px solid $green;
+        padding: 15px 10px;
+        @import './header';
+        @import './content';
+    }
+}
