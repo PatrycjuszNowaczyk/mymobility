@@ -249,7 +249,7 @@ $('document').ready(function() {
 			'dataType': 'JSON',
 			'url' : ajaxurl,
 			'data' : {
-				'action' : 'wyswietl_wynnik',
+				'action' : 'wyswietl_wynik',
 				'nazwa' : nazwa,
 				'czesc' : czesc,
 				'step': step,

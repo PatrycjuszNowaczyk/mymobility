@@ -54,8 +54,8 @@ class Badania_Front extends Badanie {
     add_action( 'wp_ajax_wczytaj_podkrok', [ $this, 'wczytaj_podkrok' ] );
     add_action( 'wp_ajax_nopriv_wczytaj_podkrok', [ $this, 'wczytaj_podkrok' ] );
 
-    add_action( 'wp_ajax_wyswietl_wynnik', [ $this, 'wyswietl_wynnik' ] );
-    add_action( 'wp_ajax_nopriv_wyswietl_wynnik', [ $this, 'wyswietl_wynnik' ] );
+    add_action( 'wp_ajax_wyswietl_wynik', [ $this, 'wyswietl_wynik' ] );
+    add_action( 'wp_ajax_nopriv_wyswietl_wynik', [ $this, 'wyswietl_wynik' ] );
 
     add_action( 'wp_ajax_wczytaj_podsumowanie_etapu', [ $this, 'wczytaj_podsumowanie_etapu' ] );
     add_action( 'wp_ajax_nopriv_wczytaj_podsumowanie_etapu', [ $this, 'wczytaj_podsumowanie_etapu' ] );
@@ -322,7 +322,7 @@ class Badania_Front extends Badanie {
     wp_die();
   }
 
-  public function wyswietl_wynnik() {
+  public function wyswietl_wynik() {
     if ( isset( $_POST['nazwa'] ) ) {
       $nazwa = $_POST['nazwa'];
     }
