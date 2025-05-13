@@ -360,57 +360,65 @@ class Badania_Front extends Badanie {
 
     if ( $_POST['step'] === 'step-1-1' ) {
       $wynik_krok1_1 = $this->badanie_wynik_1_1( $_POST['badanie_ID'] );
-      if ( isset( $wynik_krok1_1['poznawcze'] ) ) {
-        $result = str_replace( '{wynik_krok1_1_poznawcze}', number_format( $wynik_krok1_1['poznawcze'], 1, ',', ' ' ), $result );
-      }
-      if ( isset( $wynik_krok1_1['manualne'] ) ) {
-        $result = str_replace( '{wynik_krok1_1_manualne}', number_format( $wynik_krok1_1['manualne'], 1, ',', ' ' ), $result );
-      }
-      if ( isset( $wynik_krok1_1['manualne'] ) ) {
-        $result = str_replace( '{wynik_krok1_1_miekkie}', number_format( $wynik_krok1_1['miekkie'], 1, ',', ' ' ), $result );
-      }
-      if ( isset( $wynik_krok1_1['manualne'] ) ) {
-        $result = str_replace( '{wynik_krok1_1_zyciowe}', number_format( $wynik_krok1_1['zyciowe'], 1, ',', ' ' ), $result );
-      }
-    }
 
-    if ( $_POST['step'] === 'step-1-3' ) {
-
-      $wynik_krok1_3 = $this->badanie_wynik_1_3( $_POST['badanie_ID'] );
-
-      // ten if ponizej jest nowy, trzeba ogarnac by nie wyswietlalo wyniku gdy wszystko jest 0
       if (
-        // (isset($wynik_krok1_3['dopasowanie']) && $wynik_krok1_3['dopasowanie'] != 0)
-        // &&
-        ( isset( $wynik_krok1_3['niedobor'] ) && $wynik_krok1_3['niedobor'] != 0 )
-        &&
-        ( isset( $wynik_krok1_3['nadmiar'] ) && $wynik_krok1_3['nadmiar'] != 0 )
+        true === str_contains( $wynik_krok1_1['language'], 'other' )
+        && true === str_contains( $wynik_krok1_1['language'], 'english' )
       ) {
-        // if(isset($wynik_krok1_3['dopasowanie'])) {
-        //     $result = str_replace('{wynik_krok1_3_dopasowanie}', number_format($wynik_krok1_3['dopasowanie'], 2, ',', ' '), $result);
-        // }
-        if ( isset( $wynik_krok1_3['niedobor'] ) ) {
-          $result = str_replace( '{wynik_krok1_3_niedobor}', number_format( $wynik_krok1_3['niedobor'], 2, ',', ' ' ), $result );
-        } else {
-          $result = str_replace( '{wynik_krok1_3_niedobor}', '0,00', $result );
-        }
-        if ( isset( $wynik_krok1_3['nadmiar'] ) ) {
-          $result = str_replace( '{wynik_krok1_3_nadmiar}', number_format( $wynik_krok1_3['nadmiar'], 2, ',', ' ' ), $result );
-        } else {
-          $result = str_replace( '{wynik_krok1_3_nadmiar}', '0,00', $result );
-        }
-        if ( !( isset( $wynik_krok1_3['dopasowanie'] ) ) && !( isset( $wynik_krok1_3['niedobor'] ) ) && !( isset( $wynik_krok1_3['nadmiar'] ) ) ) {
-          if ( $section[ $czesc ]['wynik_zwrotny_alternatywny'] ) {
-            $result = $section[ $czesc ]['wynik_zwrotny_alternatywny'];
-          } else {
-            $result = '';
-          }
-        }
+        $result = $parsed_sections['language_2'];
       } else {
-        $result = '';
+        $result = $parsed_sections['language_1'];
       }
 
+      if ( 2 < (int) $wynik_krok1_1['programs_abroad'] ) {
+        $result .= $parsed_sections['programs_abroad_2'];
+      } else {
+        $result .= $parsed_sections['programs_abroad_1'];
+      }
 
+      if ( 1 < (int) $wynik_krok1_1['qualification_recognition'] ) {
+        $result .= $parsed_sections['qualification_recognition'];
+      }
+
+      if ( false === str_contains( $wynik_krok1_1['certifications'], '5.5' ) ) {
+        $result .= $parsed_sections['certifications_1'];
+      } else {
+        $result .= $parsed_sections['certifications_2'];
+      }
+
+      if ( 3 > (int) $wynik_krok1_1['lifelong_learning'] ) {
+        $result .= $parsed_sections['lifelong_learning_1'];
+      } else {
+        $result .= $parsed_sections['lifelong_learning_2'];
+      }
+
+      if ( $wynik_krok1_1['competences'] ) {
+        $result .= str_replace( '{{competences_result}}', '<strong>' . $wynik_krok1_1['competences'] . '</strong>', $parsed_sections['competences'] );
+      }
+
+      if ( 'yes' === $wynik_krok1_1['recommendations'] ) {
+        $result .= $parsed_sections['recommendations_1'];
+      } else {
+        $result .= $parsed_sections['recommendations_2'];
+      }
+
+      if ( false === is_null( $wynik_krok1_1['skills_acquired'] ) ) {
+        if ( 10 === $wynik_krok1_1['skills_acquired'] ) {
+          $result .= $parsed_sections['skills_acquired_3'];
+        } else if ( 15 < $wynik_krok1_1['skills_acquired'] ) {
+          $result .= $parsed_sections['skills_acquired_1'];
+        } else {
+          $result .= $parsed_sections['skills_acquired_2'];
+        }
+      }
+
+      if ( false === is_null( $wynik_krok1_1['mobility_experience'] ) ) {
+        if ( 2 < (int) $wynik_krok1_1['mobility_experience'] ) {
+          $result .= $parsed_sections['mobility_experience_2'];
+        } else {
+          $result .= $parsed_sections['mobility_experience_1'];
+        }
+      }
     }
 
     if ( $_POST['step'] === 'step-2-1' ) {
@@ -2749,193 +2757,50 @@ class Badania_Front extends Badanie {
       $this->wpdb->prepare(
         "SELECT * FROM `{$this->table_name}_wyniki_krok1_1` WHERE `wynik_ID` = %d",
         array(
-          $badanie->badanie_wyniki_krok1_1,
+          (int) $badanie->badanie_wyniki_krok1_1,
         )
       )
     );
 
-    $poznawcze = ( (float) $odp->KROK1_1_1 + (float) $odp->KROK1_1_2 + (float) $odp->KROK1_1_3 + (float) $odp->KROK1_1_5 + (float) $odp->KROK1_1_6 + (float) $odp->KROK1_1_7 + (float) $odp->KROK1_1_8 + (float) $odp->KROK1_1_9 ) / 8;
-    $manualne  = ( (float) $odp->KROK1_1_4 + (float) $odp->KROK1_1_10 + (float) $odp->KROK1_1_11 + (float) $odp->KROK1_1_21 ) / 4;
-    $miekkie   = ( (float) $odp->KROK1_1_12 + (float) $odp->KROK1_1_13 + (float) $odp->KROK1_1_14 + (float) $odp->KROK1_1_15 + (float) $odp->KROK1_1_16 + (float) $odp->KROK1_1_17 + (float) $odp->KROK1_1_18 + (float) $odp->KROK1_1_19 + (float) $odp->KROK1_1_20 ) / 9;
-    $zyciowe   = ( (float) $odp->KROK1_1_22 + (float) $odp->KROK1_1_23 + (float) $odp->KROK1_1_24 + (float) $odp->KROK1_1_25 + (float) $odp->KROK1_1_26 ) / 5;
+    $wyniki = [
+      'language'                  => null,
+      'programs_abroad'           => null,
+      'qualification_recognition' => null,
+      'certifications'            => null,
+      'lifelong_learning'         => null,
+      'competences'               => null,
+      'recommendations'           => null,
+      'skills_acquired'           => null,
+      'mobility_experience'       => null
+    ];
 
-    $wyniki              = array();
-    $wyniki['poznawcze'] = $poznawcze;
-    $wyniki['manualne']  = $manualne;
-    $wyniki['miekkie']   = $miekkie;
-    $wyniki['zyciowe']   = $zyciowe;
+    $wyniki['language']                  = $odp->KROK1_1_97;
+    $wyniki['programs_abroad']           = $odp->KROK1_1_32;
+    $wyniki['qualification_recognition'] = $odp->KROK1_1_34;
+    $wyniki['certifications']            = $odp->KROK1_1_35;
+    $wyniki['lifelong_learning']         = $odp->KROK1_1_36;
 
-    return $wyniki;
-  }
+    $wyniki['competences'] = round(
+      (float) ( (int) $odp->KROK1_1_50 + (int) $odp->KROK1_1_51 + (int) $odp->KROK1_1_52 + (int) $odp->KROK1_1_53
+                + (int) $odp->KROK1_1_54 + (int) $odp->KROK1_1_55 + (int) $odp->KROK1_1_56 + (int) $odp->KROK1_1_57
+                + (int) $odp->KROK1_1_58 + (int) $odp->KROK1_1_59 + (int) $odp->KROK1_1_60 + (int) $odp->KROK1_1_61
+                + (int) $odp->KROK1_1_62 + (int) $odp->KROK1_1_63 + (int) $odp->KROK1_1_64 + (int) $odp->KROK1_1_65
+                + (int) $odp->KROK1_1_66 + (int) $odp->KROK1_1_67 + (int) $odp->KROK1_1_68 + (int) $odp->KROK1_1_69
+                + (int) $odp->KROK1_1_70 + (int) $odp->KROK1_1_71 + (int) $odp->KROK1_1_72 + (int) $odp->KROK1_1_73
+                + (int) $odp->KROK1_1_74 + (int) $odp->KROK1_1_75 ) / 26
+      , 2 );
 
-  public function badanie_wynik_1_3( $badanie_ID ) {
-    $wyniki = array();
+    $wyniki['recommendations'] = $odp->KROK1_1_42;
+    $wyniki['skills_acquired'] = is_null( $odp->KROK1_1_77 ) ? null :
+      (int) $odp->KROK1_1_77 + (int) $odp->KROK1_1_78 + (int) $odp->KROK1_1_79
+      + (int) $odp->KROK1_1_80 + (int) $odp->KROK1_1_81 + (int) $odp->KROK1_1_82
+      + (int) $odp->KROK1_1_83 + (int) $odp->KROK1_1_84 + (int) $odp->KROK1_1_85
+      + (int) $odp->KROK1_1_86 + (int) $odp->KROK1_1_87 + (int) $odp->KROK1_1_88
+      + (int) $odp->KROK1_1_89 + (int) $odp->KROK1_1_90 + (int) $odp->KROK1_1_91
+      + (int) $odp->KROK1_1_92 + (int) $odp->KROK1_1_93 + (int) $odp->KROK1_1_94
+      + (int) $odp->KROK1_1_95 + (int) $odp->KROK1_1_96;
 
-    $badanie = $this->wpdb->get_row(
-      $this->wpdb->prepare(
-        "SELECT * FROM `{$this->table_name}` WHERE `badanie_ID` = %d",
-        array(
-          $badanie_ID,
-        )
-      )
-    );
-
-    $wynik_ID = $badanie = $this->wpdb->get_row(
-      $this->wpdb->prepare(
-        "SELECT * FROM `{$this->table_name}` WHERE `badanie_ID` = %d",
-        array(
-          $badanie_ID,
-        )
-      )
-    );
-
-    $odp_1_1 = $this->wpdb->get_row(
-      $this->wpdb->prepare(
-        "SELECT * FROM `{$this->table_name}_wyniki_krok1_1` WHERE `wynik_ID` = %d",
-        array(
-          $badanie->badanie_wyniki_krok1_1,
-        )
-      )
-    );
-
-
-    if ( $badanie->badanie_wyniki_krok1_3 != 0 ) {
-      $warunek = $badanie->badanie_wyniki_krok1_3;
-      $odp_1_3 = $this->wpdb->get_row(
-        $this->wpdb->prepare(
-          "SELECT * FROM `{$this->table_name}_wyniki_krok1_3` WHERE `wynik_ID` = %d",
-          array(
-            $badanie->badanie_wyniki_krok1_3,
-          )
-        )
-      );
-
-
-      $KP_1  = (int) $odp_1_1->KROK1_1_1;
-      $KP_2  = (int) $odp_1_1->KROK1_1_2;
-      $KP_3  = (int) $odp_1_1->KROK1_1_3;
-      $KP_4  = (int) $odp_1_1->KROK1_1_4;
-      $KP_5  = (int) $odp_1_1->KROK1_1_5;
-      $KP_6  = (int) $odp_1_1->KROK1_1_6;
-      $KP_7  = (int) $odp_1_1->KROK1_1_7;
-      $KP_8  = (int) $odp_1_1->KROK1_1_8;
-      $KP_9  = (int) $odp_1_1->KROK1_1_9;
-      $KP_10 = (int) $odp_1_1->KROK1_1_10;
-      $KP_11 = (int) $odp_1_1->KROK1_1_11;
-      $KP_12 = (int) $odp_1_1->KROK1_1_12;
-      $KP_13 = (int) $odp_1_1->KROK1_1_13;
-      $KP_14 = (int) $odp_1_1->KROK1_1_14;
-      $KP_15 = (int) $odp_1_1->KROK1_1_15;
-      $KP_16 = (int) $odp_1_1->KROK1_1_16;
-      $KP_17 = (int) $odp_1_1->KROK1_1_17;
-      $KP_18 = (int) $odp_1_1->KROK1_1_18;
-      $KP_19 = (int) $odp_1_1->KROK1_1_19;
-      $KP_20 = (int) $odp_1_1->KROK1_1_20;
-      $KP_21 = (int) $odp_1_1->KROK1_1_21;
-      $KP_22 = (int) $odp_1_1->KROK1_1_22;
-      $KP_23 = (int) $odp_1_1->KROK1_1_23;
-      $KP_24 = (int) $odp_1_1->KROK1_1_24;
-      $KP_25 = (int) $odp_1_1->KROK1_1_25;
-      $KP_26 = (int) $odp_1_1->KROK1_1_26;
-
-      $KW_1  = (int) $odp_1_3->KROK1_3_1;
-      $KW_2  = (int) $odp_1_3->KROK1_3_2;
-      $KW_3  = (int) $odp_1_3->KROK1_3_34;
-      $KW_4  = (int) $odp_1_3->KROK1_3_5;
-      $KW_5  = (int) $odp_1_3->KROK1_3_6;
-      $KW_6  = (int) $odp_1_3->KROK1_3_7;
-      $KW_7  = (int) $odp_1_3->KROK1_3_8;
-      $KW_8  = (int) $odp_1_3->KROK1_3_9;
-      $KW_9  = (int) $odp_1_3->KROK1_3_10;
-      $KW_10 = (int) $odp_1_3->KROK1_3_11;
-      $KW_11 = (int) $odp_1_3->KROK1_3_12;
-      $KW_12 = (int) $odp_1_3->KROK1_3_13;
-      $KW_13 = (int) $odp_1_3->KROK1_3_14;
-      $KW_14 = (int) $odp_1_3->KROK1_3_15;
-      $KW_15 = (int) $odp_1_3->KROK1_3_16;
-      $KW_16 = (int) $odp_1_3->KROK1_3_17;
-      $KW_17 = (int) $odp_1_3->KROK1_3_18;
-      $KW_18 = (int) $odp_1_3->KROK1_3_19;
-      $KW_19 = (int) $odp_1_3->KROK1_3_20;
-      $KW_20 = (int) $odp_1_3->KROK1_3_21;
-      $KW_21 = (int) $odp_1_3->KROK1_3_22;
-      $KW_22 = (int) $odp_1_3->KROK1_3_23;
-      $KW_23 = (int) $odp_1_3->KROK1_3_24;
-      $KW_24 = (int) $odp_1_3->KROK1_3_25;
-      $KW_25 = (int) $odp_1_3->KROK1_3_26;
-      $KW_26 = (int) $odp_1_3->KROK1_3_27;
-
-
-      for ( $i = 1; $i < 27; $i++ ) {
-        if ( ( isset( ${'KP_' . $i} ) ) && ( isset( ${'KW_' . $i} ) ) ) {
-          ${'DK_' . $i} = ${'KP_' . $i} - ${'KW_' . $i};
-        }
-      }
-
-      for ( $i = 1; $i < 27; $i++ ) {
-        if ( isset( ${'KW_' . $i} ) && ${'KW_' . $i} < 2 ) {
-          ${'KW_' . $i . 'R'} = 1;
-        } elseif ( isset( ${'KW_' . $i} ) && ${'KW_' . $i} > 2 ) {
-          ${'KW_' . $i . 'R'} = 2;
-        }
-      }
-
-
-      for ( $i = 1; $i < 27; $i++ ) {
-        if ( isset( ${'KW_' . $i . 'R'} ) && ${'KW_' . $i . 'R'} == 1 ) {
-          ${'Nadmiar' . $i} = ${'DK_' . $i};
-        } elseif ( isset( ${'KW_' . $i . 'R'} ) && ${'KW_' . $i . 'R'} == 2 ) {
-          ${'Niedobor' . $i} = ${'DK_' . $i};
-        }
-
-      }
-
-      $NADMIAR      = 0;
-      $NADMIR_count = 0;
-
-      for ( $i = 1; $i < 27; $i++ ) {
-        if ( isset( ${'Nadmiar' . $i} ) ) {
-          $NADMIAR += ${'Nadmiar' . $i};
-          $NADMIR_count++;
-        }
-      }
-
-      if ( $NADMIAR != 0 && $NADMIR_count != 0 ) {
-        $NADMIAR           = $NADMIAR / $NADMIR_count;
-        $wyniki['nadmiar'] = $NADMIAR;
-      }
-
-      // obliczanie sredniej niedoboru
-      $NIEDOBOR       = 0;
-      $NIEDOBOR_count = 0;
-
-      for ( $i = 1; $i < 27; $i++ ) {
-        if ( isset( ${'Niedobor' . $i} ) ) {
-          $NIEDOBOR += ${'Niedobor' . $i};
-          $NIEDOBOR_count++;
-        }
-      }
-
-      if ( $NIEDOBOR != 0 && $NIEDOBOR_count != 0 ) {
-        $NIEDOBOR           = $NIEDOBOR / $NIEDOBOR_count;
-        $NIEDOBOR           = $NIEDOBOR * ( -1 );
-        $wyniki['niedobor'] = $NIEDOBOR;
-      } else {
-        $wyniki['niedobor'] = 0;
-      }
-
-
-      if ( $odp_1_3->KROK1_3_31 !== null ) {
-        $wyniki['dopasowanie'] = $odp_1_3->KROK1_3_31;
-      } else {
-        $wyniki['dopasowanie'] = 0;
-      }
-
-    } else {
-      $wyniki['nadmiar']     = 0;
-      $wyniki['niedobor']    = 0;
-      $wyniki['dopasowanie'] = 0;
-    }
+    $wyniki['mobility_experience'] = $odp->KROK1_1_47;
 
     return $wyniki;
   }
