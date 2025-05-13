@@ -337,20 +337,7 @@ class Badania_Front extends Badanie {
     $parsed_sections = [];
 
     if ( $result ) {
-      // Regex to find [text_part id="..."]...[/text_part]
-      // It captures the ID and the content between the tags.
-      // The 's' modifier makes the dot (.) match newlines, so multi-line content is captured.
-      $pattern = '#\[text_part id=(["“’”`\'])([\w_\d]*)([^"`\']{1}\s*\])(.*?)\[/text_part\]#su';
-
-      preg_match_all( $pattern, $result, $matches, PREG_SET_ORDER );
-
-      if ( $matches ) {
-        foreach ( $matches as $match_item ) {
-          $id                     = $match_item[2];
-          $content                = $match_item[4];
-          $parsed_sections[ $id ] = trim( $content );
-        }
-      }
+      $parsed_sections = $this->parse_text_parts( $result );
     }
 
     if ( count( $parsed_sections ) > 0 ) {
@@ -1218,6 +1205,27 @@ class Badania_Front extends Badanie {
 
   private function clear_special_char( $string ) {
     return str_replace( array( '\"', "\'" ), array( '"', "'" ), $string );
+  }
+
+  private function parse_text_parts( $text ): array {
+    $parsed_sections = [];
+
+    // Regex to find [text_part id="..."]...[/text_part]
+    // It captures the ID and the content between the tags.
+    // The 's' modifier makes the dot (.) match newlines, so multi-line content is captured.
+    $pattern = '#\[text_part id=(["“’”`\'])([\w_\d]*)([^"`\']{1}\s*\])(.*?)\[/text_part\]#su';
+
+    preg_match_all( $pattern, $text, $matches, PREG_SET_ORDER );
+
+    if ( $matches ) {
+      foreach ( $matches as $match_item ) {
+        $id                     = $match_item[2];
+        $content                = $match_item[4];
+        $parsed_sections[ $id ] = trim( $content );
+      }
+    }
+
+    return $parsed_sections;
   }
 
   public function field_textarea( $krok_ID, $pytanie, $required, $hide, $hide_special = false ) {
