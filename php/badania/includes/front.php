@@ -270,11 +270,12 @@ class Badania_Front extends Badanie {
       )
     );
 
-    if ( ( ( $row->badanie_wyniki_krok1_1 !== null ) && ( $row->badanie_wyniki_krok1_2 !== null )
-           // && ($row->badanie_wyniki_krok1_3 !== NULL )
-         ) && ( ( $row->badanie_wyniki_krok2_1 !== null ) && ( $row->badanie_wyniki_krok2_2 !== null )
-                && ( $row->badanie_wyniki_krok2_3 !== null )
-         ) && ( ( $row->badanie_wyniki_krok3_1 !== null ) && ( $row->badanie_wyniki_krok3_2 !== null ) && ( $row->badanie_wyniki_krok3_3 !== null ) ) && ( ( $row->badanie_wyniki_krok4_1 !== null ) && ( $row->badanie_wyniki_krok4_2 !== null ) ) ) {
+    if (
+      ( $row->badanie_wyniki_krok1_1 !== null )
+      && ( $row->badanie_wyniki_krok2_1 !== null )
+      && ( ( $row->badanie_wyniki_krok3_1 !== null ) && ( $row->badanie_wyniki_krok3_2 !== null ) && ( $row->badanie_wyniki_krok3_3 !== null ) )
+      && ( ( $row->badanie_wyniki_krok4_1 !== null ) && ( $row->badanie_wyniki_krok4_2 !== null ) )
+    ) {
       $this->wpdb->update( $this->table_name, array( 'badanie_status' => "zamknięte" ), array( 'badanie_ID' => $badanie_ID ) );
     }
 
@@ -408,41 +409,6 @@ class Badania_Front extends Badanie {
       }
     }
 
-    if ( $_POST['step'] === 'step-2-2' ) {
-      $wynik_krok2_2 = $this->badanie_wynik_2_2( $_POST['badanie_ID'] );
-      if ( isset( $wynik_krok2_2['ekstrawersja'] ) ) {
-        $result = str_replace( '{wynik_krok2_2_ekstrawersja}', number_format( $wynik_krok2_2['ekstrawersja'], 2, ',', ' ' ), $result );
-      }
-      if ( isset( $wynik_krok2_2['ugodowosc'] ) ) {
-        $result = str_replace( '{wynik_krok2_2_ugodowosc}', number_format( $wynik_krok2_2['ugodowosc'], 2, ',', ' ' ), $result );
-      }
-      if ( isset( $wynik_krok2_2['sumiennosc'] ) ) {
-        $result = str_replace( '{wynik_krok2_2_sumiennosc}', number_format( $wynik_krok2_2['sumiennosc'], 2, ',', ' ' ), $result );
-      }
-      if ( isset( $wynik_krok2_2['neurotyzm'] ) ) {
-        $result = str_replace( '{wynik_krok2_2_neurotyzm}', number_format( $wynik_krok2_2['neurotyzm'], 2, ',', ' ' ), $result );
-      }
-      if ( isset( $wynik_krok2_2['wyobraznia'] ) ) {
-        $result = str_replace( '{wynik_krok2_2_wyobraznia}', number_format( $wynik_krok2_2['wyobraznia'], 2, ',', ' ' ), $result );
-      }
-    }
-
-    if ( $_POST['step'] === 'step-2-3' ) {
-      $wynik_krok2_3 = $this->badanie_wynik_2_3( $_POST['badanie_ID'] );
-      if ( isset( $wynik_krok2_3['refl_komunikacyjna'] ) ) {
-        $result = str_replace( '{wynik_krok2_3_refl_komunikacyjna}', number_format( $wynik_krok2_3['refl_komunikacyjna'], 2, ',', ' ' ), $result );
-      }
-      if ( isset( $wynik_krok2_3['refl_autonomiczna'] ) ) {
-        $result = str_replace( '{wynik_krok2_3_refl_autonomiczna}', number_format( $wynik_krok2_3['refl_autonomiczna'], 2, ',', ' ' ), $result );
-      }
-      if ( isset( $wynik_krok2_3['metarefleksyjnosc'] ) ) {
-        $result = str_replace( '{wynik_krok2_3_metarefleksyjnosc}', number_format( $wynik_krok2_3['metarefleksyjnosc'], 2, ',', ' ' ), $result );
-      }
-      if ( isset( $wynik_krok2_3['refl_peknieta'] ) ) {
-        $result = str_replace( '{wynik_krok2_3_refl_peknieta}', number_format( $wynik_krok2_3['refl_peknieta'], 2, ',', ' ' ), $result );
-      }
-    }
-
     if ( $_POST['step'] === 'step-3-2' ) {
       $wynik_krok3_2 = $this->badanie_wynik_3_2( $_POST['badanie_ID'] );
       if ( isset( $wynik_krok3_2['wsp_rodz'] ) ) {
@@ -476,7 +442,6 @@ class Badania_Front extends Badanie {
     } else {
       wp_send_json_error( $data );
     }
-
   }
 
   public function wczytaj_badanie() {
@@ -492,11 +457,12 @@ class Badania_Front extends Badanie {
       $data = array();
       if ( $row != null ) {
         $data['badanie_ID'] = $row->badanie_ID;
-        if ( ( ( $row->badanie_wyniki_krok1_1 !== null ) && ( $row->badanie_wyniki_krok1_2 !== null )
-               // && ($row->badanie_wyniki_krok1_3 !== NULL)
-             ) && ( ( $row->badanie_wyniki_krok2_1 !== null ) && ( $row->badanie_wyniki_krok2_2 !== null )
-                    && ( $row->badanie_wyniki_krok2_3 !== null )
-             ) && ( ( $row->badanie_wyniki_krok3_1 !== null ) && ( $row->badanie_wyniki_krok3_2 !== null ) && ( $row->badanie_wyniki_krok3_3 !== null ) ) && ( $row->badanie_wyniki_krok4_1 !== null ) && ( $row->badanie_wyniki_krok4_2 !== null ) ) {
+        if (
+          ( $row->badanie_wyniki_krok1_1 !== null )
+          && ( $row->badanie_wyniki_krok2_1 !== null )
+          && ( ( $row->badanie_wyniki_krok3_1 !== null ) && ( $row->badanie_wyniki_krok3_2 !== null ) && ( $row->badanie_wyniki_krok3_3 !== null ) )
+          && ( $row->badanie_wyniki_krok4_1 !== null ) && ( $row->badanie_wyniki_krok4_2 !== null )
+        ) {
           $data['wczytaj'] = 'koniec';
         } else {
           $data['wczytaj'] = 'wstepne';
@@ -864,33 +830,13 @@ class Badania_Front extends Badanie {
       $this->wpdb->update( $this->table_name, array( 'badanie_wyniki_' . $krok => '0' ), array( 'badanie_ID' => $_POST['badanie_ID'] ) );
     }
 
-    if ( $krok == 'krok1_2' ) {
-      if ( !isset( $row->badanie_wyniki_krok1_2 ) ) {
-        $warunek = 0;
-      } else {
-        $warunek = $row->badanie_wyniki_krok1_2;
-      }
-      $etap = 1;
-    } elseif ( $krok == 'krok1_3' ) {
-      if ( !isset( $row->badanie_wyniki_krok1_3 ) ) {
-        $warunek = 0;
-      } else {
-        $warunek = $row->badanie_wyniki_krok1_3;
-      }
-      $etap = 1;
-    } elseif ( $krok == 'krok2_2' ) {
-      $warunek = $row->badanie_wyniki_krok2_2;
-      $etap    = 2;
-    } elseif ( $krok == 'krok2_3' ) {
-      $warunek = $row->badanie_wyniki_krok2_3;
-      $etap    = 2;
-    } elseif ( $krok == 'krok3_2' ) {
+    if ( $krok === 'krok3_2' ) {
       $warunek = $row->badanie_wyniki_krok3_2;
       $etap    = 3;
-    } elseif ( $krok == 'krok3_3' ) {
+    } elseif ( $krok === 'krok3_3' ) {
       $warunek = $row->badanie_wyniki_krok3_3;
       $etap    = 3;
-    } elseif ( $krok == 'krok4_2' ) {
+    } elseif ( $krok === 'krok4_2' ) {
       $warunek = $row->badanie_wyniki_krok4_2;
       $etap    = 4;
     }
@@ -944,13 +890,12 @@ class Badania_Front extends Badanie {
       )
     );
 
-    if ( ( ( $row->badanie_wyniki_krok1_1 !== null ) && ( $row->badanie_wyniki_krok1_2 !== null )
-           // && ($row->badanie_wyniki_krok1_3 !== NULL)
-         )
-         && ( ( $row->badanie_wyniki_krok2_1 !== null ) && ( $row->badanie_wyniki_krok2_2 !== null )
-              && ( $row->badanie_wyniki_krok2_3 !== null )
-         )
-         && ( ( $row->badanie_wyniki_krok3_1 !== null ) && ( $row->badanie_wyniki_krok3_2 !== null ) && ( $row->badanie_wyniki_krok3_3 !== null ) ) && ( $row->badanie_wyniki_krok4_1 !== null ) && ( $row->badanie_wyniki_krok4_2 !== null ) ) {
+    if (
+      ( $row->badanie_wyniki_krok1_1 !== null )
+      && ( $row->badanie_wyniki_krok2_1 !== null )
+      && ( ( $row->badanie_wyniki_krok3_1 !== null ) && ( $row->badanie_wyniki_krok3_2 !== null ) && ( $row->badanie_wyniki_krok3_3 !== null ) )
+      && ( ( $row->badanie_wyniki_krok4_1 !== null ) && ( $row->badanie_wyniki_krok4_2 !== null ) )
+    ) {
       $data['form']    = '<form action="#" style="margin-top: 30px;" method="POST" class="end-step"><input type="hidden" value="' . $_POST['badanie_ID'] . '" name="badanie_ID">';
       $data['form']    .= '<div class="line-btn"><button class="btn btn-blue-line">' . __( 'Zakończ badanie', 'migracja' ) . '</button></div>';
       $data['form']    .= '</form>';
@@ -976,6 +921,8 @@ class Badania_Front extends Badanie {
         )
       );
       $badanie_ID = $_POST['badanie_ID'];
+
+
     } else {
       $row        = $this->wpdb->get_row( "SELECT * FROM `{$this->table_name}` ORDER BY badanie_ID DESC LIMIT 1" );
       $badanie_ID = $row->badanie_ID;
@@ -1012,9 +959,7 @@ class Badania_Front extends Badanie {
             <ul>
                 <li>
                     <label>';
-    if ( ( $row->badanie_wyniki_krok1_1 !== null ) && ( $row->badanie_wyniki_krok1_2 !== null )
-      // && ($row->badanie_wyniki_krok1_3 !== NULL)
-    ) {
+    if ( $row->badanie_wyniki_krok1_1 !== null ) {
       $html .= '<input type="radio" name="uruchom-krok" value="krok-1" class="full"><span>1. ' . __( 'Kapitał ludzki', 'migracja' ) . '</span>';
     } else {
       $html .= '<input type="radio" name="uruchom-krok" value="krok-1" checked="checked"><span>1. ' . __( 'Kapitał ludzki', 'migracja' ) . '</span>';
@@ -1028,9 +973,7 @@ class Badania_Front extends Badanie {
     ) {
       $html .= '<input type="radio" name="uruchom-krok" value="krok-2" class="full"><span>2. ' . __( 'Kapitał psychologiczny', 'migracja' ) . '</span>';
     } else {
-      if ( ( $row->badanie_wyniki_krok1_1 !== null ) && ( $row->badanie_wyniki_krok1_2 !== null )
-        // && ($row->badanie_wyniki_krok1_3 !== NULL )
-      ) {
+      if ( $row->badanie_wyniki_krok1_1 !== null ) {
         $html .= '<input type="radio" name="uruchom-krok" value="krok-2" checked="checked"><span>2. ' . __( 'Kapitał psychologiczny', 'migracja' ) . '</span>';
       } else {
         $html .= '<input type="radio" name="uruchom-krok" value="krok-2"><span>2. ' . __( 'Kapitał psychologiczny', 'migracja' ) . '</span>';
@@ -1043,12 +986,9 @@ class Badania_Front extends Badanie {
     if ( ( $row->badanie_wyniki_krok3_1 !== null ) && ( $row->badanie_wyniki_krok3_2 !== null ) && ( $row->badanie_wyniki_krok3_3 !== null ) ) {
       $html .= '<input type="radio" name="uruchom-krok" value="krok-3" class="full"><span>3. ' . __( 'Kapitał społeczny', 'migracja' ) . '</span>';
     } else {
-      if ( ( ( $row->badanie_wyniki_krok1_1 !== null ) && ( $row->badanie_wyniki_krok1_2 !== null )
-             // && ($row->badanie_wyniki_krok1_3 !== NULL )
-           )
-           && ( ( $row->badanie_wyniki_krok2_1 !== null ) && ( $row->badanie_wyniki_krok2_2 !== null )
-                && ( $row->badanie_wyniki_krok2_3 !== null )
-           )
+      if (
+        ( $row->badanie_wyniki_krok1_1 !== null )
+        && ( $row->badanie_wyniki_krok2_1 !== null )
       ) {
         $html .= '<input type="radio" name="uruchom-krok" value="krok-3" checked="checked"><span>3. ' . __( 'Kapitał społeczny', 'migracja' ) . '</span>';
       } else {
@@ -1062,13 +1002,11 @@ class Badania_Front extends Badanie {
     if ( ( $row->badanie_wyniki_krok4_1 !== null ) && ( $row->badanie_wyniki_krok4_2 !== null ) ) {
       $html .= '<input type="radio" name="uruchom-krok" value="krok-4" class="full"><span>4. ' . __( 'Kapitał ekonomiczny', 'migracja' ) . '</span>';
     } else {
-      if ( ( ( $row->badanie_wyniki_krok1_1 !== null ) && ( $row->badanie_wyniki_krok1_2 !== null )
-             // && ($row->badanie_wyniki_krok1_3 !== NULL)
-           )
-           && ( ( $row->badanie_wyniki_krok2_1 !== null ) && ( $row->badanie_wyniki_krok2_2 !== null )
-                && ( $row->badanie_wyniki_krok2_3 !== null )
-           )
-           && ( ( $row->badanie_wyniki_krok3_1 !== null ) && ( $row->badanie_wyniki_krok3_2 !== null ) && ( $row->badanie_wyniki_krok3_3 !== null ) ) ) {
+      if (
+        ( $row->badanie_wyniki_krok1_1 !== null )
+        && ( $row->badanie_wyniki_krok2_1 !== null )
+        && ( ( $row->badanie_wyniki_krok3_1 !== null ) && ( $row->badanie_wyniki_krok3_2 !== null ) && ( $row->badanie_wyniki_krok3_3 !== null ) )
+      ) {
         $html .= '<input type="radio" name="uruchom-krok" value="krok-4" checked="checked"><span>4. ' . __( 'Kapitał ekonomiczny', 'migracja' ) . '</span>';
       } else {
         $html .= '<input type="radio" name="uruchom-krok" value="krok-4"><span>4. ' . __( 'Kapitał ekonomiczny', 'migracja' ) . '</span>';

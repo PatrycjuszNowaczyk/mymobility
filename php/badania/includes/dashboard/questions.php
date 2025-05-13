@@ -1075,27 +1075,8 @@ class Pytania {
       <div class="wrap acf-settings-wrap">
         <h1 style="margin-bottom: 10px;">1. Kapitał ludzki</h1>
         <div id="poststuff">
-          <div class="questions-group">
-            <h2>1.1 Kompetencje</h2>
-            <div class="questions-group-content">
-              <?php $this->badania_pytania_form( 'krok1_1' ); ?>
-              <?php $this->badania_pytania_lista( 'krok1_1' ); ?>
-            </div>
-          </div>
-          <div class="questions-group">
-            <h2>1.2 Formalny kapitał ludzki</h2>
-            <div class="questions-group-content">
-              <?php $this->badania_pytania_form( 'krok1_2' ); ?>
-              <?php $this->badania_pytania_lista( 'krok1_2' ); ?>
-            </div>
-          </div>
-          <div class="questions-group">
-            <h2>1.3 Dopasowanie kompetencyjne</h2>
-            <div class="questions-group-content">
-              <?php $this->badania_pytania_form( 'krok1_3' ); ?>
-              <?php $this->badania_pytania_lista( 'krok1_3' ); ?>
-            </div>
-          </div>
+          <?php $this->badania_pytania_form( 'krok1_1' ); ?>
+          <?php $this->badania_pytania_lista( 'krok1_1' ); ?>
         </div>
       </div>
     </div>
@@ -1108,27 +1089,8 @@ class Pytania {
       <div class="wrap acf-settings-wrap">
         <h1 style="margin-bottom: 10px;">2. Kapitał psychologiczny</h1>
         <div id="poststuff">
-          <div class="questions-group">
-            <h2>2.1 Kapitał psychologiczny</h2>
-            <div class="questions-group-content">
-              <?php $this->badania_pytania_form( 'krok2_1' ); ?>
-              <?php $this->badania_pytania_lista( 'krok2_1' ); ?>
-            </div>
-          </div>
-          <div class="questions-group">
-            <h2>2.2 Osobowość</h2>
-            <div class="questions-group-content">
-              <?php $this->badania_pytania_form( 'krok2_2' ); ?>
-              <?php $this->badania_pytania_lista( 'krok2_2' ); ?>
-            </div>
-          </div>
-          <div class="questions-group">
-            <h2>2.3 Refleksyjność</h2>
-            <div class="questions-group-content">
-              <?php $this->badania_pytania_form( 'krok2_3' ); ?>
-              <?php $this->badania_pytania_lista( 'krok2_3' ); ?>
-            </div>
-          </div>
+          <?php $this->badania_pytania_form( 'krok2_1' ); ?>
+          <?php $this->badania_pytania_lista( 'krok2_1' ); ?>
         </div>
       </div>
     </div>

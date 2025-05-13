@@ -168,29 +168,9 @@ class Badania_Dashboard extends Badanie {
             } else {
               echo '<span class="dashicons dashicons-no"></span>';
             }; ?>
-            <?php if ( $row->badanie_wyniki_krok1_2 > 0 ) {
-              echo '<span class="dashicons dashicons-yes"></span>';
-            } else {
-              echo '<span class="dashicons dashicons-no"></span>';
-            }; ?>
-            <?php if ( $row->badanie_wyniki_krok1_3 > 0 ) {
-              echo '<span class="dashicons dashicons-yes"></span>';
-            } else {
-              echo '<span class="dashicons dashicons-no"></span>';
-            }; ?>
           </td>
           <td class="badanie_etap badanie_etap_2">
             <?php if ( $row->badanie_wyniki_krok2_1 > 0 ) {
-              echo '<span class="dashicons dashicons-yes"></span>';
-            } else {
-              echo '<span class="dashicons dashicons-no"></span>';
-            }; ?>
-            <?php if ( $row->badanie_wyniki_krok2_2 > 0 ) {
-              echo '<span class="dashicons dashicons-yes"></span>';
-            } else {
-              echo '<span class="dashicons dashicons-no"></span>';
-            }; ?>
-            <?php if ( $row->badanie_wyniki_krok2_3 > 0 ) {
               echo '<span class="dashicons dashicons-yes"></span>';
             } else {
               echo '<span class="dashicons dashicons-no"></span>';
@@ -298,36 +278,6 @@ class Badania_Dashboard extends Badanie {
 
     $array[0][] = '';
 
-    $krok_1_2 = $this->wpdb->get_results( "SELECT * FROM `{$this->table_name}_krok1_2` ORDER BY kolejnosc" );
-    foreach ( $krok_1_2 as $krok_1_2_row ) {
-      $pytanie = $this->wpdb->get_row(
-        $this->wpdb->prepare(
-          "SELECT * FROM `{$this->table_name}_pytania` WHERE `pytanie_ID` = %d",
-          array( $krok_1_2_row->pytanie_ID )
-        )
-      );
-      if ( $pytanie->pytanie_typ != 'text' ) {
-        $array[0][] = 'KROK1_2_' . $krok_1_2_row->ID;
-      }
-    }
-
-    $array[0][] = '';
-
-    // $krok_1_3 = $this->wpdb->get_results("SELECT * FROM `{$this->table_name}_krok1_3` ORDER BY kolejnosc");
-    // foreach($krok_1_3 as $krok_1_3_row) {
-    //     $pytanie = $this->wpdb->get_row(
-    //         $this->wpdb->prepare(
-    //             "SELECT * FROM `{$this->table_name}_pytania` WHERE `pytanie_ID` = %d",
-    //             array( $krok_1_3_row->pytanie_ID )
-    //         )
-    //     );
-    //     if($pytanie->pytanie_typ != 'text') {
-    //         $array[0][] = 'KROK1_3_' . $krok_1_3_row->ID;
-    //     }
-    // }
-
-    // $array[0][] = '';
-
     $krok_2_1 = $this->wpdb->get_results( "SELECT * FROM `{$this->table_name}_krok2_1` ORDER BY kolejnosc" );
     foreach ( $krok_2_1 as $krok_2_1_row ) {
       $pytanie = $this->wpdb->get_row(
@@ -338,36 +288,6 @@ class Badania_Dashboard extends Badanie {
       );
       if ( $pytanie->pytanie_typ != 'text' ) {
         $array[0][] = 'KROK2_1_' . $krok_2_1_row->ID;
-      }
-    }
-
-    $array[0][] = '';
-
-    $krok_2_2 = $this->wpdb->get_results( "SELECT * FROM `{$this->table_name}_krok2_2` ORDER BY kolejnosc" );
-    foreach ( $krok_2_2 as $krok_2_2_row ) {
-      $pytanie = $this->wpdb->get_row(
-        $this->wpdb->prepare(
-          "SELECT * FROM `{$this->table_name}_pytania` WHERE `pytanie_ID` = %d",
-          array( $krok_2_2_row->pytanie_ID )
-        )
-      );
-      if ( $pytanie->pytanie_typ != 'text' ) {
-        $array[0][] = 'KROK2_2_' . $krok_2_2_row->ID;
-      }
-    }
-
-    $array[0][] = '';
-
-    $krok_2_3 = $this->wpdb->get_results( "SELECT * FROM `{$this->table_name}_krok2_3` ORDER BY kolejnosc" );
-    foreach ( $krok_2_3 as $krok_2_3_row ) {
-      $pytanie = $this->wpdb->get_row(
-        $this->wpdb->prepare(
-          "SELECT * FROM `{$this->table_name}_pytania` WHERE `pytanie_ID` = %d",
-          array( $krok_2_3_row->pytanie_ID )
-        )
-      );
-      if ( $pytanie->pytanie_typ != 'text' ) {
-        $array[0][] = 'KROK2_3_' . $krok_2_3_row->ID;
       }
     }
 
@@ -478,34 +398,10 @@ class Badania_Dashboard extends Badanie {
             array( $row->badanie_wyniki_krok1_1 )
           )
         );
-        $wyniki_1_2     = $this->wpdb->get_row(
-          $this->wpdb->prepare(
-            "SELECT * FROM `{$this->table_name}_wyniki_krok1_2` WHERE `wynik_ID` = %d",
-            array( $row->badanie_wyniki_krok1_2 )
-          )
-        );
-        // $wyniki_1_3 = $this->wpdb->get_row(
-        //     $this->wpdb->prepare(
-        //         "SELECT * FROM `{$this->table_name}_wyniki_krok1_3` WHERE `wynik_ID` = %d",
-        //         array( $row->badanie_wyniki_krok1_3 )
-        //     )
-        // );
         $wyniki_2_1 = $this->wpdb->get_row(
           $this->wpdb->prepare(
             "SELECT * FROM `{$this->table_name}_wyniki_krok2_1` WHERE `wynik_ID` = %d",
             array( $row->badanie_wyniki_krok2_1 )
-          )
-        );
-        $wyniki_2_2 = $this->wpdb->get_row(
-          $this->wpdb->prepare(
-            "SELECT * FROM `{$this->table_name}_wyniki_krok2_2` WHERE `wynik_ID` = %d",
-            array( $row->badanie_wyniki_krok2_2 )
-          )
-        );
-        $wyniki_2_3 = $this->wpdb->get_row(
-          $this->wpdb->prepare(
-            "SELECT * FROM `{$this->table_name}_wyniki_krok2_3` WHERE `wynik_ID` = %d",
-            array( $row->badanie_wyniki_krok2_3 )
           )
         );
         $wyniki_3_1 = $this->wpdb->get_row(
@@ -592,56 +488,6 @@ class Badania_Dashboard extends Badanie {
 
         $array[ $i ][] = '';
 
-        foreach ( $krok_1_2 as $krok_1_2_row ) {
-          $pytanie = $this->wpdb->get_row(
-            $this->wpdb->prepare(
-              "SELECT * FROM `{$this->table_name}_pytania` WHERE `pytanie_ID` = %d",
-              array( $krok_1_2_row->pytanie_ID )
-            )
-          );
-          if ( $pytanie->pytanie_typ != 'text' ) {
-            $id_krok       = $krok_1_2_row->ID;
-            $nazwa_kolumny = 'KROK1_2_' . $id_krok;
-            if ( isset( $wyniki_1_2->$nazwa_kolumny ) && $wyniki_1_2->$nazwa_kolumny !== null ) {
-              $value = $wyniki_1_2->$nazwa_kolumny;
-              if ( strpos( $value, '||' ) !== false ) {
-                $value = str_replace( '||', ', ', $value );
-              }
-              $value         = str_replace( array( "\r", "\n" ), ' ', $value );
-              $array[ $i ][] = $value;
-            } else {
-              $array[ $i ][] = '';
-            }
-          }
-        }
-
-        $array[ $i ][] = '';
-
-
-        // foreach($krok_1_3 as $krok_1_3_row) {
-        //     $pytanie = $this->wpdb->get_row(
-        //         $this->wpdb->prepare(
-        //             "SELECT * FROM `{$this->table_name}_pytania` WHERE `pytanie_ID` = %d",
-        //             array( $krok_1_3_row->pytanie_ID )
-        //         )
-        //     );
-        //     if($pytanie->pytanie_typ != 'text') {
-        //         $id_krok = $krok_1_3_row->ID;
-        //         $nazwa_kolumny = 'KROK1_3_'.$id_krok;
-        //         if(isset($wyniki_1_3->$nazwa_kolumny) && $wyniki_1_3->$nazwa_kolumny !== NULL) {
-        //             $value = $wyniki_1_3->$nazwa_kolumny;
-        //             if(strpos($value, '||') !== false){
-        //                 $value = str_replace('||', ', ', $value);
-        //             }
-        //             $array[$i][] = $value;
-        //         } else {
-        //             $array[$i][] = '';
-        //         }
-        //     }
-        // }
-
-        // $array[$i][] = '';
-
         foreach ( $krok_2_1 as $krok_2_1_row ) {
           $pytanie = $this->wpdb->get_row(
             $this->wpdb->prepare(
@@ -654,56 +500,6 @@ class Badania_Dashboard extends Badanie {
             $nazwa_kolumny = 'KROK2_1_' . $id_krok;
             if ( isset( $wyniki_2_1->$nazwa_kolumny ) && $wyniki_2_1->$nazwa_kolumny !== null ) {
               $value = $wyniki_2_1->$nazwa_kolumny;
-              if ( strpos( $value, '||' ) !== false ) {
-                $value = str_replace( '||', ', ', $value );
-              }
-              $value         = str_replace( array( "\r", "\n" ), ' ', $value );
-              $array[ $i ][] = $value;
-            } else {
-              $array[ $i ][] = '';
-            }
-          }
-        }
-
-        $array[ $i ][] = '';
-
-        foreach ( $krok_2_2 as $krok_2_2_row ) {
-          $pytanie = $this->wpdb->get_row(
-            $this->wpdb->prepare(
-              "SELECT * FROM `{$this->table_name}_pytania` WHERE `pytanie_ID` = %d",
-              array( $krok_2_2_row->pytanie_ID )
-            )
-          );
-          if ( $pytanie->pytanie_typ != 'text' ) {
-            $id_krok       = $krok_2_2_row->ID;
-            $nazwa_kolumny = 'KROK2_2_' . $id_krok;
-            if ( isset( $wyniki_2_2->$nazwa_kolumny ) && $wyniki_2_2->$nazwa_kolumny !== null ) {
-              $value = $wyniki_2_2->$nazwa_kolumny;
-              if ( strpos( $value, '||' ) !== false ) {
-                $value = str_replace( '||', ', ', $value );
-              }
-              $value         = str_replace( array( "\r", "\n" ), ' ', $value );
-              $array[ $i ][] = $value;
-            } else {
-              $array[ $i ][] = '';
-            }
-          }
-        }
-
-        $array[ $i ][] = '';
-
-        foreach ( $krok_2_3 as $krok_2_3_row ) {
-          $pytanie = $this->wpdb->get_row(
-            $this->wpdb->prepare(
-              "SELECT * FROM `{$this->table_name}_pytania` WHERE `pytanie_ID` = %d",
-              array( $krok_2_3_row->pytanie_ID )
-            )
-          );
-          if ( $pytanie->pytanie_typ != 'text' ) {
-            $id_krok       = $krok_2_3_row->ID;
-            $nazwa_kolumny = 'KROK2_3_' . $id_krok;
-            if ( isset( $wyniki_2_3->$nazwa_kolumny ) && $wyniki_2_3->$nazwa_kolumny !== null ) {
-              $value = $wyniki_2_3->$nazwa_kolumny;
               if ( strpos( $value, '||' ) !== false ) {
                 $value = str_replace( '||', ', ', $value );
               }

@@ -150,13 +150,16 @@ $( 'document' ).ready( function () {
         if ( response.success === false ) {
           if ( etap === 'krok1_1' ) {
             wyswietl_wynik_krok( 'kapital_ludzki', 'pierwsza_czesc', 'step-1-1', false, badanie_ID );
-            wczytaj_podkrok( 'krok1_2', 'kapital_ludzki', 'druga_czesc', 2 );
+            wczytaj_podkrok( 'krok2_1', 'kapital_psychologiczny', 'pierwsza_czesc', 1 );
           } else if ( etap === 'krok2_1' ) {
             wyswietl_wynik_krok( 'kapital_psychologiczny', 'pierwsza_czesc', 'step-2-1', false, badanie_ID );
-            wczytaj_podkrok( 'krok2_2', 'kapital_psychologiczny', 'druga_czesc', 2 );
+            wczytaj_podkrok( 'krok3_1', 'kapital_spoleczny', 'pierwsza_czesc', 1 );
           } else if ( etap === 'krok3_1' ) {
             wyswietl_wynik_krok( 'kapital_spoleczny', 'pierwsza_czesc', 'step-3-1', false, badanie_ID );
             wczytaj_podkrok( 'krok3_2', 'kapital_spoleczny', 'druga_czesc', 2 );
+          } else if ( etap === 'krok3_2' ) {
+            wyswietl_wynik_krok( 'kapital_spoleczny', 'druga_czesc', 'step-3-2', false, badanie_ID );
+            wczytaj_podkrok( 'krok3_3', 'kapital_spoleczny', 'trzecia_czesc', 3 );
           } else if ( etap === 'krok4_1' ) {
             wyswietl_wynik_krok( 'kapital_ekonomiczny', 'pierwsza_czesc', 'step-4-1', false, badanie_ID );
             wczytaj_podkrok( 'krok4_2', 'kapital_ekonomiczny', 'druga_czesc', 2 );
@@ -199,9 +202,9 @@ $( 'document' ).ready( function () {
         let next = step + 1;
 
         $( '#page-badanie' ).removeClass( 'loading' );
-        if ( krok === 'krok1_1' || krok === 'krok1_2' || krok === 'krok1_3' ) {
+        if ( krok === 'krok1_1' ) {
           $( '#page-badanie #badanie-formularz .steps-content #step-1-' + prev ).after( response.data.form );
-        } else if ( krok === 'krok2_1' || krok === 'krok2_2' || krok === 'krok2_3' ) {
+        } else if ( krok === 'krok2_1' ) {
           $( '#page-badanie #badanie-formularz .steps-content #step-2-' + prev ).after( response.data.form );
         } else if ( krok === 'krok3_1' || krok === 'krok3_2' || krok === 'krok3_3' ) {
           $( '#page-badanie #badanie-formularz .steps-content #step-3-' + prev ).after( response.data.form );
@@ -210,9 +213,9 @@ $( 'document' ).ready( function () {
         }
 
         if ( response.success === false ) {
-          if ( krok === 'krok1_2' ) {
-            wyswietl_wynik_krok( 'kapital_ludzki', 'druga_czesc', 'step-1-' + step, false, badanie_ID );
-            wczytajPodsumowanieEtapu( '1-2', 'krok2_1', badanie_ID );
+          if ( krok === 'krok2_1' ) {
+            wyswietl_wynik_krok( 'kapital_ludzki', 'pierwsza_czesc', 'step-1-' + step, false, badanie_ID );
+            wczytajPodsumowanieEtapu( '1-1', 'krok2_1', badanie_ID );
 
             // 	wyswietl_wynik_krok('kapital_ludzki', 'druga_czesc', 'step-1-'+step, false, badanie_ID);
             // 	wczytaj_podkrok('krok1_3', 'kapital_ludzki', 'trzecia_czesc', next);
@@ -598,26 +601,12 @@ $( 'document' ).ready( function () {
               podsumowanie_wstepne();
             } else if ( step == 'krok1_1' ) {
               wyswietl_wynik_krok( 'kapital_ludzki', 'pierwsza_czesc', 'step-1-1', true, badanie_ID );
-              wczytaj_podkrok( 'krok1_2', 'kapital_ludzki', 'druga_czesc', 2, badanie_ID );
-            } else if ( step == 'krok1_2' ) {
-              wyswietl_wynik_krok( 'kapital_ludzki', 'druga_czesc', 'step-1-2', true, badanie_ID );
-              wczytajPodsumowanieEtapu( '1-2', 'krok2_1', badanie_ID );
-              // wczytaj_podkrok('krok1_3', 'kapital_ludzki', 'trzecia_czesc', 3, badanie_ID);
-              // wczytajPodsumowanieEtapu('1-3', 'krok2_1', badanie_ID);
-              // } else if( step == 'krok1_3') {
-              // 	wyswietl_wynik_krok('kapital_ludzki', 'trzecia_czesc','step-1-3', true, badanie_ID);
-              // 	wczytajPodsumowanieEtapu('1-3', 'krok2_1', badanie_ID);
+              wczytaj_podkrok( 'krok2_1', 'kapital_psychologiczny', 'pierwsza_czesc', 2, badanie_ID );
+              wczytajPodsumowanieEtapu( '1-1', 'krok2_1', badanie_ID );
             } else if ( step == 'krok2_1' ) {
               wyswietl_wynik_krok( 'kapital_psychologiczny', 'pierwsza_czesc', 'step-2-1', true, badanie_ID );
-              wczytaj_podkrok( 'krok2_2', 'kapital_psychologiczny', 'druga_czesc', 2, badanie_ID );
-            } else if ( step == 'krok2_2' ) {
-              // wyswietl_wynik_krok('kapital_psychologiczny', 'druga_czesc','step-2-2', true, badanie_ID);
-              // wczytajPodsumowanieEtapu('2-2', 'krok3_1', badanie_ID);
-              wyswietl_wynik_krok( 'kapital_psychologiczny', 'druga_czesc', 'step-2-2', true, badanie_ID );
-              wczytaj_podkrok( 'krok2_3', 'kapital_psychologiczny', 'trzecia_czesc', 3, badanie_ID );
-            } else if ( step == 'krok2_3' ) {
-              wyswietl_wynik_krok( 'kapital_psychologiczny', 'trzecia_czesc', 'step-2-3', true, badanie_ID );
-              wczytajPodsumowanieEtapu( '2-3', 'krok3_1', badanie_ID );
+              wczytaj_podkrok( 'krok3_1', 'kapital_spoleczny', 'pierwsza_czesc', 2, badanie_ID );
+              wczytajPodsumowanieEtapu( '2-1', 'krok3_1', badanie_ID );
             } else if ( step == 'krok3_1' ) {
               wyswietl_wynik_krok( 'kapital_spoleczny', 'pierwsza_czesc', 'step-3-1', true, badanie_ID );
               wczytaj_podkrok( 'krok3_2', 'kapital_spoleczny', 'druga_czesc', 2, badanie_ID );
@@ -728,12 +717,8 @@ $( 'document' ).ready( function () {
     submit_form( 'badanie_dodaj', 'wstepne' );
 
     submit_form( 'badanie_dodaj_krok', 'krok1_1' );
-    submit_form( 'badanie_dodaj_krok', 'krok1_2' );
-    submit_form( 'badanie_dodaj_krok', 'krok1_3' );
 
     submit_form( 'badanie_dodaj_krok', 'krok2_1' );
-    submit_form( 'badanie_dodaj_krok', 'krok2_2' );
-    submit_form( 'badanie_dodaj_krok', 'krok2_3' );
 
     submit_form( 'badanie_dodaj_krok', 'krok3_1' );
     submit_form( 'badanie_dodaj_krok', 'krok3_2' );
