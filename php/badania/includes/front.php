@@ -929,11 +929,20 @@ class Badania_Front extends Badanie {
     }
 
 
-    $badania      = $this->page_settings;
-    $wstepne      = $badania['wstepne'];
-    $podsumowanie = $wstepne['podsumowanie'];
+    $odp_wstepne = $this->wpdb->get_row(
+      $this->wpdb->prepare(
+        "SELECT * FROM `{$this->table_name}_wyniki_wstepne` WHERE `wynik_ID` = %d",
+        array(
+          $badanie_ID,
+        )
+      )
+    );
 
-    $html = '';
+    $badania       = $this->page_settings;
+    $wstepne       = $badania['wstepne'];
+    $podsumowanie  = $wstepne['podsumowanie'];
+    $wynik_zwrotny = $podsumowanie['wynik_zwrotny'];
+    $html          = '';
 
     if ( $podsumowanie['naglowek'] ) {
       $html .= '<header class="header"><h1>' . $podsumowanie['naglowek'] . '</h1></header>';
@@ -950,6 +959,14 @@ class Badania_Front extends Badanie {
 
     if ( $podsumowanie['dodatkowa_informacja'] ) {
       $html .= '<div class="desc">' . $podsumowanie['dodatkowa_informacja'] . '</div>';
+    }
+
+    if ( "0" === $odp_wstepne->WSTEPNE_2 ) {
+      $html .= <<<HTML
+      <div class="desc">
+      $wynik_zwrotny
+      </div>
+      HTML;
     }
 
     $html .= '</div>';
