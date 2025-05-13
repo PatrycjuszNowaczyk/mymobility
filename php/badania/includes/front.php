@@ -2825,17 +2825,76 @@ class Badania_Front extends Badanie {
       )
     );
 
-    $nadzieja              = $odp->KROK2_1_1 + $odp->KROK2_1_2 + $odp->KROK2_1_3;
-    $poczucie_skutecznosci = $odp->KROK2_1_4 + $odp->KROK2_1_5 + $odp->KROK2_1_6;
-    $odpornosc_psych       = $odp->KROK2_1_7 + $odp->KROK2_1_8 + $odp->KROK2_1_9;
-    $optymizm              = $odp->KROK2_1_10 + $odp->KROK2_1_11 + $odp->KROK2_1_12;
+    $wyniki = [
+      'defining_sentences' => null,
+      'hope'               => [
+        'avg'   => null,
+        'score' => null,
+      ],
+      'self_efficacy'      => [
+        'avg'   => null,
+        'score' => null,
+      ],
+      'resilience'         => [
+        'avg'   => null,
+        'score' => null,
+      ],
+      'optimism'           => [
+        'avg'   => null,
+        'score' => null,
+      ],
+      'personality'        => null,
+      'reflexivity'        => null,
+      'mobile_experience'  => null
+    ];
 
-    $wyniki                          = array();
-    $wyniki['nadzieja']              = $nadzieja;
-    $wyniki['poczucie_skutecznosci'] = $poczucie_skutecznosci;
-    $wyniki['odpornosc_psych']       = $odpornosc_psych;
-    $wyniki['optymizm']              = $optymizm;
-    $wyniki['ogolny']                = $nadzieja + $poczucie_skutecznosci + $odpornosc_psych + $optymizm;
+    $wyniki['defining_sentences'] = round(
+      (float) ( (int) $odp->KROK2_1_2 + (int) $odp->KROK2_1_3 + (int) $odp->KROK2_1_4 + (int) $odp->KROK2_1_5
+                + (int) $odp->KROK2_1_6 + (int) $odp->KROK2_1_7 + (int) $odp->KROK2_1_8 + (int) $odp->KROK2_1_9
+                + (int) $odp->KROK2_1_10 + (int) $odp->KROK2_1_11 + (int) $odp->KROK2_1_12 ) / 11
+      , 2 );
+
+    $wyniki['self_efficacy']['avg']   = round( 4 * 7 / 2 / 4, 2 );
+    $wyniki['self_efficacy']['score'] = round(
+      (float) ( (int) $odp->KROK2_1_15 + (int) $odp->KROK2_1_16 + (int) $odp->KROK2_1_17 + (int) $odp->KROK2_1_18 ) / 4
+      , 2 );
+
+    $wyniki['resilience']['avg']   = round( 3 * 7 / 2 / 3, 2 );
+    $wyniki['resilience']['score'] = round(
+      (float) ( (int) $odp->KROK2_1_19 + (int) $odp->KROK2_1_20 + (int) $odp->KROK2_1_21 ) / 3
+      , 2 );
+
+    $wyniki['hope']['avg']   = round( 3 * 7 / 2 / 3, 2 );
+    $wyniki['hope']['score'] = round(
+      (float) ( (int) $odp->KROK2_1_25 + (int) $odp->KROK2_1_26 + (int) $odp->KROK2_1_27 ) / 3
+      , 2 );
+
+    $wyniki['optimism']['avg']   = round( 2 * 7 / 2 / 2, 2 );
+    $wyniki['optimism']['score'] = round(
+      (float) ( (int) $odp->KROK2_1_25 + (int) $odp->KROK2_1_26 + (int) $odp->KROK2_1_27 ) / 3
+      , 2 );
+
+    $wyniki['personality'] = round(
+      (float) ( (int) $odp->KROK2_1_33 + (int) $odp->KROK2_1_34 + (int) $odp->KROK2_1_35 + (int) $odp->KROK2_1_36
+                + (int) $odp->KROK2_1_37 + (int) $odp->KROK2_1_38 + (int) $odp->KROK2_1_39 + (int) $odp->KROK2_1_40
+                + (int) $odp->KROK2_1_41 + (int) $odp->KROK2_1_42 + (int) $odp->KROK2_1_43 + (int) $odp->KROK2_1_44
+                + (int) $odp->KROK2_1_45 + (int) $odp->KROK2_1_46 + (int) $odp->KROK2_1_47 + (int) $odp->KROK2_1_48
+                + (int) $odp->KROK2_1_49 + (int) $odp->KROK2_1_50 + (int) $odp->KROK2_1_51 + (int) $odp->KROK2_1_52
+      ) / 20
+      , 2 );
+
+    $wyniki['reflexivity'] = round(
+      (float) ( (int) $odp->KROK2_1_56 + (int) $odp->KROK2_1_57 + (int) $odp->KROK2_1_58 + (int) $odp->KROK2_1_59
+                + (int) $odp->KROK2_1_60 + (int) $odp->KROK2_1_61 + (int) $odp->KROK2_1_62 + (int) $odp->KROK2_1_63
+                + (int) $odp->KROK2_1_64 + (int) $odp->KROK2_1_65 + (int) $odp->KROK2_1_66
+      ) / 11
+      , 2 );
+
+    $wyniki['mobile_experience'] = false === is_null( $odp->KROK2_1_74 ) ? (int) $odp->KROK2_1_77 : round(
+      (float) ( (int) $odp->KROK2_1_68 + (int) $odp->KROK2_1_69 + (int) $odp->KROK2_1_70 + (int) $odp->KROK2_1_71
+                + (int) $odp->KROK2_1_72 + (int) $odp->KROK2_1_73
+      ) / 11
+      , 2 );
 
     return $wyniki;
   }
