@@ -772,7 +772,7 @@ class Pytania {
                     <option value="skala-0-10">skala 0-10</option>
                     <option value="bloki-powtarzalne">bloki powtarzalne</option>
                     <option value="text">text</option>
-                    <option value="jezyki">jezyki</option>
+                    <option value="jezyki">języki</option>
                   </select>
                 </td>
                 <td style="text-align: center;">
