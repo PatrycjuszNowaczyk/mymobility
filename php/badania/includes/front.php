@@ -2445,7 +2445,7 @@ class Badania_Front extends Badanie {
         }
 
         if ( $wynik_krok1_1['competences'] ) {
-          $result_kapital_ludzki .= str_replace( '{{competences_result}}', '<strong>' . $wynik_krok1_1['competences'] . '</strong>', $parsed_sections['competences'] );
+          $result_kapital_ludzki .= str_replace( '{{competences_result}}', $wynik_krok1_1['competences'], $parsed_sections['competences'] );
         }
 
         if ( 'yes' === $wynik_krok1_1['recommendations'] ) {
