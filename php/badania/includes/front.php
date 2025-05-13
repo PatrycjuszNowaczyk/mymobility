@@ -2390,7 +2390,7 @@ class Badania_Front extends Badanie {
       // ---------------------------------------------------------
 
       // set font
-      $pdf->setFont( 'dejavusans', '', 12 );
+      $pdf->setFont( 'dejavusans', '', 10 );
 
       // add a page
       $pdf->AddPage();
@@ -2404,7 +2404,7 @@ class Badania_Front extends Badanie {
       $kapital_ludzki = $this->page_settings['kapital_ludzki'];
       if ( isset( $kapital_ludzki['pierwsza_czesc']['wynik_zwrotny'] ) ) {
 
-        $result_kapital_ludzki = '<div style="font-size: 13px;">';
+        $result_kapital_ludzki = '<div>';
 
         if ( isset( $kapital_ludzki['pierwsza_czesc']['naglowek_wyniku'] ) ) {
           $result_kapital_ludzki .= '<p style="font-weight: bold; color: #059f8e;">' . $kapital_ludzki['pierwsza_czesc']['naglowek_wyniku'] . '</p>';
@@ -2492,7 +2492,7 @@ class Badania_Front extends Badanie {
       $kapital_psychologiczny = $this->page_settings['kapital_psychologiczny'];
       if ( isset( $kapital_psychologiczny['pierwsza_czesc']['wynik_zwrotny'] ) ) {
 
-        $result_kapital_psychologiczny_2_1 = '<div style="font-size: 13px;">';
+        $result_kapital_psychologiczny_2_1 = '<div>';
 
         if ( isset( $kapital_psychologiczny['pierwsza_czesc']['naglowek_wyniku'] ) ) {
           $result_kapital_psychologiczny_2_1 .= '<p style="font-weight: bold; color: #059f8e;">' . $kapital_psychologiczny['pierwsza_czesc']['naglowek_wyniku'] . '</p>';
