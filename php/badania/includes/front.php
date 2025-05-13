@@ -2351,9 +2351,9 @@ class Badania_Front extends Badanie {
 
       // set document information
       $pdf->setCreator( PDF_CREATOR );
-      $pdf->setAuthor( __( 'Moja Migracja', 'migracja' ) );
-      $pdf->setTitle( __( 'Moja Migracja - Wynik twojego badanie', 'migracja' ) );
-      $pdf->setSubject( __( 'Wyniki', 'migracja' ) );
+      $pdf->setAuthor( __( 'My Mobility', 'migracja' ) );
+      $pdf->setTitle( __( 'My Mobility - The result of your assessment', 'migracja' ) );
+      $pdf->setSubject( __( 'Result', 'migracja' ) );
       // $pdf->setKeywords('TCPDF, PDF, example, test, guide');
 
       // set default header data
@@ -2757,11 +2757,8 @@ class Badania_Front extends Badanie {
 
       $pdf->Ln( 2 );
 
-      $footer_text = __( 'Dokument został wygenerowany z portalu badawczego www.mojamigracja.org. Portal został stworzony przez Zespół Centrum Badań nad Zmianą Społeczną i Mobilnością Akademii Leona Koźmińskiego w ramach projektu BigMig finansowanego ze środków Narodowego Centrum Nauki (OPUS, nr projektu 2020/37/B/HS6/02342).', 'migracja' );
-      // $foot1 = '<table cellpading="0" cellspacing="0" width="100%" style="width: 100%; text-align:center;"><tr><td><img src="http://mojamigracja.org/wp-content/uploads/2022/10/alk-logo.jpeg" width="150" height="112"></td></tr></table>';
-      // $pdf->writeHTML($foot1, true, false, true, false, '');
-      // $pdf->Ln(1);
-      $foot2 = '<table cellpading="0" cellspacing="0" width="100%" style="width: 100%; text-align:center;"><tr><td style="font-size: 11px; line-height: 16px; color:#1d1d1f;">' . $footer_text . '</td></tr></table>';
+      $footer_text = __( 'Dokument został wygenerowany z portalu badawczego www.mymobility.org. Portal został stworzony przez Zespół Centrum Badań nad Zmianą Społeczną i Mobilnością Akademii Leona Koźmińskiego w ramach projektu BigMig finansowanego ze środków Narodowego Centrum Nauki (OPUS, nr projektu 2020/37/B/HS6/02342).', 'migracja' );
+      $foot2       = '<table cellpadding="0" cellspacing="0" width="100%" style="width: 100%; text-align:center;"><tr><td style="font-size: 11px; line-height: 16px; color:#1d1d1f;">' . $footer_text . '</td></tr></table>';
       $pdf->writeHTML( $foot2, true, false, true, false, '' );
 
       // ---------------------------------------------------------
