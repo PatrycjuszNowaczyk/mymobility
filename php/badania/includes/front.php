@@ -2042,11 +2042,12 @@ class Badania_Front extends Badanie {
       }
       $html .= '</strong>';
     endif;
-    $html .= '
+    $html         .= '
             <div class="answers">';
-    $html .= '<select name="' . $krok_ID . '" id="' . $krok_ID . '">';
-    $html .= '<option value="" selected="true" disabled="disabled">-- ' . __( 'Wybierz rok', 'migracja' ) . ' --</option>';
-    for ( $i = 2022; $i >= 1920; $i-- ) {
+    $html         .= '<select name="' . $krok_ID . '" id="' . $krok_ID . '">';
+    $html         .= '<option value="" selected="true" disabled="disabled">-- ' . __( 'Wybierz rok', 'migracja' ) . ' --</option>';
+    $current_year = date( 'Y' );
+    for ( $i = $current_year - 13; $i >= $current_year - 100; $i-- ) {
       $html .= '<option value="' . $i . '">' . $i . '</option>';
     }
     $html .= '</select>';
