@@ -2390,7 +2390,7 @@ class Badania_Front extends Badanie {
       // ---------------------------------------------------------
 
       // set font
-      $pdf->setFont( 'dejavusans', '', 10 );
+      $pdf->setFont( 'dejavusans', '', 11 );
 
       // add a page
       $pdf->AddPage();
