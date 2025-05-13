@@ -601,11 +601,9 @@ $( 'document' ).ready( function () {
               podsumowanie_wstepne();
             } else if ( step == 'krok1_1' ) {
               wyswietl_wynik_krok( 'kapital_ludzki', 'pierwsza_czesc', 'step-1-1', true, badanie_ID );
-              wczytaj_podkrok( 'krok2_1', 'kapital_psychologiczny', 'pierwsza_czesc', 2, badanie_ID );
               wczytajPodsumowanieEtapu( '1-1', 'krok2_1', badanie_ID );
             } else if ( step == 'krok2_1' ) {
               wyswietl_wynik_krok( 'kapital_psychologiczny', 'pierwsza_czesc', 'step-2-1', true, badanie_ID );
-              wczytaj_podkrok( 'krok3_1', 'kapital_spoleczny', 'pierwsza_czesc', 2, badanie_ID );
               wczytajPodsumowanieEtapu( '2-1', 'krok3_1', badanie_ID );
             } else if ( step == 'krok3_1' ) {
               wyswietl_wynik_krok( 'kapital_spoleczny', 'pierwsza_czesc', 'step-3-1', true, badanie_ID );
