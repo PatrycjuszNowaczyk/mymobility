@@ -476,73 +476,9 @@ class Badania_Front extends Badanie {
   }
 
   private function badanie_filtrowanie_specjalne( $badanie_ID, $input_name ) {
-
     $hide_special = false;
 
-
-    if ( $input_name == 'KROK1_3_33' || $input_name == 'KROK1_3_34' || $input_name == 'KROK1_3_1' || $input_name == 'KROK1_3_2' || $input_name == 'KROK1_3_5' || $input_name == 'KROK1_3_6' || $input_name == 'KROK1_3_7' || $input_name == 'KROK1_3_8' || $input_name == 'KROK1_3_9' || $input_name == 'KROK1_3_10' || $input_name == 'KROK1_3_11' || $input_name == 'KROK1_3_12' || $input_name == 'KROK1_3_13' || $input_name == 'KROK1_3_14' || $input_name == 'KROK1_3_15' || $input_name == 'KROK1_3_16' || $input_name == 'KROK1_3_17' || $input_name == 'KROK1_3_18' || $input_name == 'KROK1_3_19' || $input_name == 'KROK1_3_20' || $input_name == 'KROK1_3_21' || $input_name == 'KROK1_3_22' || $input_name == 'KROK1_3_23' || $input_name == 'KROK1_3_24' || $input_name == 'KROK1_3_25' || $input_name == 'KROK1_3_26' || $input_name == 'KROK1_3_27' || $input_name == 'KROK1_3_31' || $input_name == 'KROK1_3_3' || $input_name == 'KROK1_3_32' ) {
-      $filtr_1_wlacz = true;
-    } else {
-      $filtr_1_wlacz = false;
-    }
-
-    // jeśli FITR_2 jest B lub C to nie ukrywaj:
-    if ( $input_name == 'KROK1_1_29' || $input_name == 'KROK1_1_30' || $input_name == 'KROK1_1_31' || $input_name == 'KROK1_1_28' || $input_name == 'KROK1_2_8' || $input_name == 'KROK2_1_13' || $input_name == 'KROK2_1_14' || $input_name == 'KROK2_1_15' || $input_name == 'KROK2_1_16' || $input_name == 'KROK1_3_32' || $input_name == 'KROK2_2_21' || $input_name == 'KROK2_3_14' || $input_name == 'KROK3_1_15' || $input_name == 'KROK3_2_13' || ( $input_name == 'KROK3_3_26' || $input_name == 'KROK3_3_18' || $input_name == 'KROK3_3_19' || $input_name == 'KROK3_3_20' || $input_name == 'KROK3_3_86'
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            || $input_name == 'KROK4_1_7' || $input_name == 'KROK4_2_16' || $input_name == 'KROK1_3_34' ) ) {
-      $filtr_2_wlacz = true;
-    } else {
-      $filtr_2_wlacz = false;
-    }
-
-    if ( $input_name == 'KROK3_1_13' || $input_name == 'KROK3_1_14' ) {
-      $filtr_3a_wlacz = true;
-    } else {
-      $filtr_3a_wlacz = false;
-    }
-
-    // Jeśli FITR_2 nie jest B to ukryj:
-    if (
-      $input_name == 'KROK3_3_21' || $input_name == 'KROK3_3_27' || $input_name == 'KROK3_3_22' || $input_name == 'KROK3_3_23'
-      || $input_name == 'KROK3_3_24' || $input_name == 'KROK3_3_25' || $input_name == 'KROK3_3_28' || $input_name == 'KROK3_3_29'
-      || $input_name == 'KROK3_3_30' || $input_name == 'KROK3_3_31' || $input_name == 'KROK3_3_32' || $input_name == 'KROK3_3_33'
-      || $input_name == 'KROK3_3_34' || $input_name == 'KROK3_3_38' || $input_name == 'KROK3_3_44' || $input_name == 'KROK3_3_40'
-      || $input_name == 'KROK3_3_41' || $input_name == 'KROK3_3_67'
-    ) {
-      $filtr_2b_wlacz = true;
-    } else {
-      $filtr_2b_wlacz = false;
-    }
-    // to dotyczy pytania 3.3.5.4.2. -  to ma się pokazać tylko jeśli "c"
-    // if(
-    //     $input_name == 'KROK3_3_68' || $input_name == 'KROK3_3_69' || $input_name == 'KROK3_3_70' || $input_name == 'KROK3_3_71'
-    //     || $input_name == 'KROK3_3_72' || $input_name == 'KROK3_3_73' || $input_name == 'KROK3_3_74' || $input_name == 'KROK3_3_75'
-    //     || $input_name == 'KROK3_3_76' || $input_name == 'KROK3_3_77' || $input_name == 'KROK3_3_78' || $input_name == 'KROK3_3_79'
-    //     || $input_name == 'KROK3_3_80' || $input_name == 'KROK3_3_81'
-    // ) {
-    //     $hide_special = true;
-    // }
-
-    // tylko Ci co przebywają na migracji
-    if (
-      $input_name == 'KROK3_3_82' || $input_name == 'KROK3_3_83' || $input_name == 'KROK3_3_84' || $input_name == 'KROK3_3_85'
-      || $input_name == 'KROK4_1_5' || $input_name == 'KROK4_1_6'
-
-      || $input_name == 'KROK3_3_92' || $input_name == 'KROK3_3_87' || $input_name == 'KROK3_3_88' || $input_name == 'KROK3_3_89' || $input_name == 'KROK3_3_90' || $input_name == 'KROK3_3_91'
-    ) {
-      $filtr_2c_wlacz = true;
-    } else {
-      $filtr_2c_wlacz = false;
-    }
-
-    if ( $input_name == 'KROK4_2_3' || $input_name == 'KROK4_2_4' || $input_name == 'KROK4_2_5' ) {
-      $filtr_4_wlacz = true;
-    } else {
-      $filtr_4_wlacz = false;
-    }
-
-
-    if ( !empty( $badanie_ID ) && ( $filtr_2_wlacz || $filtr_1_wlacz || $filtr_3a_wlacz || $filtr_2b_wlacz || $filtr_2c_wlacz || $filtr_4_wlacz ) ) {
-
+    if ( false === empty( $badanie_ID ) ) {
       $wynik_ID = $badanie = $this->wpdb->get_row(
         $this->wpdb->prepare(
           "SELECT * FROM `{$this->table_name}` WHERE `badanie_ID` = %d",
@@ -561,40 +497,42 @@ class Badania_Front extends Badanie {
         )
       );
 
-      if ( $filtr_1_wlacz ) {
-        $filtr_1 = $wyniki_wstepne->WSTEPNE_5;
-        if ( $filtr_1 != 'a' && $filtr_1 != 'b' && $filtr_1 != 'c' ) {
-          $hide_special = true;
-        }
-      }
-      if ( $filtr_2_wlacz ) {
-        $filtr_2 = $wyniki_wstepne->WSTEPNE_28;
+      $pytania_do_ukrycia = [
+        "KROK1_1_37",
+        "KROK1_1_40",
+        "KROK1_1_43",
+        "KROK1_1_45",
+        "KROK1_1_46",
+        "KROK1_1_47",
+        "KROK1_1_48",
+        "KROK1_1_76",
+        "KROK1_1_77",
+        "KROK1_1_78",
+        "KROK1_1_79",
+        "KROK1_1_80",
+        "KROK1_1_81",
+        "KROK1_1_82",
+        "KROK1_1_83",
+        "KROK1_1_84",
+        "KROK1_1_85",
+        "KROK1_1_86",
+        "KROK1_1_87",
+        "KROK1_1_88",
+        "KROK1_1_89",
+        "KROK1_1_90",
+        "KROK1_1_91",
+        "KROK1_1_92",
+        "KROK1_1_93",
+        "KROK1_1_94",
+        "KROK1_1_95",
+        "KROK1_1_96"
+      ];
 
-        if ( $filtr_2 == 'a' ) {
+      if ( "0" === $wyniki_wstepne->WSTEPNE_2 ) {
+        if ( in_array( $input_name, $pytania_do_ukrycia ) ) {
           $hide_special = true;
         }
       }
-      if ( $filtr_2b_wlacz ) {
-        $filtr_2b = $wyniki_wstepne->WSTEPNE_28;
-
-        if ( $filtr_2b != 'b' ) {
-          $hide_special = true;
-        }
-      }
-      if ( $filtr_3a_wlacz ) {
-        $hide_special = true;
-      }
-      if ( $filtr_2c_wlacz ) {
-        $filtr_2c = $wyniki_wstepne->WSTEPNE_28;
-        if ( $filtr_2c != 'c' ) {
-          // dotyczy 3.3.5.4.2. / 3.3.6.1. / 3.3.6.2. / 3.3.6.3. / 3.3.6.4.
-          $hide_special = true;
-        }
-      }
-      if ( $filtr_4_wlacz ) {
-        $hide_special = true;
-      }
-
     }
 
     return $hide_special;
