@@ -441,16 +441,16 @@ class Badania_Front extends Badanie {
         }
       }
 
-      if (false === is_null( $wynik_krok2_1['personality'])) {
-        $result .= str_replace('{{personality_result}}', $wynik_krok2_1['personality'], $parsed_sections['personality']);
+      if ( false === is_null( $wynik_krok2_1['personality'] ) ) {
+        $result .= str_replace( '{{personality_result}}', $wynik_krok2_1['personality'], $parsed_sections['personality'] );
       }
 
-      if (false === is_null( $wynik_krok2_1['reflexivity'])) {
-        $result .= str_replace('{{reflexivity_result}}', $wynik_krok2_1['reflexivity'], $parsed_sections['reflexivity']);
+      if ( false === is_null( $wynik_krok2_1['reflexivity'] ) ) {
+        $result .= str_replace( '{{reflexivity_result}}', $wynik_krok2_1['reflexivity'], $parsed_sections['reflexivity'] );
       }
 
-      if (false === is_null( $wynik_krok2_1['mobility_experience'])) {
-        $result .= str_replace('{{mobility_experience_result}}', $wynik_krok2_1['mobility_experience'], $parsed_sections['mobility_experience']);
+      if ( false === is_null( $wynik_krok2_1['mobility_experience'] ) ) {
+        $result .= str_replace( '{{mobility_experience_result}}', $wynik_krok2_1['mobility_experience'], $parsed_sections['mobility_experience'] );
       }
     }
 
@@ -2747,11 +2747,15 @@ class Badania_Front extends Badanie {
       'mobility_experience'       => null
     ];
 
-    $wyniki['language']                  = $odp->KROK1_1_97;
-    $wyniki['programs_abroad']           = $odp->KROK1_1_32;
+    $wyniki['language'] = $odp->KROK1_1_97;
+
+    $wyniki['programs_abroad'] = $odp->KROK1_1_32;
+
     $wyniki['qualification_recognition'] = $odp->KROK1_1_34;
-    $wyniki['certifications']            = $odp->KROK1_1_35;
-    $wyniki['lifelong_learning']         = $odp->KROK1_1_36;
+
+    $wyniki['certifications'] = $odp->KROK1_1_35;
+
+    $wyniki['lifelong_learning'] = $odp->KROK1_1_36;
 
     $wyniki['competences'] = round(
       (float) ( (int) $odp->KROK1_1_50 + (int) $odp->KROK1_1_51 + (int) $odp->KROK1_1_52 + (int) $odp->KROK1_1_53
@@ -2764,6 +2768,7 @@ class Badania_Front extends Badanie {
       , 2 );
 
     $wyniki['recommendations'] = $odp->KROK1_1_42;
+
     $wyniki['skills_acquired'] = is_null( $odp->KROK1_1_77 ) ? null :
       (int) $odp->KROK1_1_77 + (int) $odp->KROK1_1_78 + (int) $odp->KROK1_1_79
       + (int) $odp->KROK1_1_80 + (int) $odp->KROK1_1_81 + (int) $odp->KROK1_1_82
@@ -2798,26 +2803,26 @@ class Badania_Front extends Badanie {
     );
 
     $wyniki = [
-      'defining_sentences' => null,
-      'hope'               => [
+      'defining_sentences'  => null,
+      'hope'                => [
         'avg'   => null,
         'score' => null,
       ],
-      'self_efficacy'      => [
+      'self_efficacy'       => [
         'avg'   => null,
         'score' => null,
       ],
-      'resilience'         => [
+      'resilience'          => [
         'avg'   => null,
         'score' => null,
       ],
-      'optimism'           => [
+      'optimism'            => [
         'avg'   => null,
         'score' => null,
       ],
-      'personality'        => null,
-      'reflexivity'        => null,
-      'mobility_experience'  => null
+      'personality'         => null,
+      'reflexivity'         => null,
+      'mobility_experience' => null
     ];
 
     $wyniki['defining_sentences'] = round(
