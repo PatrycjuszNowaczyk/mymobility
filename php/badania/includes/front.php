@@ -2402,102 +2402,86 @@ class Badania_Front extends Badanie {
       $kapital_ludzki = $this->page_settings['kapital_ludzki'];
       if ( isset( $kapital_ludzki['pierwsza_czesc']['wynik_zwrotny'] ) ) {
 
-        $result_kapital_ludzki = '<h2 style="color: #059f8e; text-align: center; font-size: 16px;">1.1 ' . __( 'Kompetencje', 'migracja' ) . '</h2>';
-        $result_kapital_ludzki .= '<div style="font-size: 13px;">';
+        $result_kapital_ludzki = '<div style="font-size: 13px;">';
 
         if ( isset( $kapital_ludzki['pierwsza_czesc']['naglowek_wyniku'] ) ) {
           $result_kapital_ludzki .= '<p style="font-weight: bold; color: #059f8e;">' . $kapital_ludzki['pierwsza_czesc']['naglowek_wyniku'] . '</p>';
         }
 
-        $result_kapital_ludzki .= $kapital_ludzki['pierwsza_czesc']['wynik_zwrotny'];
+        $wynik_krok1_1   = $this->badanie_wynik_1_1( $badanie_ID );
+        $parsed_sections = $this->parse_text_parts( $kapital_ludzki['pierwsza_czesc']['wynik_zwrotny'] );
+
+        if (
+          true === str_contains( $wynik_krok1_1['language'], 'other' )
+          && true === str_contains( $wynik_krok1_1['language'], 'english' )
+        ) {
+          $result_kapital_ludzki .= $parsed_sections['language_2'];
+        } else {
+          $result_kapital_ludzki .= $parsed_sections['language_1'];
+        }
+
+        if ( 2 < (int) $wynik_krok1_1['programs_abroad'] ) {
+          $result_kapital_ludzki .= $parsed_sections['programs_abroad_2'];
+        } else {
+          $result_kapital_ludzki .= $parsed_sections['programs_abroad_1'];
+        }
+
+        if ( 1 < (int) $wynik_krok1_1['qualification_recognition'] ) {
+          $result_kapital_ludzki .= $parsed_sections['qualification_recognition'];
+        }
+
+        if ( false === str_contains( $wynik_krok1_1['certifications'], '5.5' ) ) {
+          $result_kapital_ludzki .= $parsed_sections['certifications_1'];
+        } else {
+          $result_kapital_ludzki .= $parsed_sections['certifications_2'];
+        }
+
+        if ( 3 > (int) $wynik_krok1_1['lifelong_learning'] ) {
+          $result_kapital_ludzki .= $parsed_sections['lifelong_learning_1'];
+        } else {
+          $result_kapital_ludzki .= $parsed_sections['lifelong_learning_2'];
+        }
+
+        if ( $wynik_krok1_1['competences'] ) {
+          $result_kapital_ludzki .= str_replace( '{{competences_result}}', '<strong>' . $wynik_krok1_1['competences'] . '</strong>', $parsed_sections['competences'] );
+        }
+
+        if ( 'yes' === $wynik_krok1_1['recommendations'] ) {
+          $result_kapital_ludzki .= $parsed_sections['recommendations_1'];
+        } else {
+          $result_kapital_ludzki .= $parsed_sections['recommendations_2'];
+        }
+
+        if ( false === is_null( $wynik_krok1_1['skills_acquired'] ) ) {
+          if ( 10 === $wynik_krok1_1['skills_acquired'] ) {
+            $result_kapital_ludzki .= $parsed_sections['skills_acquired_3'];
+          } else if ( 15 < $wynik_krok1_1['skills_acquired'] ) {
+            $result_kapital_ludzki .= $parsed_sections['skills_acquired_1'];
+          } else {
+            $result_kapital_ludzki .= $parsed_sections['skills_acquired_2'];
+          }
+        }
+
+        if ( false === is_null( $wynik_krok1_1['mobility_experience'] ) ) {
+          if ( 2 < (int) $wynik_krok1_1['mobility_experience'] ) {
+            $result_kapital_ludzki .= $parsed_sections['mobility_experience_2'];
+          } else {
+            $result_kapital_ludzki .= $parsed_sections['mobility_experience_1'];
+          }
+        }
 
         $result_kapital_ludzki .= '</div>';
-
-
-        if ( isset( $result_kapital_ludzki ) ) {
-          $wynik_krok1_1 = $this->badanie_wynik_1_1( $badanie_ID );
-          if ( isset( $wynik_krok1_1['poznawcze'] ) ) {
-            $result_kapital_ludzki = str_replace( '{wynik_krok1_1_poznawcze}', number_format( $wynik_krok1_1['poznawcze'], 1, ',', ' ' ), $result_kapital_ludzki );
-          }
-          if ( isset( $wynik_krok1_1['manualne'] ) ) {
-            $result_kapital_ludzki = str_replace( '{wynik_krok1_1_manualne}', number_format( $wynik_krok1_1['manualne'], 1, ',', ' ' ), $result_kapital_ludzki );
-          }
-          if ( isset( $wynik_krok1_1['manualne'] ) ) {
-            $result_kapital_ludzki = str_replace( '{wynik_krok1_1_miekkie}', number_format( $wynik_krok1_1['miekkie'], 1, ',', ' ' ), $result_kapital_ludzki );
-          }
-          if ( isset( $wynik_krok1_1['manualne'] ) ) {
-            $result_kapital_ludzki = str_replace( '{wynik_krok1_1_zyciowe}', number_format( $wynik_krok1_1['zyciowe'], 1, ',', ' ' ), $result_kapital_ludzki );
-          }
-        }
-
       }
-
-      if ( isset( $kapital_ludzki['druga_czesc']['wynik_zwrotny'] ) ) {
-
-        $result_kapital_ludzki_1_2 = '<h2 style="color: #059f8e; text-align: center; font-size: 16px;">1.2 ' . __( 'Formalny kapitał ludzki', 'migracja' ) . '</h2>';
-        $result_kapital_ludzki_1_2 .= '<div style="font-size: 13px;">';
-
-        if ( isset( $kapital_ludzki['druga_czesc']['naglowek_wyniku'] ) ) {
-          $result_kapital_ludzki_1_2 .= '<p style="font-weight: bold; color: #059f8e;">' . $kapital_ludzki['druga_czesc']['naglowek_wyniku'] . '</p>';
-        }
-
-        $result_kapital_ludzki_1_2 .= $kapital_ludzki['druga_czesc']['wynik_zwrotny'];
-
-        $result_kapital_ludzki_1_2 .= '</div>';
-
-      }
-
-
-      // $wynik_krok1_3 = $this->badanie_wynik_1_3($badanie_ID);
-      // if((isset($wynik_krok1_3['dopasowanie']) && $wynik_krok1_3['dopasowanie'] != 0) && (isset($wynik_krok1_3['niedobor']) && $wynik_krok1_3['niedobor'] != 0) && (isset($wynik_krok1_3['nadmiar']) && $wynik_krok1_3['nadmiar'] != 0)) :
-      //     // if( isset($wynik_krok1_3['dopasowanie']) && isset($wynik_krok1_3['niedobor']) && isset($wynik_krok1_3['nadmiar']) ) {
-      //     if(isset($kapital_ludzki['trzecia_czesc']['wynik_zwrotny'])) {
-
-
-      //         $result_kapital_ludzki_1_3 = '<h2 style="color: #059f8e; text-align: center; font-size: 16px;">1.3 '. __('Dopasowanie kompetencyjne', 'migracja') . '</h2>';
-      //         $result_kapital_ludzki_1_3 .= '<div style="font-size: 13px;">';
-
-      //         if(isset($kapital_ludzki['trzecia_czesc']['naglowek_wyniku'])) {
-      //             $result_kapital_ludzki_1_3 .= '<p style="font-weight: bold; color: #059f8e;">'. $kapital_ludzki['trzecia_czesc']['naglowek_wyniku'] . '</p>';
-      //         }
-
-      //         $result_kapital_ludzki_1_3 .= $kapital_ludzki['trzecia_czesc']['wynik_zwrotny'];
-
-      //         if(isset($wynik_krok1_3['dopasowanie'])) {
-      //             $result_kapital_ludzki_1_3 = str_replace('{wynik_krok1_3_dopasowanie}', number_format($wynik_krok1_3['dopasowanie'], 2, ',', ' '), $result_kapital_ludzki_1_3);
-      //         }
-      //         if(isset($wynik_krok1_3['niedobor'])) {
-      //             $result_kapital_ludzki_1_3 = str_replace('{wynik_krok1_3_niedobor}', number_format($wynik_krok1_3['niedobor'], 2, ',', ' '), $result_kapital_ludzki_1_3);
-      //         }
-      //         if(isset($wynik_krok1_3['nadmiar'])) {
-      //             $result_kapital_ludzki_1_3 = str_replace('{wynik_krok1_3_nadmiar}', number_format($wynik_krok1_3['nadmiar'], 2, ',', ' '), $result_kapital_ludzki_1_3);
-      //         }
-
-      //         $result_kapital_ludzki_1_3 .= '</div>';
-
-      //     }
-      // endif;
-
-      // }
 
       // ---------------------------------------------------------
-
 
       if ( isset( $result_kapital_ludzki ) && $result_kapital_ludzki ) {
         $html .= $result_kapital_ludzki;
       }
-      if ( isset( $result_kapital_ludzki_1_2 ) && $result_kapital_ludzki_1_2 ) {
-        $html .= $result_kapital_ludzki_1_2;
-      }
-      // if(isset($result_kapital_ludzki_1_3) && $result_kapital_ludzki_1_3) {
-      //     $html .= $result_kapital_ludzki_1_3;
-      // }
 
       $pdf->writeHTML( $html, true, false, true, false, '' );
 
-
       // ---------------------------------------------------------
-
 
       $name_2 = '<h1 style="color: #059f8e; text-align: center; font-size: 21px;">2. ' . __( 'Kapitał psychologiczny', 'migracja' ) . '</h1>';
       $pdf->writeHTML( $name_2, true, false, true, false, '' );
@@ -2506,8 +2490,7 @@ class Badania_Front extends Badanie {
       $kapital_psychologiczny = $this->page_settings['kapital_psychologiczny'];
       if ( isset( $kapital_psychologiczny['pierwsza_czesc']['wynik_zwrotny'] ) ) {
 
-        $result_kapital_psychologiczny_2_1 = '<h2 style="color: #059f8e; text-align: center; font-size: 16px;">2.1 ' . __( 'Kapitał psychologiczny', 'migracja' ) . '</h2>';
-        $result_kapital_psychologiczny_2_1 .= '<div style="font-size: 13px;">';
+        $result_kapital_psychologiczny_2_1 = '<div style="font-size: 13px;">';
 
         if ( isset( $kapital_psychologiczny['pierwsza_czesc']['naglowek_wyniku'] ) ) {
           $result_kapital_psychologiczny_2_1 .= '<p style="font-weight: bold; color: #059f8e;">' . $kapital_psychologiczny['pierwsza_czesc']['naglowek_wyniku'] . '</p>';
@@ -2515,103 +2498,60 @@ class Badania_Front extends Badanie {
 
         $result_kapital_psychologiczny_2_1 .= $kapital_psychologiczny['pierwsza_czesc']['wynik_zwrotny'];
 
+        $wynik_krok2_1   = $this->badanie_wynik_2_1( $badanie_ID );
+        $parsed_sections = $this->parse_text_parts( $kapital_psychologiczny['pierwsza_czesc']['wynik_zwrotny'] );
+
+        if ( false === is_null( $wynik_krok2_1['defining_sentences'] ) ) {
+          $result_kapital_psychologiczny_2_1 .= str_replace( '{{defining_sentences_result}}', $wynik_krok2_1['defining_sentences'], $parsed_sections['defining_sentences'] );
+        }
+
+        if ( false === is_null( $wynik_krok2_1['hope']['score'] ) ) {
+          if ( $wynik_krok2_1['hope']['score'] >= $wynik_krok2_1['hope']['avg'] ) {
+            $result_kapital_psychologiczny_2_1 .= $parsed_sections['hope_1'];
+          } else {
+            $result_kapital_psychologiczny_2_1 .= $parsed_sections['hope_2'];
+          }
+
+          if ( $wynik_krok2_1['self_efficacy']['score'] >= $wynik_krok2_1['self_efficacy']['avg'] ) {
+            $result_kapital_psychologiczny_2_1 .= $parsed_sections['self_efficacy_1'];
+          } else {
+            $result_kapital_psychologiczny_2_1 .= $parsed_sections['self_efficacy_2'];
+          }
+
+          if ( $wynik_krok2_1['resilience']['score'] >= $wynik_krok2_1['resilience']['avg'] ) {
+            $result_kapital_psychologiczny_2_1 .= $parsed_sections['resilience_1'];
+          } else {
+            $result_kapital_psychologiczny_2_1 .= $parsed_sections['resilience_2'];
+          }
+
+          if ( $wynik_krok2_1['optimism']['score'] >= $wynik_krok2_1['optimism']['avg'] ) {
+            $result_kapital_psychologiczny_2_1 .= $parsed_sections['optimism_1'];
+          } else {
+            $result_kapital_psychologiczny_2_1 .= $parsed_sections['optimism_2'];
+          }
+        }
+
+        if ( false === is_null( $wynik_krok2_1['personality'] ) ) {
+          $result_kapital_psychologiczny_2_1 .= str_replace( '{{personality_result}}', $wynik_krok2_1['personality'], $parsed_sections['personality'] );
+        }
+
+        if ( false === is_null( $wynik_krok2_1['reflexivity'] ) ) {
+          $result_kapital_psychologiczny_2_1 .= str_replace( '{{reflexivity_result}}', $wynik_krok2_1['reflexivity'], $parsed_sections['reflexivity'] );
+        }
+
+        if ( false === is_null( $wynik_krok2_1['mobility_experience'] ) ) {
+          $result_kapital_psychologiczny_2_1 .= str_replace( '{{mobility_experience_result}}', $wynik_krok2_1['mobility_experience'], $parsed_sections['mobility_experience'] );
+        }
+
         $result_kapital_psychologiczny_2_1 .= '</div>';
-
-
-        if ( isset( $result_kapital_psychologiczny_2_1 ) ) {
-          $wynik_krok2_1 = $this->badanie_wynik_2_1( $badanie_ID );
-          if ( isset( $wynik_krok2_1['poczucie_skutecznosci'] ) ) {
-            $result_kapital_psychologiczny_2_1 = str_replace( '{wynik_krok2_1_poczucie_skutecznosci}', number_format( $wynik_krok2_1['poczucie_skutecznosci'], 2, ',', ' ' ), $result_kapital_psychologiczny_2_1 );
-          }
-          if ( isset( $wynik_krok2_1['optymizm'] ) ) {
-            $result_kapital_psychologiczny_2_1 = str_replace( '{wynik_krok2_1_optymizm}', number_format( $wynik_krok2_1['optymizm'], 2, ',', ' ' ), $result_kapital_psychologiczny_2_1 );
-          }
-          if ( isset( $wynik_krok2_1['nadzieja'] ) ) {
-            $result_kapital_psychologiczny_2_1 = str_replace( '{wynik_krok2_1_nadzieja}', number_format( $wynik_krok2_1['nadzieja'], 2, ',', ' ' ), $result_kapital_psychologiczny_2_1 );
-          }
-          if ( isset( $wynik_krok2_1['odpornosc_psych'] ) ) {
-            $result_kapital_psychologiczny_2_1 = str_replace( '{wynik_krok2_1_odpornosc_psych}', number_format( $wynik_krok2_1['odpornosc_psych'], 2, ',', ' ' ), $result_kapital_psychologiczny_2_1 );
-          }
-          if ( isset( $wynik_krok2_1['ogolny'] ) ) {
-            $result_kapital_psychologiczny_2_1 = str_replace( '{wynik_krok2_1_ogolny}', number_format( $wynik_krok2_1['ogolny'], 2, ',', ' ' ), $result_kapital_psychologiczny_2_1 );
-          }
-        }
-
-      }
-
-      if ( isset( $kapital_psychologiczny['druga_czesc']['wynik_zwrotny'] ) ) {
-
-        $result_kapital_psychologiczny_2_2 = '<h2 style="color: #059f8e; text-align: center; font-size: 16px;">2.2 ' . __( 'Osobowość', 'migracja' ) . '</h2>';
-        $result_kapital_psychologiczny_2_2 .= '<div style="font-size: 13px;">';
-
-        if ( isset( $kapital_psychologiczny['druga_czesc']['naglowek_wyniku'] ) ) {
-          $result_kapital_psychologiczny_2_2 .= '<p style="font-weight: bold; color: #059f8e;">' . $kapital_psychologiczny['druga_czesc']['naglowek_wyniku'] . '</p>';
-        }
-
-        $result_kapital_psychologiczny_2_2 .= $kapital_psychologiczny['druga_czesc']['wynik_zwrotny'];
-
-        $result_kapital_psychologiczny_2_2 .= '</div>';
-
-        $wynik_krok2_2 = $this->badanie_wynik_2_2( $badanie_ID );
-        if ( isset( $wynik_krok2_2['ekstrawersja'] ) ) {
-          $result_kapital_psychologiczny_2_2 = str_replace( '{wynik_krok2_2_ekstrawersja}', number_format( $wynik_krok2_2['ekstrawersja'], 2, ',', ' ' ), $result_kapital_psychologiczny_2_2 );
-        }
-        if ( isset( $wynik_krok2_2['ugodowosc'] ) ) {
-          $result_kapital_psychologiczny_2_2 = str_replace( '{wynik_krok2_2_ugodowosc}', number_format( $wynik_krok2_2['ugodowosc'], 2, ',', ' ' ), $result_kapital_psychologiczny_2_2 );
-        }
-        if ( isset( $wynik_krok2_2['sumiennosc'] ) ) {
-          $result_kapital_psychologiczny_2_2 = str_replace( '{wynik_krok2_2_sumiennosc}', number_format( $wynik_krok2_2['sumiennosc'], 2, ',', ' ' ), $result_kapital_psychologiczny_2_2 );
-        }
-        if ( isset( $wynik_krok2_2['neurotyzm'] ) ) {
-          $result_kapital_psychologiczny_2_2 = str_replace( '{wynik_krok2_2_neurotyzm}', number_format( $wynik_krok2_2['neurotyzm'], 2, ',', ' ' ), $result_kapital_psychologiczny_2_2 );
-        }
-        if ( isset( $wynik_krok2_2['wyobraznia'] ) ) {
-          $result_kapital_psychologiczny_2_2 = str_replace( '{wynik_krok2_2_wyobraznia}', number_format( $wynik_krok2_2['wyobraznia'], 2, ',', ' ' ), $result_kapital_psychologiczny_2_2 );
-        }
-
-
-      }
-
-      if ( isset( $kapital_psychologiczny['trzecia_czesc']['wynik_zwrotny'] ) ) {
-
-        $result_kapital_psychologiczny_2_3 = '<h2 style="color: #059f8e; text-align: center; font-size: 16px;">2.3 ' . __( 'Refleksyjność', 'migracja' ) . '</h2>';
-        $result_kapital_psychologiczny_2_3 .= '<div style="font-size: 13px;">';
-
-        if ( isset( $kapital_psychologiczny['trzecia_czesc']['naglowek_wyniku'] ) ) {
-          $result_kapital_psychologiczny_2_3 .= '<p style="font-weight: bold; color: #059f8e;">' . $kapital_psychologiczny['trzecia_czesc']['naglowek_wyniku'] . '</p>';
-        }
-
-        $result_kapital_psychologiczny_2_3 .= $kapital_psychologiczny['trzecia_czesc']['wynik_zwrotny'];
-
-        $wynik_krok2_3 = $this->badanie_wynik_2_3( $badanie_ID );
-        if ( isset( $wynik_krok2_3['refl_komunikacyjna'] ) ) {
-          $result_kapital_psychologiczny_2_3 = str_replace( '{wynik_krok2_3_refl_komunikacyjna}', number_format( $wynik_krok2_3['refl_komunikacyjna'], 2, ',', ' ' ), $result_kapital_psychologiczny_2_3 );
-        }
-        if ( isset( $wynik_krok2_3['refl_autonomiczna'] ) ) {
-          $result_kapital_psychologiczny_2_3 = str_replace( '{wynik_krok2_3_refl_autonomiczna}', number_format( $wynik_krok2_3['refl_autonomiczna'], 2, ',', ' ' ), $result_kapital_psychologiczny_2_3 );
-        }
-        if ( isset( $wynik_krok2_3['metarefleksyjnosc'] ) ) {
-          $result_kapital_psychologiczny_2_3 = str_replace( '{wynik_krok2_3_metarefleksyjnosc}', number_format( $wynik_krok2_3['metarefleksyjnosc'], 2, ',', ' ' ), $result_kapital_psychologiczny_2_3 );
-        }
-        if ( isset( $wynik_krok2_3['refl_peknieta'] ) ) {
-          $result_kapital_psychologiczny_2_3 = str_replace( '{wynik_krok2_3_refl_peknieta}', number_format( $wynik_krok2_3['refl_peknieta'], 2, ',', ' ' ), $result_kapital_psychologiczny_2_3 );
-        }
-
-        $result_kapital_psychologiczny_2_3 .= '</div>';
-
       }
 
       // ---------------------------------------------------------
 
+
       $html2 = '';
       if ( isset( $result_kapital_psychologiczny_2_1 ) && $result_kapital_psychologiczny_2_1 ) {
         $html2 .= $result_kapital_psychologiczny_2_1;
-      }
-      if ( isset( $result_kapital_psychologiczny_2_2 ) && $result_kapital_psychologiczny_2_2 ) {
-        $html2 .= $result_kapital_psychologiczny_2_2;
-      }
-      if ( isset( $result_kapital_psychologiczny_2_3 ) && $result_kapital_psychologiczny_2_3 ) {
-        $html2 .= $result_kapital_psychologiczny_2_3;
       }
 
       $pdf->writeHTML( $html2, true, false, true, false, '' );
