@@ -1208,6 +1208,8 @@ class Badania_Front extends Badanie {
   }
 
   private function parse_text_parts( $text ): array {
+    $text = html_entity_decode( $text );
+
     $parsed_sections = [];
 
     // Regex to find [text_part id="..."]...[/text_part]
