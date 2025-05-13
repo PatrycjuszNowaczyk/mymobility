@@ -2498,8 +2498,6 @@ class Badania_Front extends Badanie {
           $result_kapital_psychologiczny_2_1 .= '<p style="font-weight: bold; color: #059f8e;">' . $kapital_psychologiczny['pierwsza_czesc']['naglowek_wyniku'] . '</p>';
         }
 
-        $result_kapital_psychologiczny_2_1 .= $kapital_psychologiczny['pierwsza_czesc']['wynik_zwrotny'];
-
         $wynik_krok2_1   = $this->badanie_wynik_2_1( $badanie_ID );
         $parsed_sections = $this->parse_text_parts( $kapital_psychologiczny['pierwsza_czesc']['wynik_zwrotny'] );
 
