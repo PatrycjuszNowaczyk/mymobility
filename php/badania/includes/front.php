@@ -423,20 +423,47 @@ class Badania_Front extends Badanie {
 
     if ( $_POST['step'] === 'step-2-1' ) {
       $wynik_krok2_1 = $this->badanie_wynik_2_1( $_POST['badanie_ID'] );
-      if ( isset( $wynik_krok2_1['poczucie_skutecznosci'] ) ) {
-        $result = str_replace( '{wynik_krok2_1_poczucie_skutecznosci}', number_format( $wynik_krok2_1['poczucie_skutecznosci'], 2, ',', ' ' ), $result );
+
+      if ( false === is_null( $wynik_krok2_1['defining_sentences'] ) ) {
+        $result = str_replace( '{{defining_sentences_result}}', $wynik_krok2_1['defining_sentences'], $parsed_sections['defining_sentences'] );
       }
-      if ( isset( $wynik_krok2_1['optymizm'] ) ) {
-        $result = str_replace( '{wynik_krok2_1_optymizm}', number_format( $wynik_krok2_1['optymizm'], 2, ',', ' ' ), $result );
+
+      if ( false === is_null( $wynik_krok2_1['hope']['score'] ) ) {
+        if ( $wynik_krok2_1['hope']['score'] >= $wynik_krok2_1['hope']['avg'] ) {
+          $result .= $parsed_sections['hope_1'];
+        } else {
+          $result .= $parsed_sections['hope_2'];
+        }
+
+        if ( $wynik_krok2_1['self_efficacy']['score'] >= $wynik_krok2_1['self_efficacy']['avg'] ) {
+          $result .= $parsed_sections['self_efficacy_1'];
+        } else {
+          $result .= $parsed_sections['self_efficacy_2'];
+        }
+
+        if ( $wynik_krok2_1['resilience']['score'] >= $wynik_krok2_1['resilience']['avg'] ) {
+          $result .= $parsed_sections['resilience_1'];
+        } else {
+          $result .= $parsed_sections['resilience_2'];
+        }
+
+        if ( $wynik_krok2_1['optimism']['score'] >= $wynik_krok2_1['optimism']['avg'] ) {
+          $result .= $parsed_sections['optimism_1'];
+        } else {
+          $result .= $parsed_sections['optimism_2'];
+        }
       }
-      if ( isset( $wynik_krok2_1['nadzieja'] ) ) {
-        $result = str_replace( '{wynik_krok2_1_nadzieja}', number_format( $wynik_krok2_1['nadzieja'], 2, ',', ' ' ), $result );
+
+      if (false === is_null( $wynik_krok2_1['personality'])) {
+        $result .= str_replace('{{personality_result}}', $wynik_krok2_1['personality'], $parsed_sections['personality']);
       }
-      if ( isset( $wynik_krok2_1['odpornosc_psych'] ) ) {
-        $result = str_replace( '{wynik_krok2_1_odpornosc_psych}', number_format( $wynik_krok2_1['odpornosc_psych'], 2, ',', ' ' ), $result );
+
+      if (false === is_null( $wynik_krok2_1['reflexivity'])) {
+        $result .= str_replace('{{reflexivity_result}}', $wynik_krok2_1['reflexivity'], $parsed_sections['reflexivity']);
       }
-      if ( isset( $wynik_krok2_1['ogolny'] ) ) {
-        $result = str_replace( '{wynik_krok2_1_ogolny}', number_format( $wynik_krok2_1['ogolny'], 2, ',', ' ' ), $result );
+
+      if (false === is_null( $wynik_krok2_1['mobility_experience'])) {
+        $result .= str_replace('{{mobility_experience_result}}', $wynik_krok2_1['mobility_experience'], $parsed_sections['mobility_experience']);
       }
     }
 
@@ -2845,7 +2872,7 @@ class Badania_Front extends Badanie {
       ],
       'personality'        => null,
       'reflexivity'        => null,
-      'mobile_experience'  => null
+      'mobility_experience'  => null
     ];
 
     $wyniki['defining_sentences'] = round(
@@ -2890,7 +2917,7 @@ class Badania_Front extends Badanie {
       ) / 11
       , 2 );
 
-    $wyniki['mobile_experience'] = false === is_null( $odp->KROK2_1_74 ) ? (int) $odp->KROK2_1_77 : round(
+    $wyniki['mobility_experience'] = false === is_null( $odp->KROK2_1_74 ) ? (int) $odp->KROK2_1_77 : round(
       (float) ( (int) $odp->KROK2_1_68 + (int) $odp->KROK2_1_69 + (int) $odp->KROK2_1_70 + (int) $odp->KROK2_1_71
                 + (int) $odp->KROK2_1_72 + (int) $odp->KROK2_1_73
       ) / 11
