@@ -2593,11 +2593,12 @@ class Badania_Front extends Badanie {
         $result_kapital_spoleczny_3_1 = '<h2 style="color: #059f8e; text-align: center; font-size: 16px;">3.1 ' . __( 'Relacje społeczne', 'migracja' ) . '</h2>';
         $result_kapital_spoleczny_3_1 .= '<div style="font-size: 13px;">';
 
+        $wynik_krok3_1 = $this->badanie_wynik_3_1( $badanie_ID );
+
         if ( isset( $kapital_spoleczny['pierwsza_czesc']['naglowek_wyniku'] ) ) {
           $result_kapital_spoleczny_3_1 .= '<p style="font-weight: bold; color: #059f8e;">' . $kapital_spoleczny['pierwsza_czesc']['naglowek_wyniku'] . '</p>';
         }
-
-        $result_kapital_spoleczny_3_1 .= $kapital_spoleczny['pierwsza_czesc']['wynik_zwrotny'];
+        $result_kapital_spoleczny_3_1 .= str_replace( '{{importance_of_all_contacts_result}}', $wynik_krok3_1['importance_of_all_contacts'], $kapital_spoleczny['pierwsza_czesc']['wynik_zwrotny'] );
 
         $result_kapital_spoleczny_3_1 .= '</div>';
 
@@ -2612,20 +2613,24 @@ class Badania_Front extends Badanie {
           $result_kapital_spoleczny_3_2 .= '<p style="font-weight: bold; color: #059f8e;">' . $kapital_spoleczny['druga_czesc']['naglowek_wyniku'] . '</p>';
         }
 
-        $result_kapital_spoleczny_3_2 .= $kapital_spoleczny['druga_czesc']['wynik_zwrotny'];
+        $parsed_sections = $this->parse_text_parts( $kapital_spoleczny['druga_czesc']['wynik_zwrotny'] );
+        $wynik_krok3_2   = $this->badanie_wynik_3_2( $badanie_ID );
 
-        $wynik_krok3_2 = $this->badanie_wynik_3_2( $badanie_ID );
-        if ( isset( $wynik_krok3_2['wsp_rodz'] ) ) {
-          $result_kapital_spoleczny_3_2 = str_replace( '{wynik_krok3_2_wsp_rodz}', number_format( $wynik_krok3_2['wsp_rodz'], 2, ',', ' ' ), $result_kapital_spoleczny_3_2 );
+        if ( isset( $wynik_krok3_2['relations']['wsp_rodz'] ) ) {
+          $result_kapital_spoleczny_3_2 .= str_replace( '{wynik_krok3_2_wsp_rodz}', number_format( $wynik_krok3_2['relations']['wsp_rodz'], 2, ',', ' ' ), $parsed_sections['relations'] );
         }
-        if ( isset( $wynik_krok3_2['wsp_przyj'] ) ) {
-          $result_kapital_spoleczny_3_2 = str_replace( '{wynik_krok3_2_wsp_przyj}', number_format( $wynik_krok3_2['wsp_przyj'], 2, ',', ' ' ), $result_kapital_spoleczny_3_2 );
+        if ( isset( $wynik_krok3_2['relations']['wsp_przyj'] ) ) {
+          $result_kapital_spoleczny_3_2 = str_replace( '{wynik_krok3_2_wsp_przyj}', number_format( $wynik_krok3_2['relations']['wsp_przyj'], 2, ',', ' ' ), $result_kapital_spoleczny_3_2 );
         }
-        if ( isset( $wynik_krok3_2['wsp_oz'] ) ) {
-          $result_kapital_spoleczny_3_2 = str_replace( '{wynik_krok3_2_wsp_oz}', number_format( $wynik_krok3_2['wsp_oz'], 2, ',', ' ' ), $result_kapital_spoleczny_3_2 );
+        if ( isset( $wynik_krok3_2['relations']['wsp_oz'] ) ) {
+          $result_kapital_spoleczny_3_2 = str_replace( '{wynik_krok3_2_wsp_oz}', number_format( $wynik_krok3_2['relations']['wsp_oz'], 2, ',', ' ' ), $result_kapital_spoleczny_3_2 );
         }
-        if ( isset( $wynik_krok3_2['wsp_all'] ) ) {
-          $result_kapital_spoleczny_3_2 = str_replace( '{wynik_krok3_2_wsp_all}', number_format( $wynik_krok3_2['wsp_all'], 2, ',', ' ' ), $result_kapital_spoleczny_3_2 );
+        if ( isset( $wynik_krok3_2['relations']['wsp_all'] ) ) {
+          $result_kapital_spoleczny_3_2 = str_replace( '{wynik_krok3_2_wsp_all}', number_format( $wynik_krok3_2['relations']['wsp_all'], 2, ',', ' ' ), $result_kapital_spoleczny_3_2 );
+        }
+
+        if ( false === is_null( $wynik_krok3_2['mobility_affected_support'] ) ) {
+          $result_kapital_spoleczny_3_2 .= str_replace( '{{mobility_affected_support_result}}', $wynik_krok3_2['mobility_affected_support'], $parsed_sections['mobility_affected_support'] );
         }
 
         $result_kapital_spoleczny_3_2 .= '</div>';
@@ -2637,11 +2642,20 @@ class Badania_Front extends Badanie {
         $result_kapital_spoleczny_3_3 = '<h2 style="color: #059f8e; text-align: center; font-size: 16px;">3.3 ' . __( 'Zaangażowanie społeczno-obywatelskie', 'migracja' ) . '</h2>';
         $result_kapital_spoleczny_3_3 .= '<div style="font-size: 13px;">';
 
+        $parsed_sections = $this->parse_text_parts( $kapital_spoleczny['trzecia_czesc']['wynik_zwrotny'] );
+        $wynik_krok3_3   = $this->badanie_wynik_3_3( $badanie_ID );
+
         if ( isset( $kapital_spoleczny['trzecia_czesc']['naglowek_wyniku'] ) ) {
           $result_kapital_spoleczny_3_3 .= '<p style="font-weight: bold; color: #059f8e;">' . $kapital_spoleczny['trzecia_czesc']['naglowek_wyniku'] . '</p>';
         }
 
-        $result_kapital_spoleczny_3_3 .= $kapital_spoleczny['trzecia_czesc']['wynik_zwrotny'];
+        $result_kapital_spoleczny_3_3 .= $parsed_sections['general'];
+
+        $result_kapital_spoleczny_3_3 .= str_replace( '{{social_involvement_result}}', $wynik_krok3_3['social_involvement'], $parsed_sections['social_involvement'] );
+
+        if ( false === is_null( $wynik_krok3_3['perceive_aspects_after_return'] ) ) {
+          $result_kapital_spoleczny_3_3 .= str_replace( '{{perceive_aspects_after_return_result}}', $wynik_krok3_3['perceive_aspects_after_return'], $parsed_sections['perceive_aspects_after_return'] );
+        }
 
         $result_kapital_spoleczny_3_3 .= '</div>';
 
