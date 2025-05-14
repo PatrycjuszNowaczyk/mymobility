@@ -457,7 +457,7 @@ class Badania_Front extends Badanie {
     if ( $_POST['step'] === 'step-3-1' ) {
       $wynik_krok3_1 = $this->badanie_wynik_3_1( $_POST['badanie_ID'] );
 
-      $result = str_replace('{{importance_of_all_contacts_result}}', $wynik_krok3_1['importance_of_all_contacts'], $result);
+      $result = str_replace( '{{importance_of_all_contacts_result}}', $wynik_krok3_1['importance_of_all_contacts'], $result );
     }
 
     if ( $_POST['step'] === 'step-3-2' ) {
