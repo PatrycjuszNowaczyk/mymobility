@@ -454,6 +454,12 @@ class Badania_Front extends Badanie {
       }
     }
 
+    if ( $_POST['step'] === 'step-3-1' ) {
+      $wynik_krok3_1 = $this->badanie_wynik_3_1( $_POST['badanie_ID'] );
+
+      $result = str_replace('{{importance_of_all_contacts_result}}', $wynik_krok3_1['importance_of_all_contacts'], $result);
+    }
+
     if ( $_POST['step'] === 'step-3-2' ) {
       $wynik_krok3_2 = $this->badanie_wynik_3_2( $_POST['badanie_ID'] );
       if ( isset( $wynik_krok3_2['wsp_rodz'] ) ) {
@@ -2872,6 +2878,32 @@ class Badania_Front extends Badanie {
                 + (int) $odp->KROK2_1_72 + (int) $odp->KROK2_1_73
       ) / 11
       , 2 );
+
+    return $wyniki;
+  }
+
+  public function badanie_wynik_3_1( $badanie_ID ) {
+    $wynik_ID = $badanie = $this->wpdb->get_row(
+      $this->wpdb->prepare(
+        "SELECT * FROM `{$this->table_name}` WHERE `badanie_ID` = %d",
+        array(
+          $badanie_ID,
+        )
+      )
+    );
+
+    $odp = $this->wpdb->get_row(
+      $this->wpdb->prepare(
+        "SELECT * FROM `{$this->table_name}_wyniki_krok3_1` WHERE `wynik_ID` = %d",
+        array(
+          $badanie->badanie_wyniki_krok3_1,
+        )
+      )
+    );
+
+    $wyniki = [
+      'importance_of_all_contacts' => $odp->KROK3_1_6
+    ];
 
     return $wyniki;
   }
