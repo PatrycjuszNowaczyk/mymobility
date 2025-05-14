@@ -462,17 +462,34 @@ class Badania_Front extends Badanie {
 
     if ( $_POST['step'] === 'step-3-2' ) {
       $wynik_krok3_2 = $this->badanie_wynik_3_2( $_POST['badanie_ID'] );
-      if ( isset( $wynik_krok3_2['wsp_rodz'] ) ) {
-        $result = str_replace( '{wynik_krok3_2_wsp_rodz}', number_format( $wynik_krok3_2['wsp_rodz'], 2, ',', ' ' ), $result );
+
+      if ( isset( $wynik_krok3_2['relations']['wsp_rodz'] ) ) {
+        $result = str_replace( '{wynik_krok3_2_wsp_rodz}', number_format( $wynik_krok3_2['relations']['wsp_rodz'], 2, ',', ' ' ), $parsed_sections['relations'] );
       }
-      if ( isset( $wynik_krok3_2['wsp_przyj'] ) ) {
-        $result = str_replace( '{wynik_krok3_2_wsp_przyj}', number_format( $wynik_krok3_2['wsp_przyj'], 2, ',', ' ' ), $result );
+      if ( isset( $wynik_krok3_2['relations']['wsp_przyj'] ) ) {
+        $result = str_replace( '{wynik_krok3_2_wsp_przyj}', number_format( $wynik_krok3_2['relations']['wsp_przyj'], 2, ',', ' ' ), $result );
       }
-      if ( isset( $wynik_krok3_2['wsp_oz'] ) ) {
-        $result = str_replace( '{wynik_krok3_2_wsp_oz}', number_format( $wynik_krok3_2['wsp_oz'], 2, ',', ' ' ), $result );
+      if ( isset( $wynik_krok3_2['relations']['wsp_oz'] ) ) {
+        $result = str_replace( '{wynik_krok3_2_wsp_oz}', number_format( $wynik_krok3_2['relations']['wsp_oz'], 2, ',', ' ' ), $result );
       }
-      if ( isset( $wynik_krok3_2['wsp_all'] ) ) {
-        $result = str_replace( '{wynik_krok3_2_wsp_all}', number_format( $wynik_krok3_2['wsp_all'], 2, ',', ' ' ), $result );
+      if ( isset( $wynik_krok3_2['relations']['wsp_all'] ) ) {
+        $result = str_replace( '{wynik_krok3_2_wsp_all}', number_format( $wynik_krok3_2['relations']['wsp_all'], 2, ',', ' ' ), $result );
+      }
+
+      if ( false === is_null( $wynik_krok3_2['mobility_affected_support'] ) ) {
+        $result .= str_replace( '{{mobility_affected_support_result}}', $wynik_krok3_2['mobility_affected_support'], $parsed_sections['mobility_affected_support'] );
+      }
+    }
+
+    if ( $_POST['step'] === 'step-3-3' ) {
+      $wynik_krok3_3 = $this->badanie_wynik_3_3( $_POST['badanie_ID'] );
+
+      $result = $parsed_sections['general'];
+
+      $result .= str_replace( '{{social_involvement_result}}', $wynik_krok3_3['social_involvement'], $parsed_sections['social_involvement'] );
+
+      if ( false === is_null( $wynik_krok3_3['perceive_aspects_after_return'] ) ) {
+        $result .= str_replace( '{{perceive_aspects_after_return_result}}', $wynik_krok3_3['perceive_aspects_after_return'], $parsed_sections['perceive_aspects_after_return'] );
       }
     }
 
@@ -2932,11 +2949,58 @@ class Badania_Front extends Badanie {
     $wsp_oz    = ( $odp->KROK3_2_1 + $odp->KROK3_2_2 + $odp->KROK3_2_5 + $odp->KROK3_2_10 ) / 4;
     $wsp_all   = ( $wsp_rodz + $wsp_przyj + $wsp_oz );
 
-    $wyniki              = array();
-    $wyniki['wsp_rodz']  = $wsp_rodz;
-    $wyniki['wsp_przyj'] = $wsp_przyj;
-    $wyniki['wsp_oz']    = $wsp_oz;
-    $wyniki['wsp_all']   = $wsp_all;
+    $wyniki                           = array();
+    $wyniki['relations']['wsp_rodz']  = $wsp_rodz;
+    $wyniki['relations']['wsp_przyj'] = $wsp_przyj;
+    $wyniki['relations']['wsp_oz']    = $wsp_oz;
+    $wyniki['relations']['wsp_all']   = $wsp_all;
+
+    $wyniki['mobility_affected_support'] = is_null( $odp->KROK3_2_16 ) ? null : round(
+      (float) (
+        (int) $odp->KROK3_2_16 + (int) $odp->KROK3_2_17 + (int) $odp->KROK3_2_18 + (int) $odp->KROK3_2_19
+        + (int) $odp->KROK3_2_20 + (int) $odp->KROK3_2_21 + (int) $odp->KROK3_2_22
+      ) / 7, 2 );
+
+
+    return $wyniki;
+  }
+
+  public function badanie_wynik_3_3( $badanie_ID ) {
+    $wynik_ID = $badanie = $this->wpdb->get_row(
+      $this->wpdb->prepare(
+        "SELECT * FROM `{$this->table_name}` WHERE `badanie_ID` = %d",
+        array(
+          $badanie_ID,
+        )
+      )
+    );
+
+    $odp = $this->wpdb->get_row(
+      $this->wpdb->prepare(
+        "SELECT * FROM `{$this->table_name}_wyniki_krok3_3` WHERE `wynik_ID` = %d",
+        array(
+          $badanie->badanie_wyniki_krok3_3,
+        )
+      )
+    );
+
+    $wyniki['social_involvement'] = is_null( $odp->KROK3_3_1 ) ? null : round(
+      (float) (
+        (int) $odp->KROK3_3_1 + (int) $odp->KROK3_3_2 + (int) $odp->KROK3_3_3 + (int) $odp->KROK3_3_4
+        + (int) $odp->KROK3_3_5 + (int) $odp->KROK3_3_6 + (int) $odp->KROK3_3_7 + (int) $odp->KROK3_3_8
+        + (int) $odp->KROK3_3_9 + (int) $odp->KROK3_3_10 + (int) $odp->KROK3_3_11 + (int) $odp->KROK3_3_12
+        + (int) $odp->KROK3_3_13 + (int) $odp->KROK3_3_87
+      ) / 14, 2 );
+
+    $perceive_aspects_questions_nr           = is_null( $odp->KROK3_3_38 ) ? 11 : 12;
+    $wyniki['perceive_aspects_after_return'] = is_null( $odp->KROK3_3_22 ) ? null : round(
+      (float) (
+        (int) $odp->KROK3_3_22 + (int) $odp->KROK3_3_23 + (int) $odp->KROK3_3_24 + (int) $odp->KROK3_3_25
+        + (int) $odp->KROK3_3_28 + (int) $odp->KROK3_3_29 + (int) $odp->KROK3_3_30 + (int) $odp->KROK3_3_31
+        + (int) $odp->KROK3_3_32 + (int) $odp->KROK3_3_33 + (int) $odp->KROK3_3_34
+        + ( is_null( +(int) $odp->KROK3_3_38 ) ? 0 : (int) $odp->KROK3_3_92 )
+      ) / $perceive_aspects_questions_nr
+      , 2 );
 
     return $wyniki;
   }
