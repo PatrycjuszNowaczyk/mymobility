@@ -565,6 +565,16 @@ class Badania_Front extends Badanie {
         )
       );
 
+      $wyniki_kapital_ludzki = $this->wpdb->get_row(
+        $this->wpdb->prepare(
+          "SELECT * FROM `{$this->table_name}_wyniki_krok1_1` WHERE `wynik_ID` = %d",
+          array(
+            $badanie->badanie_wyniki_wstepne,
+          )
+        )
+      );
+
+
       $pytania_do_ukrycia = [
         "KROK1_1_37",
         "KROK1_1_40",
@@ -593,10 +603,81 @@ class Badania_Front extends Badanie {
         "KROK1_1_93",
         "KROK1_1_94",
         "KROK1_1_95",
-        "KROK1_1_96"
+        "KROK1_1_96",
+        "KROK2_1_14",
+        "KROK2_1_22",
+        "KROK2_1_15",
+        "KROK2_1_16",
+        "KROK2_1_17",
+        "KROK2_1_18",
+        "KROK2_1_23",
+        "KROK2_1_19",
+        "KROK2_1_20",
+        "KROK2_1_21",
+        "KROK2_1_24",
+        "KROK2_1_25",
+        "KROK2_1_26",
+        "KROK2_1_27",
+        "KROK2_1_28",
+        "KROK2_1_29",
+        "KROK2_1_30",
+        "KROK2_1_31",
+        "KROK2_1_53",
+        "KROK2_1_67",
+        "KROK2_1_68",
+        "KROK2_1_69",
+        "KROK2_1_70",
+        "KROK2_1_71",
+        "KROK2_1_72",
+        "KROK2_1_73",
+        "KROK2_1_74",
+        "KROK2_1_75",
+        "KROK3_1_15",
+        "KROK3_2_14",
+        "KROK3_2_1",
+        "KROK3_2_2",
+        "KROK3_2_3",
+        "KROK3_2_4",
+        "KROK3_2_5",
+        "KROK3_2_6",
+        "KROK3_2_7",
+        "KROK3_2_8",
+        "KROK3_2_9",
+        "KROK3_2_10",
+        "KROK3_2_11",
+        "KROK3_2_12",
+        "KROK3_2_13",
+        "KROK3_2_15",
+        "KROK3_2_16",
+        "KROK3_2_17",
+        "KROK3_2_18",
+        "KROK3_2_19",
+        "KROK3_2_20",
+        "KROK3_2_21",
+        "KROK3_2_22",
+        "KROK3_3_88",
+        "KROK3_3_27",
+        "KROK3_3_89",
+        "KROK3_3_22",
+        "KROK3_3_23",
+        "KROK3_3_24",
+        "KROK3_3_25",
+        "KROK3_3_28",
+        "KROK3_3_29",
+        "KROK3_3_30",
+        "KROK3_3_31",
+        "KROK3_3_32",
+        "KROK3_3_33",
+        "KROK3_3_34",
+        "KROK3_3_38",
+        "KROK4_2_1",
+        "KROK4_2_3"
       ];
 
-      if ( "0" === $wyniki_wstepne->WSTEPNE_2 ) {
+      if (
+        "0" === $wyniki_wstepne->WSTEPNE_2
+        || ( false === is_null($wyniki_kapital_ludzki) && ( 3 === (int) $wyniki_kapital_ludzki->KROK1_1_32 || 4 === (int) $wyniki_kapital_ludzki->KROK1_1_32 ) )
+      ) {
         if ( in_array( $input_name, $pytania_do_ukrycia ) ) {
           $hide_special = true;
         }
