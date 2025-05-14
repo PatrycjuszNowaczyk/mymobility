@@ -24744,7 +24744,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 
 class MyTCPDF extends TCPDF{
   public function Header(){
-     $html = '<table width="100%" style="width:100%; border-bottom: 1px solid #d5d5d5; padding-bottom: 10px;"><tr><td><img width="160" height="60" src="http://mojamigracja.org/wp-content/themes/migracja/php/TCPDF/examples/images/logo-moja-migracja.jpg"></td><td style="text-align:right;"><img src="http://mojamigracja.org/wp-content/uploads/2022/10/alk-logo.jpeg" width="80" height="60"></td></tr></table>';
+     $html = '<table width="100%" style="width:100%; border-bottom: 1px solid #d5d5d5; padding-bottom: 10px;"><tr><td><img width="160" height="60" src="https://mymobility.academy/wp-content/themes/migracja/img/logo-moja-migracja.svg"></td><td style="text-align:right;"><img src="https://mymobility.academy/wp-content/themes/migracja/img/logotyp-KOZMINSKI-black.png" width="47" height="60"></td></tr></table>';
     //  $this->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $html, $border = '#000000', $ln = 1, $fill = '', $reseth = true, $align = 'top', $autopadding = true);
 	 $this->writeHTML($html, true, false, true, false, '');
 	}
