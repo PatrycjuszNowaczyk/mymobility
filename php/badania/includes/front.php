@@ -2697,7 +2697,7 @@ class Badania_Front extends Badanie {
 
       $pdf->Ln( 2 );
 
-      $footer_text = __( 'Dokument został wygenerowany z portalu badawczego www.mymobility.org. Portal został stworzony przez Zespół Centrum Badań nad Zmianą Społeczną i Mobilnością Akademii Leona Koźmińskiego w ramach projektu BigMig finansowanego ze środków Narodowego Centrum Nauki (OPUS, nr projektu 2020/37/B/HS6/02342).', 'migracja' );
+      $footer_text = __( 'Dokument został wygenerowany z portalu badawczego www.mymobility.academy. Portal został stworzony przez Zespół Centrum Badań nad Zmianą Społeczną i Mobilnością Akademii Leona Koźmińskiego w ramach projektu BigMig finansowanego ze środków Narodowego Centrum Nauki (OPUS, nr projektu 2020/37/B/HS6/02342).', 'migracja' );
       $foot2       = '<table cellpadding="0" cellspacing="0" width="100%" style="width: 100%; text-align:center;"><tr><td style="font-size: 11px; line-height: 16px; color:#1d1d1f;">' . $footer_text . '</td></tr></table>';
       $pdf->writeHTML( $foot2, true, false, true, false, '' );
 
