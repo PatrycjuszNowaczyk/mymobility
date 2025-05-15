@@ -572,7 +572,7 @@ class Badania_Front extends Badanie {
         $this->wpdb->prepare(
           "SELECT * FROM `{$this->table_name}_wyniki_krok1_1` WHERE `wynik_ID` = %d",
           array(
-            $badanie->badanie_wyniki_wstepne,
+            $badanie->badanie_wyniki_krok1_1,
           )
         )
       );
