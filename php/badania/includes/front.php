@@ -290,6 +290,8 @@ class Badania_Front extends Badanie {
     $badania      = $this->page_settings;
     $podsumowanie = $badania['podsumowanie_badania'];
 
+    $this->badanie_dodaj_krok( 'metryczka' );
+
     if ( isset( $_POST['badanie_satysfakcja'] ) ) :
       $input['badanie_satysfakcja'] = $_POST['badanie_satysfakcja'];
     endif;
