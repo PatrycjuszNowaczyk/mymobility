@@ -3039,10 +3039,10 @@ class Badania_Front extends Badanie {
       )
     );
 
-    $wsp_rodz  = ( $odp->KROK3_2_3 + $odp->KROK3_2_4 + $odp->KROK3_2_8 + $odp->KROK3_2_11 ) / 4;
-    $wsp_przyj = ( $odp->KROK3_2_6 + $odp->KROK3_2_7 + $odp->KROK3_2_9 + $odp->KROK3_2_12 ) / 4;
-    $wsp_oz    = ( $odp->KROK3_2_1 + $odp->KROK3_2_2 + $odp->KROK3_2_5 + $odp->KROK3_2_10 ) / 4;
-    $wsp_all   = ( $wsp_rodz + $wsp_przyj + $wsp_oz );
+    $wsp_rodz  = is_null( $odp->KROK3_2_3 ) ? null : ( $odp->KROK3_2_3 + $odp->KROK3_2_4 + $odp->KROK3_2_8 + $odp->KROK3_2_11 ) / 4;
+    $wsp_przyj = is_null( $odp->KROK3_2_3 ) ? null : ( $odp->KROK3_2_6 + $odp->KROK3_2_7 + $odp->KROK3_2_9 + $odp->KROK3_2_12 ) / 4;
+    $wsp_oz    = is_null( $odp->KROK3_2_3 ) ? null : ( $odp->KROK3_2_1 + $odp->KROK3_2_2 + $odp->KROK3_2_5 + $odp->KROK3_2_10 ) / 4;
+    $wsp_all   = is_null( $odp->KROK3_2_3 ) ? null : ( $wsp_rodz + $wsp_przyj + $wsp_oz );
 
     $wyniki                           = array();
     $wyniki['relations']['wsp_rodz']  = $wsp_rodz;
