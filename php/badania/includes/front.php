@@ -3005,11 +3005,13 @@ class Badania_Front extends Badanie {
       ) / 11
       , 2 );
 
-    $wyniki['mobility_experience'] = false === is_null( $odp->KROK2_1_74 ) ? (int) $odp->KROK2_1_77 : round(
+    $wyniki['mobility_experience'] = false === is_null( $odp->KROK2_1_74 ) ? (int) $odp->KROK2_1_77 : (
+    false === is_null( $odp->KROK2_1_68 ) ? ( round(
       (float) ( (int) $odp->KROK2_1_68 + (int) $odp->KROK2_1_69 + (int) $odp->KROK2_1_70 + (int) $odp->KROK2_1_71
                 + (int) $odp->KROK2_1_72 + (int) $odp->KROK2_1_73
       ) / 11
-      , 2 );
+      , 2 ) ) : null
+    );
 
     return $wyniki;
   }
