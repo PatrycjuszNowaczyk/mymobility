@@ -684,7 +684,7 @@ class Badania_Front extends Badanie {
 
       if (
         "0" === $wyniki_wstepne->WSTEPNE_2
-        || ( false === is_null($wyniki_kapital_ludzki) && ( 3 === (int) $wyniki_kapital_ludzki->KROK1_1_32 || 4 === (int) $wyniki_kapital_ludzki->KROK1_1_32 ) )
+        || ( false === is_null( $wyniki_kapital_ludzki ) && ( 3 === (int) $wyniki_kapital_ludzki->KROK1_1_32 || 4 === (int) $wyniki_kapital_ludzki->KROK1_1_32 ) )
       ) {
         if ( in_array( $input_name, $pytania_do_ukrycia ) ) {
           $hide_special = true;
@@ -1307,11 +1307,15 @@ class Badania_Front extends Badanie {
         $form .= '<input name="badanie_jezyk" type="hidden" value="' . ICL_LANGUAGE_CODE . '">';
       }
 
-      $form         .= '<div class="line-btn">
-                <input name="badanie_ID" type="hidden" value="' . $badanie_ID . '"> 
-                <button class="btn btn-blue-line">' . __( 'Zapisz', 'migracja' ) . '</button>
-            </div>';
-      $form         .= '</form>';
+      $form .= '
+      <div class="line-btn">
+        <input name="badanie_ID" type="hidden" value="' . $badanie_ID . '"> 
+        <button class="btn btn-blue-line">' . __( 'Zapisz', 'migracja' ) . '</button>
+      </div>
+      ';
+
+      $form .= '</form>';
+
       $data['form'] = $form;
 
       wp_send_json_success( $data );
@@ -2694,6 +2698,7 @@ class Badania_Front extends Badanie {
         if ( isset( $kapital_spoleczny['pierwsza_czesc']['naglowek_wyniku'] ) ) {
           $result_kapital_spoleczny_3_1 .= '<p style="font-weight: bold; color: #059f8e;">' . $kapital_spoleczny['pierwsza_czesc']['naglowek_wyniku'] . '</p>';
         }
+
         $result_kapital_spoleczny_3_1 .= str_replace( '{{importance_of_all_contacts_result}}', $wynik_krok3_1['importance_of_all_contacts'], $kapital_spoleczny['pierwsza_czesc']['wynik_zwrotny'] );
 
         $result_kapital_spoleczny_3_1 .= '</div>';
@@ -2732,7 +2737,6 @@ class Badania_Front extends Badanie {
         }
 
         $result_kapital_spoleczny_3_2 .= '</div>';
-
       }
 
       if ( isset( $kapital_spoleczny['trzecia_czesc']['wynik_zwrotny'] ) ) {
@@ -2756,7 +2760,6 @@ class Badania_Front extends Badanie {
         }
 
         $result_kapital_spoleczny_3_3 .= '</div>';
-
       }
 
       // ---------------------------------------------------------
