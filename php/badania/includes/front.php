@@ -214,10 +214,10 @@ class Badania_Front extends Badanie {
     wp_die();
   }
 
-  public function badanie_dodaj_krok() {
+  public function badanie_dodaj_krok( $nazwaKroku = null ) {
     $badanie_ID = $_POST['badanie_ID'];
-    $krok       = $_POST['krok'];
-    $krok_upper = strtoupper( $_POST['krok'] );
+    $krok       = false === empty( $nazwaKroku ) ? $nazwaKroku : $_POST['krok'];
+    $krok_upper = strtoupper( $krok );
     $wyniki_ID  = $this->wynik_nowy_ID( $krok );
 
     $wyniki_sql = array(
@@ -279,8 +279,9 @@ class Badania_Front extends Badanie {
       $this->wpdb->update( $this->table_name, array( 'badanie_status' => "zamknięte" ), array( 'badanie_ID' => $badanie_ID ) );
     }
 
-
-    wp_die();
+    if ( 'metryczka' !== $krok ) {
+      wp_die();
+    }
   }
 
   public function badanie_podsumowanie_form() {
