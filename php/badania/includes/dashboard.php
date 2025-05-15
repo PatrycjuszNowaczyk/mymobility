@@ -366,6 +366,21 @@ class Badania_Dashboard extends Badanie {
       }
     }
 
+    $array[0][] = '';
+
+    $krok_metryczka = $this->wpdb->get_results( "SELECT * FROM `{$this->table_name}_metryczka` ORDER BY kolejnosc" );
+    foreach ( $krok_metryczka as $metryczka_row ) {
+      $pytanie = $this->wpdb->get_row(
+        $this->wpdb->prepare(
+          "SELECT * FROM `{$this->table_name}_pytania` WHERE `pytanie_ID` = %d",
+          array( $metryczka_row->pytanie_ID )
+        )
+      );
+      if ( $pytanie->pytanie_typ != 'text' ) {
+        $array[0][] = 'METRYCZKA_' . $metryczka_row->ID;
+      }
+    }
+
 
     $result = $this->wpdb->get_results( "SELECT * FROM `{$this->table_name}` ORDER BY badanie_ID" );
     if ( $result != null ) {
@@ -432,6 +447,12 @@ class Badania_Dashboard extends Badanie {
           $this->wpdb->prepare(
             "SELECT * FROM `{$this->table_name}_wyniki_krok4_2` WHERE `wynik_ID` = %d",
             array( $row->badanie_wyniki_krok4_2 )
+          )
+        );
+        $wyniki_metryczka = $this->wpdb->get_row(
+          $this->wpdb->prepare(
+            "SELECT * FROM `{$this->table_name}_wyniki_metryczka` WHERE `wynik_ID` = %d",
+            array( $row->badanie_wyniki_metryczka )
           )
         );
 
@@ -625,6 +646,31 @@ class Badania_Dashboard extends Badanie {
             $nazwa_kolumny = 'KROK4_2_' . $id_krok;
             if ( isset( $wyniki_4_2->$nazwa_kolumny ) && $wyniki_4_2->$nazwa_kolumny !== null ) {
               $value = $wyniki_4_2->$nazwa_kolumny;
+              if ( strpos( $value, '||' ) !== false ) {
+                $value = str_replace( '||', ', ', $value );
+              }
+              $value         = str_replace( array( "\r", "\n" ), ' ', $value );
+              $array[ $i ][] = $value;
+            } else {
+              $array[ $i ][] = '';
+            }
+          }
+        }
+
+        $array[ $i ][] = '';
+
+        foreach ( $krok_metryczka as $krok_metryczka_row ) {
+          $pytanie = $this->wpdb->get_row(
+            $this->wpdb->prepare(
+              "SELECT * FROM `{$this->table_name}_pytania` WHERE `pytanie_ID` = %d",
+              array( $krok_metryczka_row->pytanie_ID )
+            )
+          );
+          if ( $pytanie->pytanie_typ != 'text' ) {
+            $id_krok       = $krok_metryczka_row->ID;
+            $nazwa_kolumny = 'METRYCZKA_' . $id_krok;
+            if ( isset( $wyniki_metryczka->$nazwa_kolumny ) && $wyniki_metryczka->$nazwa_kolumny !== null ) {
+              $value = $wyniki_metryczka->$nazwa_kolumny;
               if ( strpos( $value, '||' ) !== false ) {
                 $value = str_replace( '||', ', ', $value );
               }
