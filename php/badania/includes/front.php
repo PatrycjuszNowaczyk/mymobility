@@ -395,7 +395,7 @@ class Badania_Front extends Badanie {
       if ( false === is_null( $wynik_krok1_1['skills_acquired'] ) ) {
         if ( 10 === $wynik_krok1_1['skills_acquired'] ) {
           $result .= $parsed_sections['skills_acquired_3'];
-        } else if ( 15 < $wynik_krok1_1['skills_acquired'] ) {
+        } else if ( 15 <= $wynik_krok1_1['skills_acquired'] ) {
           $result .= $parsed_sections['skills_acquired_1'];
         } else {
           $result .= $parsed_sections['skills_acquired_2'];
@@ -2564,7 +2564,7 @@ class Badania_Front extends Badanie {
         if ( false === is_null( $wynik_krok1_1['skills_acquired'] ) ) {
           if ( 10 === $wynik_krok1_1['skills_acquired'] ) {
             $result_kapital_ludzki .= $parsed_sections['skills_acquired_3'];
-          } else if ( 15 < $wynik_krok1_1['skills_acquired'] ) {
+          } else if ( 15 <= $wynik_krok1_1['skills_acquired'] ) {
             $result_kapital_ludzki .= $parsed_sections['skills_acquired_1'];
           } else {
             $result_kapital_ludzki .= $parsed_sections['skills_acquired_2'];
