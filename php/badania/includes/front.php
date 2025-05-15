@@ -773,9 +773,14 @@ class Badania_Front extends Badanie {
         endif;
       endforeach;
 
-      $html .= '<div class="line-btn">
-                <button class="btn btn-blue-line">' . __( 'Zapisz', 'migracja' ) . '</button>
-            </div>';
+
+      if ( 'metryczka' !== $krok ) {
+        $html .= '
+        <div class="line-btn">
+          <button class="btn btn-blue-line">' . __( 'Zapisz', 'migracja' ) . '</button>
+        </div>
+        ';
+      }
 
       return $html;
 
