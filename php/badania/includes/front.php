@@ -1183,6 +1183,8 @@ class Badania_Front extends Badanie {
     if ( empty( $row->badanie_email ) || empty( $row->badanie_satysfakcja ) || empty( $row->badanie_nastroj ) || empty( $row->badanie_zrodlo ) ) {
       $form = '<form action="#" id="form-podsumowanie-badania">';
 
+      $form .= $this->lista_pytan( 'metryczka', $badanie_ID );
+
 
       if ( !( $row->badanie_satysfakcja ) ) {
         $form .= '<div class="item">';
