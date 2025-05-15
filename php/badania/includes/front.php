@@ -466,17 +466,19 @@ class Badania_Front extends Badanie {
     if ( $_POST['step'] === 'step-3-2' ) {
       $wynik_krok3_2 = $this->badanie_wynik_3_2( $_POST['badanie_ID'] );
 
-      if ( isset( $wynik_krok3_2['relations']['wsp_rodz'] ) ) {
-        $result = str_replace( '{wynik_krok3_2_wsp_rodz}', number_format( $wynik_krok3_2['relations']['wsp_rodz'], 2, ',', ' ' ), $parsed_sections['relations'] );
-      }
-      if ( isset( $wynik_krok3_2['relations']['wsp_przyj'] ) ) {
-        $result = str_replace( '{wynik_krok3_2_wsp_przyj}', number_format( $wynik_krok3_2['relations']['wsp_przyj'], 2, ',', ' ' ), $result );
-      }
-      if ( isset( $wynik_krok3_2['relations']['wsp_oz'] ) ) {
-        $result = str_replace( '{wynik_krok3_2_wsp_oz}', number_format( $wynik_krok3_2['relations']['wsp_oz'], 2, ',', ' ' ), $result );
-      }
-      if ( isset( $wynik_krok3_2['relations']['wsp_all'] ) ) {
-        $result = str_replace( '{wynik_krok3_2_wsp_all}', number_format( $wynik_krok3_2['relations']['wsp_all'], 2, ',', ' ' ), $result );
+      if ( false === is_null($wynik_krok3_2['relations']['wsp_rodz']) ) {
+        if ( isset( $wynik_krok3_2['relations']['wsp_rodz'] ) ) {
+          $result = str_replace( '{wynik_krok3_2_wsp_rodz}', number_format( $wynik_krok3_2['relations']['wsp_rodz'], 2, ',', ' ' ), $parsed_sections['relations'] );
+        }
+        if ( isset( $wynik_krok3_2['relations']['wsp_przyj'] ) ) {
+          $result = str_replace( '{wynik_krok3_2_wsp_przyj}', number_format( $wynik_krok3_2['relations']['wsp_przyj'], 2, ',', ' ' ), $result );
+        }
+        if ( isset( $wynik_krok3_2['relations']['wsp_oz'] ) ) {
+          $result = str_replace( '{wynik_krok3_2_wsp_oz}', number_format( $wynik_krok3_2['relations']['wsp_oz'], 2, ',', ' ' ), $result );
+        }
+        if ( isset( $wynik_krok3_2['relations']['wsp_all'] ) ) {
+          $result = str_replace( '{wynik_krok3_2_wsp_all}', number_format( $wynik_krok3_2['relations']['wsp_all'], 2, ',', ' ' ), $result );
+        }
       }
 
       if ( false === is_null( $wynik_krok3_2['mobility_affected_support'] ) ) {
@@ -2700,17 +2702,19 @@ class Badania_Front extends Badanie {
         $parsed_sections = $this->parse_text_parts( $kapital_spoleczny['druga_czesc']['wynik_zwrotny'] );
         $wynik_krok3_2   = $this->badanie_wynik_3_2( $badanie_ID );
 
-        if ( isset( $wynik_krok3_2['relations']['wsp_rodz'] ) ) {
-          $result_kapital_spoleczny_3_2 .= str_replace( '{wynik_krok3_2_wsp_rodz}', number_format( $wynik_krok3_2['relations']['wsp_rodz'], 2, ',', ' ' ), $parsed_sections['relations'] );
-        }
-        if ( isset( $wynik_krok3_2['relations']['wsp_przyj'] ) ) {
-          $result_kapital_spoleczny_3_2 = str_replace( '{wynik_krok3_2_wsp_przyj}', number_format( $wynik_krok3_2['relations']['wsp_przyj'], 2, ',', ' ' ), $result_kapital_spoleczny_3_2 );
-        }
-        if ( isset( $wynik_krok3_2['relations']['wsp_oz'] ) ) {
-          $result_kapital_spoleczny_3_2 = str_replace( '{wynik_krok3_2_wsp_oz}', number_format( $wynik_krok3_2['relations']['wsp_oz'], 2, ',', ' ' ), $result_kapital_spoleczny_3_2 );
-        }
-        if ( isset( $wynik_krok3_2['relations']['wsp_all'] ) ) {
-          $result_kapital_spoleczny_3_2 = str_replace( '{wynik_krok3_2_wsp_all}', number_format( $wynik_krok3_2['relations']['wsp_all'], 2, ',', ' ' ), $result_kapital_spoleczny_3_2 );
+        if ( false === is_null($wynik_krok3_2['relations']['wsp_rodz']) ) {
+          if ( isset( $wynik_krok3_2['relations']['wsp_rodz'] ) ) {
+            $result_kapital_spoleczny_3_2 .= str_replace( '{wynik_krok3_2_wsp_rodz}', number_format( $wynik_krok3_2['relations']['wsp_rodz'], 2, ',', ' ' ), $parsed_sections['relations'] );
+          }
+          if ( isset( $wynik_krok3_2['relations']['wsp_przyj'] ) ) {
+            $result_kapital_spoleczny_3_2 = str_replace( '{wynik_krok3_2_wsp_przyj}', number_format( $wynik_krok3_2['relations']['wsp_przyj'], 2, ',', ' ' ), $result_kapital_spoleczny_3_2 );
+          }
+          if ( isset( $wynik_krok3_2['relations']['wsp_oz'] ) ) {
+            $result_kapital_spoleczny_3_2 = str_replace( '{wynik_krok3_2_wsp_oz}', number_format( $wynik_krok3_2['relations']['wsp_oz'], 2, ',', ' ' ), $result_kapital_spoleczny_3_2 );
+          }
+          if ( isset( $wynik_krok3_2['relations']['wsp_all'] ) ) {
+            $result_kapital_spoleczny_3_2 = str_replace( '{wynik_krok3_2_wsp_all}', number_format( $wynik_krok3_2['relations']['wsp_all'], 2, ',', ' ' ), $result_kapital_spoleczny_3_2 );
+          }
         }
 
         if ( false === is_null( $wynik_krok3_2['mobility_affected_support'] ) ) {
