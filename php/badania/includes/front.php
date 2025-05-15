@@ -1180,101 +1180,10 @@ class Badania_Front extends Badanie {
     $data['opis'] = $html;
 
 
-    if ( empty( $row->badanie_email ) || empty( $row->badanie_satysfakcja ) || empty( $row->badanie_nastroj ) || empty( $row->badanie_zrodlo ) ) {
+    if ( empty( $row->badanie_email ) ) {
       $form = '<form action="#" id="form-podsumowanie-badania">';
 
       $form .= $this->lista_pytan( 'metryczka', $badanie_ID );
-
-
-      if ( !( $row->badanie_satysfakcja ) ) {
-        $form .= '<div class="item">';
-        $form .= '<strong class="question">' . $podsumowanie['pytanie_satysfakcji'] . '</strong>
-                    <div class="answers answers-scale">';
-
-        for ( $i = 1; $i <= 10; $i++ ) {
-          $form .= '<label for="badanie_satysfakcja_' . $i . '">';
-          $form .= '<strong>' . $i . '</strong>';
-          $form .= '<input type="radio" name="badanie_satysfakcja" id="badanie_satysfakcja_' . $i . '" value="' . $i . '">';
-          $form .= '<span></span>';
-          $form .= '</label>';
-        }
-
-        $form .= '</div>';
-
-        $form .= '<div class="values">';
-        $form .= '<span>' . __( 'zdecydowanie negatywnie', 'migracja' ) . '</span>';
-        $form .= '<span>' . __( 'zdecydowanie pozytywnie', 'migracja' ) . '</span>';
-        $form .= '</div>';
-
-        $form .= '</div>';
-      }
-
-      if ( $row->badanie_nastroj === null ) {
-        $form .= '<div class="item">';
-        if ( isset( $podsumowanie['pytanie_nastroj'] ) ) {
-          $form .= '<strong class="question">' . $podsumowanie['pytanie_nastroj'] . '</strong>';
-          $form .= '<div class="answers answers-scale">';
-
-          for ( $i = 0; $i <= 10; $i++ ) {
-            $form .= '<label for="badanie_nastroj_' . $i . '">';
-            $form .= '<strong>' . $i . '</strong>';
-            $form .= '<input type="radio" name="badanie_nastroj" id="badanie_nastroj_' . $i . '" value="' . $i . '">';
-            $form .= '<span></span>';
-            $form .= '</label>';
-          }
-
-          $form .= '</div>';
-        }
-
-        $form .= '<div class="values">';
-        $form .= '<span>' . __( 'beznadziejny', 'migracja' ) . '</span>';
-        $form .= '<span>' . __( 'znakomity', 'migracja' ) . '</span>';
-        $form .= '</div>';
-
-        $form .= '</div>';
-      } elseif ( $row->badanie_nastroj < 5 ) {
-        $form .= '<div class="list-nastroj">' . $podsumowanie['lista_wsparcia'] . '</div>';
-      }
-
-      if ( !( $row->badanie_zrodlo ) ) {
-        while ( have_rows( 'badania', $this->page_id ) ) : the_row();
-          while ( have_rows( 'podsumowanie_badania' ) ) : the_row();
-            while ( have_rows( 'skad_info' ) ) : the_row();
-              $form .= '<div class="item">';
-              $form .= '<strong class="question">' . get_sub_field( 'pytanie' ) . '</strong>
-                                <div class="answers">';
-              $i    = 0;
-              while ( have_rows( 'opcje' ) ) : the_row();
-                $i++;
-                $form .= '<label for="badanie_zrodlo-' . $i . '">';
-                $form .= '<input type="radio" name="badanie_zrodlo"';
-                if ( get_sub_field( 'inne' ) ) {
-                  $form .= ' class="wybor-inne"';
-                }
-                $form .= ' value="' . get_sub_field( 'odpowiedz' ) . '" id="badanie_zrodlo-' . $i . '">';
-                $form .= '<span>' . get_sub_field( 'odpowiedz' ) . '</span>';
-                if ( get_sub_field( 'inne' ) ) {
-                  $form .= '<input type="text" name="badanie_zrodlo_inne" class="inne">';
-                }
-                $form .= '</label>';
-              endwhile;
-              $form .= '</div>
-                            </div>';
-            endwhile;
-          endwhile;
-        endwhile;
-      }
-
-      if ( !( $row->badanie_haslo ) ) {
-        $form .= '<div class="haslo">';
-        if ( isset( $podsumowanie['pytanie_haslo'] ) ) {
-          $form .= '<label for="badanie_haslo">' . $podsumowanie['pytanie_haslo'] . '</label>';
-        }
-
-        $form .= '<input type="text" name="badanie_haslo" placeholder="' . __( 'Hasło', 'migracja' ) . '">';
-
-        $form .= '</div>';
-      }
 
       if ( !( $row->badanie_email ) ) {
         $form .= '<div class="email">';
@@ -1287,18 +1196,6 @@ class Badania_Front extends Badanie {
         if ( isset( $email['dodatkowa_informacja'] ) ) {
           $form .= '<div class="email-add-info">' . $email['dodatkowa_informacja'] . '</div>';
         }
-        $form .= '</div>';
-      }
-
-
-      if ( !( $row->badanie_pseudonim ) ) {
-        $form .= '<div class="pseudonim">';
-        if ( isset( $podsumowanie['pytanie_pseudonim'] ) ) {
-          $form .= '<label for="badanie_pseudonim">' . $podsumowanie['pytanie_pseudonim'] . '</label>';
-        }
-
-        $form .= '<input type="text" name="badanie_pseudonim" placeholder="' . __( 'Pseudonim', 'migracja' ) . '">';
-
         $form .= '</div>';
       }
 
