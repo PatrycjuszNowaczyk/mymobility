@@ -676,7 +676,10 @@ class Badania_Front extends Badanie {
         "KROK3_3_34",
         "KROK3_3_38",
         "KROK4_2_1",
-        "KROK4_2_3"
+        "KROK4_2_3",
+        "METRYCZKA_1",
+        "METRYCZKA_2",
+        "METRYCZKA_3"
       ];
 
       if (
