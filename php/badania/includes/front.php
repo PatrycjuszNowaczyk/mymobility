@@ -451,7 +451,7 @@ class Badania_Front extends Badanie {
     if ( $_POST['step'] === 'step-3-2' ) {
       $wynik_krok3_2 = $this->badanie_wynik_3_2( $_POST['badanie_ID'] );
 
-      if ( false === is_null($wynik_krok3_2['relations']['wsp_rodz']) ) {
+      if ( false === is_null( $wynik_krok3_2['relations']['wsp_rodz'] ) ) {
         if ( isset( $wynik_krok3_2['relations']['wsp_rodz'] ) ) {
           $result = str_replace( '{wynik_krok3_2_wsp_rodz}', number_format( $wynik_krok3_2['relations']['wsp_rodz'], 2, ',', ' ' ), $parsed_sections['relations'] );
         }
@@ -1207,8 +1207,6 @@ class Badania_Front extends Badanie {
     } else {
       wp_send_json_error( $data );
     }
-
-
   }
 
   private function clear_special_char( $string ) {
@@ -2602,7 +2600,7 @@ class Badania_Front extends Badanie {
         $parsed_sections = $this->parse_text_parts( $kapital_spoleczny['druga_czesc']['wynik_zwrotny'] );
         $wynik_krok3_2   = $this->badanie_wynik_3_2( $badanie_ID );
 
-        if ( false === is_null($wynik_krok3_2['relations']['wsp_rodz']) ) {
+        if ( false === is_null( $wynik_krok3_2['relations']['wsp_rodz'] ) ) {
           if ( isset( $wynik_krok3_2['relations']['wsp_rodz'] ) ) {
             $result_kapital_spoleczny_3_2 .= str_replace( '{wynik_krok3_2_wsp_rodz}', number_format( $wynik_krok3_2['relations']['wsp_rodz'], 2, ',', ' ' ), $parsed_sections['relations'] );
           }
