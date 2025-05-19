@@ -726,55 +726,6 @@ $( 'document' ).ready( function () {
     submit_form( 'badanie_dodaj_krok', 'krok4_2' );
   } );
 
-  // płeć
-  $( document ).on( 'change', '#WSTEPNE_1', function () {
-    if ( $( '#WSTEPNE_1 option:selected' ).val() == 'inna' ) {
-      $( '#WSTEPNE_1_inne' ).show();
-    } else {
-      $( '#WSTEPNE_1_inne' ).val( '' );
-      $( '#WSTEPNE_1_inne' ).hide();
-    }
-  } );
-
-  $( document ).on( 'change', 'input[name="KROK3_1_12"]:checked', function () {
-    if ( $( 'input[name="KROK3_1_12"]:checked' ).val() > 1 ) {
-      $( '.item[data-item-id="KROK3_1_13"], .item[data-item-id="KROK3_1_14"]' ).show();
-      $( '.item[data-item-id="KROK3_1_13"], .item[data-item-id="KROK3_1_14"]' ).addClass( 'active' ).removeClass( 'noactive' );
-    } else {
-      $( '.item[data-item-id="KROK3_1_13"], .item[data-item-id="KROK3_1_14"]' ).hide();
-      $( '.item[data-item-id="KROK3_1_13"], .item[data-item-id="KROK3_1_14"]' ).removeClass( 'active' ).addClass( 'noactive' );
-      $( 'input[name="KROK3_1_13"], input[name="KROK3_1_14"]' ).prop( 'checked', false );
-    }
-  } );
-
-
-  $( document ).on( 'change', 'input[name="KROK4_2_2"]:checked', function () {
-    if ( $( 'input[name="KROK4_2_2"]:checked' ).val() > 3 ) {
-      $( '.item[data-item-id="KROK4_2_3"]' ).show();
-      $( '.item[data-item-id="KROK4_2_3"]' ).addClass( 'active' ).removeClass( 'noactive' );
-    } else {
-      $( '.item[data-item-id="KROK4_2_3"]' ).hide();
-      $( '.item[data-item-id="KROK4_2_3"]' ).removeClass( 'active' ).addClass( 'noactive' );
-      $( 'input[name="KROK4_2_3"]' ).prop( 'checked', false );
-    }
-    if ( $( 'input[name="KROK4_2_2"]:checked' ).val() < 3 ) {
-      $( '.item[data-item-id="KROK4_2_4"]' ).show();
-      $( '.item[data-item-id="KROK4_2_4"]' ).addClass( 'active' ).removeClass( 'noactive' );
-    } else {
-      $( '.item[data-item-id="KROK4_2_4"]' ).hide();
-      $( '.item[data-item-id="KROK4_2_4"]' ).removeClass( 'active' ).addClass( 'noactive' );
-      $( 'input[name="KROK4_2_4"]' ).prop( 'checked', false );
-    }
-    if ( $( 'input[name="KROK4_2_2"]:checked' ).val() == 3 ) {
-      $( '.item[data-item-id="KROK4_2_5"]' ).show();
-      $( '.item[data-item-id="KROK4_2_5"]' ).addClass( 'active' ).removeClass( 'noactive' );
-    } else {
-      $( '.item[data-item-id="KROK4_2_5"]' ).hide();
-      $( '.item[data-item-id="KROK4_2_5"]' ).removeClass( 'active' ).addClass( 'noactive' );
-      $( 'input[name="KROK4_2_5"]' ).prop( 'checked', false );
-    }
-  } );
-
   $( document ).on( 'click', '.item-langs .btn', function ( e ) {
     e.preventDefault();
     let lang_input = $( this ).closest( '.item' ).find( '.answers div:first' ).html();
