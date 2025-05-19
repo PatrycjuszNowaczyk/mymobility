@@ -1158,7 +1158,6 @@ class Badania_Front extends Badanie {
     if ( $podsumowanie['tresc'] ) {
       $html .= '<div class="desc">' . $podsumowanie['tresc'] . '</div>';
     }
-    $html .= '<div class="line-btn"><a href="#" id="generuj-pdf" data-badanie-id="' . $badanie_ID . '" title="' . __( 'Pobierz plik PDF z wynikami', 'migracja' ) . '" class="btn btn-green">' . __( 'Pobierz plik PDF z wynikami', 'migracja' ) . '</a></div>';
 
     $html .= '</div>';
 
@@ -1197,6 +1196,10 @@ class Badania_Front extends Badanie {
       ';
 
       $form .= '</form>';
+
+      $form .= '<div class="content">';
+      $form .= '<div class="line-btn"><a href="#" id="generuj-pdf" data-badanie-id="' . $badanie_ID . '" title="' . __( 'Pobierz plik PDF z wynikami', 'migracja' ) . '" class="btn btn-green">' . __( 'Pobierz plik PDF z wynikami', 'migracja' ) . '</a></div>';
+      $form .= '</div>';
 
       $data['form'] = $form;
 
