@@ -292,23 +292,8 @@ class Badania_Front extends Badanie {
 
     $this->badanie_dodaj_krok( 'metryczka' );
 
-    if ( isset( $_POST['badanie_satysfakcja'] ) ) :
-      $input['badanie_satysfakcja'] = $_POST['badanie_satysfakcja'];
-    endif;
-    if ( isset( $_POST['badanie_nastroj'] ) ) :
-      $input['badanie_nastroj'] = $_POST['badanie_nastroj'];
-    endif;
-    if ( isset( $_POST['badanie_haslo'] ) ) :
-      $input['badanie_haslo'] = $_POST['badanie_haslo'];
-    endif;
-    if ( isset( $_POST['badanie_pseudonim'] ) ) :
-      $input['badanie_pseudonim'] = $_POST['badanie_pseudonim'];
-    endif;
     if ( isset( $_POST['badanie_email'] ) ) :
       $input['badanie_email'] = $_POST['badanie_email'];
-    endif;
-    if ( isset( $_POST['badanie_zrodlo'] ) ) :
-      $input['badanie_zrodlo'] = $_POST['badanie_zrodlo'];
     endif;
     if ( isset( $_POST['badanie_jezyk'] ) ) :
       $input['badanie_jezyk'] = $_POST['badanie_jezyk'];
