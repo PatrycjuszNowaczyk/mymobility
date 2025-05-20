@@ -2692,18 +2692,20 @@ class Badania_Front extends Badanie {
       }
 
       if ( isset( $kapital_ekonomiczny['druga_czesc']['wynik_zwrotny'] ) ) {
-
         $result_kapital_ekonomiczny_4_2 = '<h2 style="color: #059f8e; text-align: center; font-size: 16px;">4.2 ' . __( 'Stabilność zawodowa', 'migracja' ) . '</h2>';
         $result_kapital_ekonomiczny_4_2 .= '<div style="font-size: 13px;">';
 
+        $wynik_krok4_2   = $this->badanie_wynik_4_2( $badanie_ID );
+
         if ( isset( $kapital_ekonomiczny['druga_czesc']['naglowek_wyniku'] ) ) {
-          $result_kapital_ekonomiczny_4_2 .= '<p style="font-weight: bold; color: #059f8e;">' . $kapital_ekonomiczny['druga_czesc']['naglowek_wyniku'] . '</p>';
+          $result_kapital_ekonomiczny_4_2 .= '<p style="font-weight: bold; color: #059f8e;">' . $kapital_ekonomiczny['trzecia_czesc']['naglowek_wyniku'] . '</p>';
         }
 
-        $result_kapital_ekonomiczny_4_2 .= $kapital_ekonomiczny['druga_czesc']['wynik_zwrotny'];
+        $result_kapital_ekonomiczny_4_2 .= str_replace( '{{average_financial_literacy_result}}', (
+          $wynik_krok4_2['average_financial_literacy'] ?? __( 'No statement', 'migracja' )
+        ), $kapital_ekonomiczny['druga_czesc']['wynik_zwrotny'] );
 
         $result_kapital_ekonomiczny_4_2 .= '</div>';
-
       }
 
       // ---------------------------------------------------------
