@@ -1079,9 +1079,7 @@ class Badania_Front extends Badanie {
                 </li>
                 <li>
                     <label>';
-    if ( ( $row->badanie_wyniki_krok2_1 !== null ) && ( $row->badanie_wyniki_krok2_2 !== null )
-         && ( $row->badanie_wyniki_krok2_3 !== null )
-    ) {
+    if ( ( $row->badanie_wyniki_krok2_1 !== null ) ) {
       $html .= '<input type="radio" name="uruchom-krok" value="krok-2" class="full"><span>2. ' . __( 'Kapitał psychologiczny', 'migracja' ) . '</span>';
     } else {
       if ( $row->badanie_wyniki_krok1_1 !== null ) {
@@ -1094,7 +1092,7 @@ class Badania_Front extends Badanie {
                 </li>
                 <li>
                     <label>';
-    if ( ( $row->badanie_wyniki_krok3_1 !== null ) && ( $row->badanie_wyniki_krok3_2 !== null ) && ( $row->badanie_wyniki_krok3_3 !== null ) ) {
+    if ( $row->badanie_wyniki_krok3_1 !== null && $row->badanie_wyniki_krok3_2 !== null && $row->badanie_wyniki_krok3_3 !== null ) {
       $html .= '<input type="radio" name="uruchom-krok" value="krok-3" class="full"><span>3. ' . __( 'Kapitał społeczny', 'migracja' ) . '</span>';
     } else {
       if (
@@ -1110,7 +1108,7 @@ class Badania_Front extends Badanie {
                 </li>
                 <li>
                     <label>';
-    if ( ( $row->badanie_wyniki_krok4_1 !== null ) && ( $row->badanie_wyniki_krok4_2 !== null ) ) {
+    if ( $row->badanie_wyniki_krok4_1 !== null && $row->badanie_wyniki_krok4_2 !== null ) {
       $html .= '<input type="radio" name="uruchom-krok" value="krok-4" class="full"><span>4. ' . __( 'Kapitał ekonomiczny', 'migracja' ) . '</span>';
     } else {
       if (
