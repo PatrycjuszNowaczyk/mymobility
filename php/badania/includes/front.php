@@ -3026,13 +3026,13 @@ class Badania_Front extends Badanie {
       $this->wpdb->prepare(
         "SELECT * FROM `{$this->table_name}_wyniki_krok4_2` WHERE `wynik_ID` = %d",
         array(
-          $badanie->badanie_wyniki_krok3_3,
+          $badanie->badanie_wyniki_krok4_2,
         )
       )
     );
 
     $wyniki = [
-      'average_financial_literacy' => is_null( $odp->KROK4_2_2 ) ? null :
+      'average_financial_literacy' => false === is_null( $odp->KROK4_2_4 ) ? null :
         (float) (
           (int) $odp->KROK4_2_5 + (int) $odp->KROK4_2_6 + (int) $odp->KROK4_2_7 + (int) $odp->KROK4_2_8 + (int) $odp->KROK4_2_9
           + (int) $odp->KROK4_2_10 + (int) $odp->KROK4_2_11 + (int) $odp->KROK4_2_12 + (int) $odp->KROK4_2_13 + (int) $odp->KROK4_2_14
