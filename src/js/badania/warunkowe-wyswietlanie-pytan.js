@@ -53,13 +53,16 @@
           $( '.item' ).each( function () {
             if ( questions_to_hide_in_step_2.includes( $( this ).attr( 'data-item-id' ) ) ) {
               if ( types_of_input_to_reset.some( type => $( this ).find( type ).val() !== undefined ) ) {
-                types_of_input_to_reset.forEach( type => $( this ).find( type ).val( '' ) );
+                types_of_input_to_reset.forEach( type => {
+                  $( this ).find( type ).val( '' );
+                } );
               }
 
               if ( types_of_input_to_uncheck.some( type => $( this ).find( type ).is( ':checked' ) ) ) {
                 types_of_input_to_uncheck.forEach( type => $( this ).find( type ).prop( 'checked', false ) );
               }
 
+              $( this ).addClass( 'hide' );
               $( this ).hide();
             }
           } )
@@ -67,6 +70,7 @@
       } else {
         $( '.item' ).each( function () {
           if ( questions_to_hide_in_step_2.includes( $( this ).attr( 'data-item-id' ) ) ) {
+            $( this ).removeClass( 'hide' );
             $( this ).show();
           }
         } )
