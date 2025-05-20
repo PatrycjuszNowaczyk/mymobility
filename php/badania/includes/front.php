@@ -483,6 +483,15 @@ class Badania_Front extends Badanie {
       }
     }
 
+    if ( $_POST['step'] === 'step-4-2' ) {
+      $wynik_krok4_2 = $this->badanie_wynik_4_2( $_POST['badanie_ID'] );
+
+      $result = str_replace( '{{average_financial_literacy_result}}', (
+      false === is_null( $wynik_krok4_2['average_financial_literacy'] ) ?
+        $wynik_krok4_2['average_financial_literacy'] : __( 'No statement', 'migracja' )
+      ), $result );
+    }
+
     $data = array();
 
     if ( !empty( $result ) ) {
@@ -3001,6 +3010,36 @@ class Badania_Front extends Badanie {
         + ( is_null( +(int) $odp->KROK3_3_38 ) ? 0 : (int) $odp->KROK3_3_92 )
       ) / $perceive_aspects_questions_nr
       , 2 );
+
+    return $wyniki;
+  }
+
+  function badanie_wynik_4_2( $badanie_ID ) {
+    $wynik_ID = $badanie = $this->wpdb->get_row(
+      $this->wpdb->prepare(
+        "SELECT * FROM `{$this->table_name}` WHERE `badanie_ID` = %d",
+        array(
+          $badanie_ID,
+        )
+      )
+    );
+
+    $odp = $this->wpdb->get_row(
+      $this->wpdb->prepare(
+        "SELECT * FROM `{$this->table_name}_wyniki_krok4_2` WHERE `wynik_ID` = %d",
+        array(
+          $badanie->badanie_wyniki_krok3_3,
+        )
+      )
+    );
+
+    $wyniki = [
+      'average_financial_literacy' => is_null( $odp->KROK4_2_2 ) ? null :
+        (float) (
+          (int) $odp->KROK4_2_5 + (int) $odp->KROK4_2_6 + (int) $odp->KROK4_2_7 + (int) $odp->KROK4_2_8 + (int) $odp->KROK4_2_9
+          + (int) $odp->KROK4_2_10 + (int) $odp->KROK4_2_11 + (int) $odp->KROK4_2_12 + (int) $odp->KROK4_2_13 + (int) $odp->KROK4_2_14
+        ) / 10,
+    ];
 
     return $wyniki;
   }
