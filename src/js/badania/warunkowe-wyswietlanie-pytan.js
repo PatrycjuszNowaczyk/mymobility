@@ -1,4 +1,14 @@
 ( function () {
+  const target = document.body;
+  const observer = new MutationObserver( () => {
+    $( document ).trigger( 'subtreeChanged' );
+  } );
+
+  observer.observe( target, {
+    childList : true,
+    subtree : true
+  } );
+
   const questions_to_hide_in_step_1_1 = [
     "KROK1_1_37",
     "KROK1_1_40",
@@ -43,6 +53,10 @@
     "KROK4_2_14"
   ];
 
+  const questions_to_hide_for_metryczka = [
+    "METRYCZKA_3"
+  ];
+
   const types_of_input_to_reset = [
     'input[type="text"]',
     'input[type="number"]',
@@ -55,7 +69,6 @@
     'input[type="radio"]:checked',
     'input[type="checkbox"]:checked'
   ]
-
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -125,5 +138,47 @@
       }
     } )
 // KROK4_2 END
+
+//----------------------------------------------------------------------------------------------------------------------
+
+// METRYCZKA START
+    $( document ).on( 'subtreeChanged', function () {
+      const metryczka_3 = $( '.item[data-item-id="METRYCZKA_3"]' );
+      if ( metryczka_3 && ( false === !!metryczka_3.data( 'is-initial-rendering' ) ) ) {
+        metryczka_3.hide();
+        metryczka_3.data( 'is-initial-rendering', true );
+      }
+    } );
+
+    $( document ).on( 'change', 'input[type="radio"][name="METRYCZKA_1"]:checked', function () {
+      if ( parseInt( $( this ).val() ) > 5 ) {
+        ( function hide_questions_to_hide_in_step_metryczka() {
+          $( '.item' ).each( function () {
+            if ( questions_to_hide_for_metryczka.includes( $( this ).attr( 'data-item-id' ) ) ) {
+              if ( types_of_input_to_reset.some( type => $( this ).find( type ).val() !== undefined ) ) {
+                types_of_input_to_reset.forEach( type => {
+                  $( this ).find( type ).val( '' );
+                } );
+              }
+
+              if ( types_of_input_to_uncheck.some( type => $( this ).find( type ).is( ':checked' ) ) ) {
+                types_of_input_to_uncheck.forEach( type => $( this ).find( type ).prop( 'checked', false ) );
+              }
+
+              $( this ).addClass( 'hide' );
+              $( this ).hide();
+            }
+          } )
+        } )()
+      } else {
+        $( '.item' ).each( function () {
+          if ( questions_to_hide_for_metryczka.includes( $( this ).attr( 'data-item-id' ) ) ) {
+            $( this ).removeClass( 'hide' );
+            $( this ).show();
+          }
+        } )
+      }
+    } )
+// METRYCZKA END
   } )
 } )();
