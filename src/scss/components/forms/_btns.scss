@@ -71,7 +71,7 @@ $line-width: 2px;
 
 @mixin btn-green-line {
   @include btn-line;
-  color: $green;
+  color: $white;
   border-color: $green;
   &:hover {
     color: $white;

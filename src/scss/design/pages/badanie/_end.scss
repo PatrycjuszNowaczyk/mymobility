@@ -13,10 +13,11 @@
         }
     }
     & + .thankyou {
+        margin: 1rem 0;
+        padding: 20px !important;
+        text-align: center;
         border-radius: 6px;
         background: $green;
-        text-align: center;
-        padding: 20px !important;
         color: #fff;
     }
 }
