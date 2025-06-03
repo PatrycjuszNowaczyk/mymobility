@@ -2346,7 +2346,7 @@ class Badania_Front extends Badanie {
                 <div><input type="text" name="' . $krok_ID . '[]" placeholder="' . __( 'Wpisz język', 'migracja' ) . '..."></div>
             </div>
             <div class="add-button" style="padding-top: 10px;">
-                <a href="#" class="btn btn-blue" title="' . __( 'Dodaj język', 'migracja' ) . '">' . __( 'Dodaj język', 'migracja' ) . '</a>
+                <a href="#" class="btn btn-blue-line" title="' . __( 'Dodaj język', 'migracja' ) . '">' . __( 'Dodaj język', 'migracja' ) . '</a>
             </div>
         </div>';
 
