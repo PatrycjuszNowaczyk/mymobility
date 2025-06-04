@@ -578,6 +578,7 @@ $( 'document' ).ready( function () {
   }
 
   function submit_form( action, step ) {
+    console.log( 'submit form function' );
     $( '#page-badanie form.form-step[data-step="' + step + '"]' ).submit( function ( e ) {
       $( this ).find( 'button' ).attr( 'disabled', 'disabled' );
       e.preventDefault();
@@ -669,6 +670,7 @@ $( 'document' ).ready( function () {
 
 
   $( document ).on( 'submit', '#page-badanie form.end-step', function ( e ) {
+    console.log( '#page-badanie form.end-step' );
     e.preventDefault();
     e.stopImmediatePropagation();
     let badanie_ID = $( this ).find( 'input[name="badanie_ID"]' ).val();
@@ -677,6 +679,7 @@ $( 'document' ).ready( function () {
 
 
   $( document ).on( 'submit', '#page-badanie form.load-new-step', function ( e ) {
+    console.log( '#page-badanie form.load-new-step' );
     e.preventDefault();
     e.stopImmediatePropagation();
     let badanie_ID = $( this ).find( 'input[name="badanie_ID"]' ).val();
@@ -691,9 +694,10 @@ $( 'document' ).ready( function () {
   } );
 
   $( document ).on( 'submit', '#page-badanie #form-podsumowanie-badania', function ( e ) {
+    console.log( '#page-badanie #form-podsumowanie-badania' );
     e.preventDefault();
     e.stopImmediatePropagation();
-
+    console.log( 'submit form' );
     let form = $( this ).get( 0 );
     let formData = new FormData( form );
     let formError = validate_form();
@@ -732,6 +736,7 @@ $( 'document' ).ready( function () {
   } );
 
   $( document ).ajaxComplete( function () {
+    console.log( 'ajax complete' );
     change_option();
     input_inne();
 
