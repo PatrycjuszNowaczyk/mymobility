@@ -98,6 +98,7 @@ $( 'document' ).ready( function () {
           href : response.link,
           id : 'download',
           name : 'test',
+          target : '_blank'
         } );
 
         $( "body" ).append( temp_link );
