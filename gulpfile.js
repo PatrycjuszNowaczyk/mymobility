@@ -61,8 +61,10 @@ function browserSyncReload( done ) {
 // JavaScript processing
 function compileJS() {
   return src( [ paths.js.src ] )
+  .pipe( sourcemaps.init() )
   .pipe( concat( paths.js.filename ) )
   .pipe( uglify( { compress : { drop_console : true } } ) )
+  .pipe( sourcemaps.write( '.' ) )
   .pipe( dest( paths.js.dest ) )
 }
 
