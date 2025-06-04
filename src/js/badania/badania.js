@@ -394,7 +394,7 @@ $( 'document' ).ready( function () {
       $( '.hide' ).each( function () {
         let id = $( this ).data( 'show-question' );
 
-        if ( id.length > 0 ) {
+        if ( ( 'undefined' !== typeof id ) && ( id.length > 0 ) ) {
           for ( let i = 0 ; i < id.length ; i++ ) {
             let sprawdz = id[i];
             if ( tablica.indexOf( sprawdz ) > -1 ) {
@@ -444,7 +444,7 @@ $( 'document' ).ready( function () {
       $( '.hide' ).each( function () {
         let id = $( this ).data( 'show-question' );
 
-        if ( id.length > 0 ) {
+        if ( ( 'undefined' !== typeof id ) && ( id.length > 0 ) ) {
           for ( let i = 0 ; i < id.length ; i++ ) {
             let sprawdz = id[i];
             if ( tablica.indexOf( sprawdz ) > -1 ) {
