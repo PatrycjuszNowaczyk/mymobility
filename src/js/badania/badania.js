@@ -717,9 +717,9 @@ $( 'document' ).ready( function () {
         $( '#page-badanie' ).removeClass( 'loading' );
         $( '#badanie-formularz .steps-content form#form-podsumowanie-badania button' ).remove();
         $( '#badanie-formularz .steps-content form#form-podsumowanie-badania' ).after( response );
-        $( 'input').attr('disabled', 'disabled');
-        $( 'select').attr('disabled', 'disabled');
-        $( 'textarea').attr('disabled', 'disabled');
+        $( 'input' ).attr( 'disabled', 'disabled' );
+        $( 'select' ).attr( 'disabled', 'disabled' );
+        $( 'textarea' ).attr( 'disabled', 'disabled' );
         $( 'html, body' ).animate( {
           scrollTop : $( '#badanie-formularz .steps-content .thankyou' ).offset().top - 120
         }, 500 );
