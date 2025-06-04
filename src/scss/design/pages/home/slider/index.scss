@@ -74,7 +74,8 @@
       flex-wrap: wrap;
       text-align: center;
       flex-direction: column-reverse;
-      min-height: 1px;
+      height: auto;
+      justify-content: center;
       
       &-col {
         &-left {
