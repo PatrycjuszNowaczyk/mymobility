@@ -492,61 +492,48 @@ $( 'document' ).ready( function () {
     // });
   }
 
-  function submit_form( action, step ) {
-    $( '#page-badanie form.form-step[data-step="' + step + '"]' ).submit( function ( e ) {
-      $( this ).find( 'button' ).attr( 'disabled', 'disabled' );
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      $( '#page-badanie .loading' ).addClass( 'loading' );
-      let formError = false;
-      clearInputsHidden();
+  function validate_form() {
+    let formError = false;
 
-      $( '#page-badanie form .item' ).each( function () {
-        const item = $( this );
-        if ( !( item.hasClass( 'no-required' ) ) ) {
-          if ( item.hasClass( 'error' ) ) {
-            item.removeClass( 'error' );
+    $( '#page-badanie form .item' ).each( function () {
+      const item = $( this );
+
+      if ( !( item.hasClass( 'no-required' ) ) ) {
+        if ( item.hasClass( 'error' ) ) {
+          item.removeClass( 'error' );
+          if ( item.find( '.alert' ) ) {
+            item.find( '.alert' ).remove();
+          }
+        }
+        if ( ( item.hasClass( 'hide' ) && item.hasClass( 'active' ) ) || !( item.hasClass( 'hide' ) ) ) {
+          const input = item.find( 'input' );
+          const textarea = item.find( 'textarea' );
+          const select = item.find( 'select' );
+          if ( input.length && input.attr( 'type' ) == 'radio' && !( item.find( 'input[type="radio"]:checked' ).val() ) ) {
+            console.log( 'Problem: ' + item.data( 'item-id' ) + item.find( 'input[type="radio"]:checked' ).val() );
+
+            item.addClass( 'error' );
             if ( item.find( '.alert' ) ) {
               item.find( '.alert' ).remove();
             }
-          }
-          if ( ( item.hasClass( 'hide' ) && item.hasClass( 'active' ) ) || !( item.hasClass( 'hide' ) ) ) {
-            const input = item.find( 'input' );
-            const textarea = item.find( 'textarea' );
-            const select = item.find( 'select' );
-            if ( input.length && input.attr( 'type' ) == 'radio' && !( item.find( 'input[type="radio"]:checked' ).val() ) ) {
-              console.log( 'Problem: ' + item.data( 'item-id' ) + item.find( 'input[type="radio"]:checked' ).val() );
-
-              item.addClass( 'error' );
-              if ( item.find( '.alert' ) ) {
-                item.find( '.alert' ).remove();
-              }
-              item.append( '<span class="alert">' + text_error_empty_options + '</span>' );
-              formError = true;
-            } else if ( input.length && input.attr( 'type' ) == 'checkbox' && !( item.find( 'input[type="checkbox"]:checked' ).val() ) ) {
-              item.addClass( 'error' );
-              if ( item.find( '.alert' ) ) {
-                item.find( '.alert' ).remove();
-              }
-              item.append( '<span class="alert">' + text_error_empty_options + '</span>' );
-              formError = true;
-            } else if ( select.length && !( select.find( 'option:selected' ).val() ) ) {
-              item.addClass( 'error' );
-              if ( item.find( '.alert' ) ) {
-                item.find( '.alert' ).remove();
-              }
-              item.append( '<span class="alert">' + text_error_empty_options + '</span>' );
-              formError = true;
-            } else if ( input.length && ( input.attr( 'type' ) == 'number' || input.attr( 'type' ) == 'text' ) && !( input.val() ) ) {
-              if ( !( input.hasClass( 'inne' ) ) /*|| (input.hasClass('inne') && input.prev('select').find('option:selected').val() == 'inna')*/ ) {
-                item.addClass( 'error' );
-                if ( item.find( '.alert' ) ) {
-                  item.find( '.alert' ).remove();
-                }
-                item.append( '<span class="alert">' + text_error_empty + '</span>' );
-                formError = true;
-              }
-            } else if ( textarea.length && !( textarea.val() ) ) {
+            item.append( '<span class="alert">' + text_error_empty_options + '</span>' );
+            formError = true;
+          } else if ( input.length && input.attr( 'type' ) == 'checkbox' && !( item.find( 'input[type="checkbox"]:checked' ).val() ) ) {
+            item.addClass( 'error' );
+            if ( item.find( '.alert' ) ) {
+              item.find( '.alert' ).remove();
+            }
+            item.append( '<span class="alert">' + text_error_empty_options + '</span>' );
+            formError = true;
+          } else if ( select.length && !( select.find( 'option:selected' ).val() ) ) {
+            item.addClass( 'error' );
+            if ( item.find( '.alert' ) ) {
+              item.find( '.alert' ).remove();
+            }
+            item.append( '<span class="alert">' + text_error_empty_options + '</span>' );
+            formError = true;
+          } else if ( input.length && ( input.attr( 'type' ) == 'number' || input.attr( 'type' ) == 'text' ) && !( input.val() ) ) {
+            if ( !( input.hasClass( 'inne' ) ) /*|| (input.hasClass('inne') && input.prev('select').find('option:selected').val() == 'inna')*/ ) {
               item.addClass( 'error' );
               if ( item.find( '.alert' ) ) {
                 item.find( '.alert' ).remove();
@@ -554,27 +541,54 @@ $( 'document' ).ready( function () {
               item.append( '<span class="alert">' + text_error_empty + '</span>' );
               formError = true;
             }
-          } else {
-            item.find( 'input[type="text"]' ).val( '' );
-            item.find( 'input[type="number"]' ).val( '' );
-            item.find( 'textarea' ).val( '' );
-            item.find( 'input[type="radio"]' ).prop( 'checked', false );
-            item.find( 'input[type="checkbox"]' ).prop( 'checked', false );
+          } else if ( textarea.length && !( textarea.val() ) ) {
+            item.addClass( 'error' );
+            if ( item.find( '.alert' ) ) {
+              item.find( '.alert' ).remove();
+            }
+            item.append( '<span class="alert">' + text_error_empty + '</span>' );
+            formError = true;
           }
+        } else {
+          item.find( 'input[type="text"]' ).val( '' );
+          item.find( 'input[type="number"]' ).val( '' );
+          item.find( 'textarea' ).val( '' );
+          item.find( 'input[type="radio"]' ).prop( 'checked', false );
+          item.find( 'input[type="checkbox"]' ).prop( 'checked', false );
         }
-      } );
+      }
+
+    } );
+
+    return formError;
+  }
+
+  function show_form_error() {
+    if ( $( this ).find( '.problem' ) ) {
+      $( this ).find( '.problem' ).remove();
+    }
+
+    $( this ).append( '<div class="problem">' + text_error_validation + '</div>' );
+
+    $( 'html, body' ).animate( {
+      scrollTop : $( '#page-badanie form .item.error' ).offset().top - 120
+    }, 500 );
+    $( this ).find( 'button' ).removeAttr( 'disabled' );
+  }
+
+  function submit_form( action, step ) {
+    $( '#page-badanie form.form-step[data-step="' + step + '"]' ).submit( function ( e ) {
+      $( this ).find( 'button' ).attr( 'disabled', 'disabled' );
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      $( '#page-badanie .loading' ).addClass( 'loading' );
+      clearInputsHidden();
+
+      let formError = validate_form();
+
 
       if ( formError ) {
-        if ( $( this ).find( '.problem' ) ) {
-          $( this ).find( '.problem' ).remove();
-        }
-
-        $( this ).append( '<div class="problem">' + text_error_validation + '</div>' );
-
-        $( 'html, body' ).animate( {
-          scrollTop : $( '#page-badanie form .item.error' ).offset().top - 120
-        }, 500 );
-        $( this ).find( 'button' ).removeAttr( 'disabled' );
+        show_form_error();
       } else {
         let form = $( this ).get( 0 );
         let formData = new FormData( form );
@@ -681,6 +695,12 @@ $( 'document' ).ready( function () {
 
     let form = $( this ).get( 0 );
     let formData = new FormData( form );
+    let formError = validate_form();
+
+    if ( formError ) {
+      show_form_error();
+      return;
+    }
 
     formData.append( 'action', 'badanie_podsumowanie_form' );
 
@@ -697,15 +717,17 @@ $( 'document' ).ready( function () {
         $( '#page-badanie' ).removeClass( 'loading' );
         $( '#badanie-formularz .steps-content form#form-podsumowanie-badania button' ).remove();
         $( '#badanie-formularz .steps-content form#form-podsumowanie-badania' ).after( response );
+        $( 'input').attr('disabled', 'disabled');
+        $( 'select').attr('disabled', 'disabled');
+        $( 'textarea').attr('disabled', 'disabled');
         $( 'html, body' ).animate( {
           scrollTop : $( '#badanie-formularz .steps-content .thankyou' ).offset().top - 120
         }, 500 );
       },
       error : function ( error ) {
-        console.log( error );
+        console.error( error );
       }
     } );
-
   } );
 
   $( document ).ajaxComplete( function () {
