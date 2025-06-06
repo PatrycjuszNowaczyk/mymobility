@@ -677,7 +677,7 @@ class Badania_Front extends Badanie {
       ];
 
       if (
-        "0" === $wyniki_wstepne->WSTEPNE_2
+        0 === (int) $wyniki_wstepne->WSTEPNE_2
         || ( false === is_null( $wyniki_kapital_ludzki ) && ( 3 === (int) $wyniki_kapital_ludzki->KROK1_1_32 || 4 === (int) $wyniki_kapital_ludzki->KROK1_1_32 ) )
       ) {
         if ( in_array( $input_name, $pytania_do_ukrycia ) ) {
