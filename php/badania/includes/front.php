@@ -575,13 +575,15 @@ class Badania_Front extends Badanie {
 
 
       $pytania_do_ukrycia = [
+        "KROK1_1_32",
+        "KROK1_1_34",
         "KROK1_1_37",
+        "KROK1_1_48",
         "KROK1_1_40",
         "KROK1_1_43",
         "KROK1_1_45",
         "KROK1_1_46",
         "KROK1_1_47",
-        "KROK1_1_48",
         "KROK1_1_76",
         "KROK1_1_77",
         "KROK1_1_78",
@@ -603,7 +605,7 @@ class Badania_Front extends Badanie {
         "KROK1_1_94",
         "KROK1_1_95",
         "KROK1_1_96",
-        "KROK2_1_14",
+
         "KROK2_1_22",
         "KROK2_1_15",
         "KROK2_1_16",
@@ -614,7 +616,6 @@ class Badania_Front extends Badanie {
         "KROK2_1_20",
         "KROK2_1_21",
         "KROK2_1_24",
-        "KROK2_1_25",
         "KROK2_1_26",
         "KROK2_1_27",
         "KROK2_1_28",
@@ -622,30 +623,14 @@ class Badania_Front extends Badanie {
         "KROK2_1_30",
         "KROK2_1_31",
         "KROK2_1_53",
+        "KROK2_1_62",
+        "KROK2_1_63",
+        "KROK2_1_64",
         "KROK2_1_67",
-        "KROK2_1_68",
-        "KROK2_1_69",
-        "KROK2_1_70",
-        "KROK2_1_71",
-        "KROK2_1_72",
-        "KROK2_1_73",
-        "KROK2_1_74",
         "KROK2_1_75",
+
         "KROK3_1_15",
-        "KROK3_2_14",
-//        "KROK3_2_1",
-//        "KROK3_2_2",
-//        "KROK3_2_3",
-//        "KROK3_2_4",
-//        "KROK3_2_5",
-//        "KROK3_2_6",
-//        "KROK3_2_7",
-//        "KROK3_2_8",
-//        "KROK3_2_9",
-//        "KROK3_2_10",
-//        "KROK3_2_11",
-//        "KROK3_2_12",
-        "KROK3_2_13",
+
         "KROK3_2_15",
         "KROK3_2_16",
         "KROK3_2_17",
@@ -654,9 +639,10 @@ class Badania_Front extends Badanie {
         "KROK3_2_20",
         "KROK3_2_21",
         "KROK3_2_22",
+
         "KROK3_3_88",
-        "KROK3_3_27",
         "KROK3_3_89",
+        "KROK3_3_27",
         "KROK3_3_22",
         "KROK3_3_23",
         "KROK3_3_24",
@@ -669,11 +655,13 @@ class Badania_Front extends Badanie {
         "KROK3_3_33",
         "KROK3_3_34",
         "KROK3_3_38",
+        "KROK3_3_91",
+        "KROK3_3_92",
+
         "KROK4_2_1",
         "KROK4_2_3",
-        "METRYCZKA_1",
-        "METRYCZKA_2",
-        "METRYCZKA_3"
+
+        "METRYCZKA_11",
       ];
 
       if (
